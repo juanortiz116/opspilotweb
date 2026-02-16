@@ -43,7 +43,7 @@ export const Product: React.FC = () => {
                             { emoji: '🍽️', name: 'RestoPilot', desc: 'Reservas, comandas digitales y control de stock para restaurantes.', price: '69€/mes', sector: 'Restauración' },
                         ].map((p) => (
                             <div key={p.name} className={`${styles.productCard} reveal`}>
-                                <span className={styles.productEmoji}>{p.emoji}</span>
+                                <span className={styles.productIcon}>{p.emoji}</span>
                                 <span className={styles.productSector}>{p.sector}</span>
                                 <h3 className={styles.productName}>{p.name}</h3>
                                 <p className={styles.productDesc}>{p.desc}</p>
@@ -61,15 +61,15 @@ export const Product: React.FC = () => {
                     <div className={`${styles.sectionHeader} reveal`}>
                         <h2 className={styles.sectionTitle}>Ventajas del modelo SaaS</h2>
                     </div>
-                    <div className={styles.advantagesGrid}>
+                    <div className={styles.whyGrid}>
                         {[
                             { icon: '🚀', title: 'Implementación rápida', desc: 'Activo en 48 horas. Sin esperas de desarrollo.' },
                             { icon: '💰', title: 'Coste predecible', desc: 'Suscripción mensual sin sorpresas. Cancela cuando quieras.' },
                             { icon: '🔄', title: 'Actualizaciones continuas', desc: 'Mejoras constantes sin coste adicional.' },
                             { icon: '🛡️', title: 'Soporte incluido', desc: 'Equipo técnico disponible para resolver cualquier duda.' },
                         ].map((a) => (
-                            <div key={a.title} className={`${styles.advantageCard} reveal`}>
-                                <span className={styles.advantageIcon}>{a.icon}</span>
+                            <div key={a.title} className={`${styles.whyCard} reveal`}>
+                                <span className={styles.whyEmoji}>{a.icon}</span>
                                 <h4>{a.title}</h4>
                                 <p>{a.desc}</p>
                             </div>

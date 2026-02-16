@@ -1,0 +1,296 @@
+.page {
+    background: var(--color-dark-bg);
+    min-height: 100vh;
+    color: var(--color-dark-text-main);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+}
+
+.section {
+    padding: var(--spacing-20) 0;
+}
+
+.tag {
+    display: inline-block;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    margin-bottom: var(--spacing-4);
+    padding: var(--spacing-2) var(--spacing-4);
+    background: rgba(57, 206, 134, .08);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(57, 206, 134, .15);
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+}
+
+.sectionTitle {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: #fff;
+    margin-bottom: var(--spacing-4);
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    padding: 10rem var(--spacing-6) var(--spacing-16);
+    text-align: center;
+}
+
+.heroGlow {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(57, 206, 134, .12) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.heroTitle {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-6);
+    letter-spacing: -.03em;
+}
+
+.heroSub {
+    font-size: var(--font-size-lg);
+    color: var(--color-dark-text-muted);
+    line-height: 1.7;
+}
+
+@media(min-width:640px) {
+    .heroTitle {
+        font-size: var(--font-size-5xl)
+    }
+}
+
+@media(min-width:1024px) {
+    .heroTitle {
+        font-size: var(--font-size-6xl)
+    }
+}
+
+/* Pricing Grid */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+    align-items: start;
+}
+
+@media(min-width:768px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr)
+    }
+}
+
+.card {
+    padding: var(--spacing-10);
+    background: rgba(255, 255, 255, .02);
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: var(--radius-2xl);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+.card:hover {
+    border-color: rgba(255, 255, 255, .12);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, .25);
+}
+
+.cardPro {
+    background: rgba(57, 206, 134, .03);
+    border-color: rgba(57, 206, 134, .2);
+}
+
+.cardPro:hover {
+    border-color: rgba(57, 206, 134, .35);
+    box-shadow: 0 16px 48px rgba(57, 206, 134, .08);
+}
+
+.badge {
+    position: absolute;
+    top: calc(var(--spacing-5) * -1);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--spacing-2) var(--spacing-4);
+    background: var(--color-primary);
+    color: #111a23;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+
+.planName {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: #fff;
+    margin-bottom: var(--spacing-2);
+    display: block;
+}
+
+.planDesc {
+    font-size: var(--font-size-sm);
+    color: var(--color-dark-text-muted);
+    margin-bottom: var(--spacing-6);
+    line-height: 1.5;
+}
+
+.priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-1);
+    margin-bottom: var(--spacing-8);
+}
+
+.price {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--color-primary);
+    font-family: var(--font-family-heading);
+    line-height: 1;
+}
+
+.period {
+    font-size: var(--font-size-base);
+    color: var(--color-dark-text-muted);
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-8) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    flex: 1;
+}
+
+.features li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-dark-text-muted);
+}
+
+.check {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+}
+
+/* Custom Services */
+.customBlock {
+    padding: var(--spacing-16) var(--spacing-10);
+    background: rgba(255, 255, 255, .02);
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: var(--radius-2xl);
+}
+
+.customContent {
+    max-width: 600px;
+}
+
+.customTitle {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: #fff;
+    margin-bottom: var(--spacing-4);
+    line-height: 1.2;
+}
+
+.customText {
+    font-size: var(--font-size-base);
+    color: var(--color-dark-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-8);
+}
+
+.customPrices {
+    display: flex;
+    gap: var(--spacing-8);
+    margin-bottom: var(--spacing-8);
+    flex-wrap: wrap;
+}
+
+.customPrices div {
+    display: flex;
+    flex-direction: column;
+}
+
+.customPrices strong {
+    font-size: var(--font-size-sm);
+    color: #fff;
+    margin-bottom: var(--spacing-1);
+}
+
+.customPrices span {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--color-primary);
+}
+
+/* FAQ */
+.faqGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media(min-width:768px) {
+    .faqGrid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+.faqCard {
+    padding: var(--spacing-6);
+    background: rgba(255, 255, 255, .02);
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: var(--radius-xl);
+}
+
+.faqCard h4 {
+    font-size: var(--font-size-base);
+    color: #fff;
+    margin-bottom: var(--spacing-3);
+}
+
+.faqCard p {
+    font-size: var(--font-size-sm);
+    color: var(--color-dark-text-muted);
+    line-height: 1.6;
+}

@@ -1,0 +1,113 @@
+.footer {
+    background-color: #0c1219;
+    color: var(--color-dark-text-main);
+    padding: var(--spacing-16) 0 var(--spacing-8);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-10);
+    margin-bottom: var(--spacing-12);
+}
+
+.brand {
+    max-width: 360px;
+}
+
+.logo {
+    color: #FFFFFF;
+    font-size: var(--font-size-xl);
+    font-family: var(--font-family-heading);
+    margin-bottom: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.logoIcon {
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+}
+
+.tagline {
+    color: var(--color-dark-text-muted);
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-6);
+}
+
+.socials {
+    display: flex;
+    gap: var(--spacing-3);
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-dark-text-muted);
+    transition: all var(--transition-fast);
+}
+
+.socialLink:hover {
+    background: rgba(57, 206, 134, 0.1);
+    border-color: rgba(57, 206, 134, 0.3);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.heading {
+    color: #FFFFFF;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-4);
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.link {
+    color: var(--color-dark-text-muted);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+}
+
+.link:hover {
+    color: var(--color-primary);
+}
+
+.bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--spacing-8);
+    text-align: center;
+    color: var(--color-dark-text-muted);
+    font-size: var(--font-size-xs);
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .bottom {
+        text-align: left;
+    }
+}

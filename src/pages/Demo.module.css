@@ -1,0 +1,244 @@
+.page {
+    background: var(--color-dark-bg);
+    min-height: 100vh;
+    color: var(--color-dark-text-main);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+}
+
+.section {
+    padding: var(--spacing-6) 0 var(--spacing-24);
+}
+
+.tag {
+    display: inline-block;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    margin-bottom: var(--spacing-4);
+    padding: var(--spacing-2) var(--spacing-4);
+    background: rgba(57, 206, 134, .08);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(57, 206, 134, .15);
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    padding: 10rem var(--spacing-6) var(--spacing-16);
+    text-align: center;
+}
+
+.heroGlow {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 700px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(57, 206, 134, .12) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.heroTitle {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-6);
+    letter-spacing: -.03em;
+}
+
+.heroSub {
+    font-size: var(--font-size-lg);
+    color: var(--color-dark-text-muted);
+    line-height: 1.7;
+}
+
+@media(min-width:640px) {
+    .heroTitle {
+        font-size: var(--font-size-5xl)
+    }
+}
+
+@media(min-width:1024px) {
+    .heroTitle {
+        font-size: var(--font-size-6xl)
+    }
+}
+
+/* Demo Grid */
+.demoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+}
+
+@media(min-width:768px) {
+    .demoGrid {
+        grid-template-columns: 1.2fr .8fr
+    }
+}
+
+/* Form Card */
+.formCard {
+    padding: var(--spacing-10);
+    background: rgba(255, 255, 255, .02);
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: var(--radius-2xl);
+}
+
+.formTitle {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: #fff;
+    margin-bottom: var(--spacing-2);
+}
+
+.formSub {
+    font-size: var(--font-size-sm);
+    color: var(--color-dark-text-muted);
+    margin-bottom: var(--spacing-8);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-5);
+}
+
+@media(min-width:480px) {
+    .row {
+        grid-template-columns: 1fr 1fr
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.field label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: rgba(255, 255, 255, .7);
+}
+
+.field input,
+.field select,
+.field textarea {
+    padding: var(--spacing-3) var(--spacing-4);
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: var(--radius-lg);
+    color: #fff;
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    outline: none;
+    transition: border-color var(--transition-fast);
+    resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: rgba(255, 255, 255, .25);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: var(--color-primary);
+}
+
+.field select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.field select option {
+    background: #1a2535;
+    color: #fff;
+}
+
+/* Benefits */
+.benefits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.benefitCard {
+    padding: var(--spacing-6);
+    background: rgba(255, 255, 255, .02);
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-normal);
+}
+
+.benefitCard:hover {
+    border-color: rgba(57, 206, 134, .2);
+}
+
+.benefitIcon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: var(--spacing-3);
+}
+
+.benefitCard h4 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: #fff;
+    margin-bottom: var(--spacing-2);
+}
+
+.benefitCard p {
+    font-size: var(--font-size-sm);
+    color: var(--color-dark-text-muted);
+    line-height: 1.5;
+}
+
+.benefitBig {
+    padding: var(--spacing-8);
+    background: rgba(57, 206, 134, .04);
+    border: 1px solid rgba(57, 206, 134, .12);
+    border-radius: var(--radius-xl);
+    text-align: center;
+}
+
+.bigNumber {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--color-primary);
+    font-family: var(--font-family-heading);
+    line-height: 1;
+    margin-bottom: var(--spacing-3);
+}
+
+.benefitBig p {
+    font-size: var(--font-size-sm);
+    color: var(--color-dark-text-muted);
+    line-height: 1.5;
+}

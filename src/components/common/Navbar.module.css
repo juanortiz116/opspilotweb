@@ -12,15 +12,15 @@
 .auroraWrapper {
     position: absolute;
     inset: 0;
-    z-index: -2;
+    z-index: -1;
     overflow: hidden;
 }
 
 .navbarBackground {
     position: absolute;
     inset: 0;
-    z-index: -1;
-    background: rgba(17, 26, 35, 0.65);
+    z-index: -2;
+    background: rgba(17, 26, 35, 0.4);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
 }

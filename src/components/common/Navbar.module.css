@@ -4,12 +4,25 @@
     left: 0;
     right: 0;
     height: 4rem;
-    background: rgba(17, 26, 35, 0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     z-index: var(--z-index-navbar);
     transition: all var(--transition-normal);
+}
+
+.auroraWrapper {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.navbarBackground {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(17, 26, 35, 0.65);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
 .container {

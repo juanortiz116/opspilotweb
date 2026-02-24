@@ -4,10 +4,173 @@ import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import styles from './Product.module.css';
 
+// Mockup Components for each product
+
+const ERPMockup = () => (
+    <div className={`${styles.dashboardMock} anim-float`}>
+        <div className={styles.mockHeader}>
+            <div className={styles.mockDots}>
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div className={styles.mockBody}>
+            <div className={styles.mockSidebar}>
+                <div className={styles.mockNav}></div>
+                <div className={styles.mockNav}></div>
+                <div className={styles.mockNav}></div>
+                <div className={styles.mockNav}></div>
+            </div>
+            <div className={styles.mockContent}>
+                <div className={styles.mockCards}>
+                    <div className={styles.mockCard}>
+                        <div className={styles.mockLabel}>Ingresos Mes</div>
+                        <div className={styles.mockValue}>€14.250</div>
+                    </div>
+                    <div className={styles.mockCard}>
+                        <div className={styles.mockLabel}>Empleados Activos</div>
+                        <div className={styles.mockValue}>12</div>
+                    </div>
+                </div>
+                <div className={styles.mockChart}>
+                    <div className={styles.chartLine}></div>
+                </div>
+            </div>
+        </div>
+        <div className={`${styles.floatingBadge} ${styles.badgeERP}`}>
+            <span>📈</span> Control total
+        </div>
+    </div>
+);
+
+const CRMMockup = () => (
+    <div className={`${styles.kanbanMock} anim-float-slow`}>
+        <div className={styles.kanbanHeader}>Pipeline de Ventas</div>
+        <div className={styles.kanbanBoard}>
+            <div className={styles.kanbanColumn}>
+                <div className={styles.colTitle}>Nuevos</div>
+                <div className={styles.kanbanCard}>Lead: Empresa S.L.</div>
+                <div className={styles.kanbanCard}>Lead: Autonómos Unidos</div>
+            </div>
+            <div className={styles.kanbanColumn}>
+                <div className={styles.colTitle}>En Negociación</div>
+                <div className={styles.kanbanCard}>Juan Pérez - Presupuesto enviado</div>
+            </div>
+            <div className={styles.kanbanColumn}>
+                <div className={styles.colTitle}>Cerrados</div>
+                <div className={`${styles.kanbanCard} ${styles.cardSuccess}`}>Proyecto Reforma Integral</div>
+            </div>
+        </div>
+        <div className={`${styles.floatingBadge} ${styles.badgeCRM}`}>
+            <span>🎯</span> +30% Conversión
+        </div>
+    </div>
+);
+
+const PresupuestadorMockup = () => (
+    <div className={`${styles.phoneMockup} anim-float`}>
+        <div className={styles.phoneScreen}>
+            <div className={styles.phoneNotch}></div>
+            <div className={styles.phoneContent}>
+                <div className={styles.quoteHeader}>PRESUPUESTO #0042</div>
+                <div className={styles.quoteCard}>
+                    <div className={styles.quoteImage}>🏠</div>
+                    <div className={styles.quoteInfo}>
+                        <div className={styles.quoteTitle}>Reforma Cocina</div>
+                        <div className={styles.quotePrice}>€4.200</div>
+                    </div>
+                </div>
+                <div className={styles.quoteCard}>
+                    <div className={styles.quoteImage}>🛁</div>
+                    <div className={styles.quoteInfo}>
+                        <div className={styles.quoteTitle}>Reforma Baño</div>
+                        <div className={styles.quotePrice}>€2.800</div>
+                    </div>
+                </div>
+                <div className={styles.quoteTotal}>
+                    <span>Total:</span>
+                    <span className={styles.quoteTotalAmount}>€7.000</span>
+                </div>
+                <div className={`${styles.floatingBadge} ${styles.badgePresupuesto}`}>
+                    <span>⚡</span> Enviado en 2 min
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
+const TarifaOCRMockup = () => (
+    <div className={`${styles.scannerMock} anim-float-slow`}>
+        <div className={styles.scannerHeader}>Análisis de Factura</div>
+        <div className={styles.scannerBody}>
+            <div className={styles.scanLine}></div>
+            <div className={styles.facturaVieja}>
+                <div className={styles.facturaTitle}>Factura Actual (Iberdrola)</div>
+                <div className={styles.facturaPrice}>150 €/mes</div>
+            </div>
+            <div className={styles.scanArrow}>⬇️</div>
+            <div className={styles.facturaNueva}>
+                <div className={styles.facturaTitle}>Propuesta Óptima (Endesa)</div>
+                <div className={styles.facturaPriceSuccess}>120 €/mes</div>
+            </div>
+        </div>
+        <div className={`${styles.floatingBadge} ${styles.badgeTarifa}`}>
+            <span>💸</span> Ahorro del 20%
+        </div>
+    </div>
+);
+
+
 export const Product: React.FC = () => {
     const productsRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const advantagesRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const ctaRef = useScrollReveal<HTMLDivElement>();
+
+    const products = [
+        {
+            id: 'erp',
+            emoji: '🏢',
+            name: 'ERP OpsPilot',
+            desc: 'Gestión completa de tu empresa en un solo lugar: empleados, horarios, calendario, reservas, inventario, proveedores, facturación y analítica básica. El control que tienen las grandes empresas, al alcance de cualquier PYME.',
+            price: 'Desde 29€/mes',
+            sector: 'Pequeña y mediana empresa',
+            cta: 'Solicitar acceso',
+            href: '/contact',
+            mockup: <ERPMockup />
+        },
+        {
+            id: 'crm',
+            emoji: '🎯',
+            name: 'CRM OpsPilot',
+            desc: 'Gestión de clientes, seguimientos, pipeline de ventas y comunicaciones en un solo lugar. Adaptable a cómo trabaja tu equipo, no al revés. Porque cada negocio tiene su propia forma de vender.',
+            price: 'Desde 19€/mes',
+            sector: 'Cualquier sector',
+            cta: 'Solicitar acceso',
+            href: '/contact',
+            mockup: <CRMMockup />
+        },
+        {
+            id: 'presupuestador',
+            emoji: '📋',
+            name: 'Presupuestador Pro',
+            desc: 'Crea presupuestos profesionales en minutos. Añade partidas, asigna precios, crea packs reutilizables y envía propuestas que cierran ventas. Diseñado junto a reformistas, para reformistas.',
+            price: 'Desde 25€/mes',
+            sector: 'Reformas, construcción y oficios',
+            cta: 'Solicitar acceso',
+            href: '/contact',
+            mockup: <PresupuestadorMockup />
+        },
+        {
+            id: 'tarifaocr',
+            emoji: '⚡',
+            name: 'TarifaOCR',
+            desc: 'Sube la factura de tu cliente y en segundos tienes la mejor propuesta de tarifa disponible, optimizada por precio final o por tu comisión. Gestiona toda tu cartera desde un solo panel. Adiós al análisis manual.',
+            price: 'Consultar precio',
+            sector: 'Comerciales de energía eléctrica',
+            cta: 'Solicitar información',
+            href: '/contact',
+            mockup: <TarifaOCRMockup />
+        },
+    ];
 
     return (
         <div className={styles.page}>
@@ -27,63 +190,27 @@ export const Product: React.FC = () => {
                 </div>
             </section>
 
-            {/* Products Grid */}
+            {/* Products Layout (Alternating Rows) */}
             <section className={styles.section}>
                 <div className={styles.container} ref={productsRef}>
                     <div className={`${styles.sectionHeader} reveal`}>
                         <h2 className={styles.sectionTitle}>Nuestros productos</h2>
                         <p className={styles.sectionSub}>Cuatro herramientas construidas para problemas reales que encontramos en nuestros clientes.</p>
                     </div>
-                    <div className={styles.grid}>
-                        {[
-                            {
-                                id: 'erp',
-                                emoji: '🏢',
-                                name: 'ERP OpsPilot',
-                                desc: 'Gestión completa de tu empresa en un solo lugar: empleados, horarios, calendario, reservas, inventario, proveedores, facturación y analítica básica. El control que tienen las grandes empresas, al alcance de cualquier PYME.',
-                                price: 'Desde 29€/mes',
-                                sector: 'Pequeña y mediana empresa',
-                                cta: 'Solicitar acceso',
-                                href: '/contact'
-                            },
-                            {
-                                id: 'crm',
-                                emoji: '🎯',
-                                name: 'CRM OpsPilot',
-                                desc: 'Gestión de clientes, seguimientos, pipeline de ventas y comunicaciones en un solo lugar. Adaptable a cómo trabaja tu equipo, no al revés. Porque cada negocio tiene su propia forma de vender.',
-                                price: 'Desde 19€/mes',
-                                sector: 'Cualquier sector',
-                                cta: 'Solicitar acceso',
-                                href: '/contact'
-                            },
-                            {
-                                id: 'presupuestador',
-                                emoji: '📋',
-                                name: 'Presupuestador Pro',
-                                desc: 'Crea presupuestos profesionales en minutos. Añade partidas, asigna precios, crea packs reutilizables y envía propuestas que cierran ventas. Diseñado junto a reformistas, para reformistas.',
-                                price: 'Desde 25€/mes',
-                                sector: 'Reformas, construcción y oficios',
-                                cta: 'Solicitar acceso',
-                                href: '/contact'
-                            },
-                            {
-                                id: 'tarifaocr',
-                                emoji: '⚡',
-                                name: 'TarifaOCR',
-                                desc: 'Sube la factura de tu cliente y en segundos tienes la mejor propuesta de tarifa disponible, optimizada por precio final o por tu comisión. Gestiona toda tu cartera desde un solo panel. Adiós al análisis manual.',
-                                price: 'Consultar precio',
-                                sector: 'Comerciales de energía eléctrica',
-                                cta: 'Solicitar información',
-                                href: '/contact'
-                            },
-                        ].map((p) => (
-                            <div key={p.name} id={p.id} className={`${styles.productCard} reveal`}>
-                                <span className={styles.productIcon}>{p.emoji}</span>
-                                <span className={styles.productSector}>{p.sector}</span>
-                                <h3 className={styles.productName}>{p.name}</h3>
-                                <p className={styles.productDesc}>{p.desc}</p>
-                                <div className={styles.productPrice}>{p.price}</div>
-                                <Link to={p.href}><Button variant="outline" size="sm" fullWidth>{p.cta}</Button></Link>
+                    <div className={styles.productsList}>
+                        {products.map((p, index) => (
+                            <div key={p.name} id={p.id} className={`${styles.productRow} ${index % 2 !== 0 ? styles.rowReverse : ''} reveal`}>
+                                <div className={styles.productInfo}>
+                                    <span className={styles.productIcon}>{p.emoji}</span>
+                                    <span className={styles.productSector}>{p.sector}</span>
+                                    <h3 className={styles.productName}>{p.name}</h3>
+                                    <p className={styles.productDesc}>{p.desc}</p>
+                                    <div className={styles.productPrice}>{p.price}</div>
+                                    <Link to={p.href}><Button variant="primary" size="lg">{p.cta} →</Button></Link>
+                                </div>
+                                <div className={styles.productVisualContainer}>
+                                    {p.mockup}
+                                </div>
                             </div>
                         ))}
                     </div>

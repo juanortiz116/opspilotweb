@@ -12,6 +12,7 @@ const filtros = [
         title: 'Crear presupuestos me lleva demasiado tiempo',
         who: 'Reformistas, fontaneros, electricistas, instaladores y cualquier oficio',
         solution: 'Presupuestador Pro — partidas, precios unitarios y packs reutilizables',
+        benefits: ['Presupuestos en 2 min', 'Márgenes sin errores', '+20% cierre de ventas'],
         cta: 'Ver solución',
         href: '/product#presupuestador',
     },
@@ -20,6 +21,7 @@ const filtros = [
         title: 'Analizo tarifas eléctricas a mano cliente por cliente',
         who: 'Comerciales de energía eléctrica y gas',
         solution: 'TarifaOCR — sube la factura, obtén la mejor propuesta en segundos',
+        benefits: ['Análisis automático', 'Propuesta instantánea', 'Cartera centralizada'],
         cta: 'Ver solución',
         href: '/product#tarifaocr',
     },
@@ -28,6 +30,7 @@ const filtros = [
         title: 'Gestiono mi empresa con Excel y se me escapa todo',
         who: 'PYMEs y autónomos de cualquier sector',
         solution: 'ERP OpsPilot — empleados, inventario, proveedores, facturación y analítica',
+        benefits: ['Control total', 'Horas ahorradas cada mes', 'Datos en tiempo real'],
         cta: 'Ver solución',
         href: '/product#erp',
     },
@@ -36,6 +39,7 @@ const filtros = [
         title: 'Pierdo clientes porque no les hago seguimiento',
         who: 'Cualquier negocio que vende servicios o productos',
         solution: 'CRM OpsPilot — pipeline, seguimientos y comunicaciones centralizadas',
+        benefits: ['Seguimiento automático', 'Pipeline visual', 'Cero leads perdidos'],
         cta: 'Ver solución',
         href: '/product#crm',
     },
@@ -44,6 +48,7 @@ const filtros = [
         title: 'No tengo web o la que tengo no me genera nada',
         who: 'Autónomos, negocios locales y PYMEs sin presencia digital',
         solution: 'Web corporativa desde 200€, diseñada para convertir visitas en clientes',
+        benefits: ['Diseño premium', 'Optimización SEO', 'Alta conversión'],
         cta: 'Ver solución',
         href: '/services#web',
     },
@@ -52,6 +57,7 @@ const filtros = [
         title: 'Lo mío es específico y no encuentro nada que encaje',
         who: 'Cualquiera con un proceso único que el software estándar no resuelve',
         solution: 'Desarrollo a medida — analizamos tu caso y construimos lo que necesitas',
+        benefits: ['100% Adaptado a ti', 'Escalable sin límites', 'Integración total'],
         cta: 'Cuéntanoslo',
         href: '/contact',
     },
@@ -83,20 +89,36 @@ export const Soluciones: React.FC = () => {
             <section className={styles.section}>
                 <div className={styles.container} ref={gridRef}>
                     <div className={styles.grid}>
-                        {filtros.map((f) => (
-                            <div key={f.title} className={`${styles.card} reveal`}>
-                                <div className={styles.cardIcon}>{f.icon}</div>
-                                <h2 className={styles.cardTitle}>{f.title}</h2>
-                                <p className={styles.cardWho}>
-                                    <span className={styles.whoLabel}>Para:</span> {f.who}
-                                </p>
-                                <div className={styles.cardSolution}>
-                                    <span className={styles.solutionLabel}>Nuestra solución:</span>
-                                    <p>{f.solution}</p>
+                        {filtros.map((f, index) => (
+                            <div key={f.title} className={`${styles.mobileCard} reveal`} style={{ animationDelay: `${index * 0.1}s` }}>
+                                <div className={styles.mobileScreen}>
+                                    <div className={styles.screenHeader}>
+                                        <div className={styles.screenNotch}></div>
+                                    </div>
+                                    <div className={styles.screenContent}>
+                                        <div className={styles.screenIcon}>{f.icon}</div>
+                                        <div className={styles.screenTitle}>{f.solution.split('—')[0].trim()}</div>
+                                        <ul className={styles.benefitsList}>
+                                            {f.benefits.map(b => (
+                                                <li key={b}>
+                                                    <span className={styles.check}>✓</span> {b}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
-                                <Link to={f.href}>
-                                    <Button variant="outline" size="sm" fullWidth>{f.cta} →</Button>
-                                </Link>
+                                <div className={styles.mobileBody}>
+                                    <h2 className={styles.cardTitle}>{f.title}</h2>
+                                    <p className={styles.cardWho}>
+                                        <span className={styles.whoLabel}>Para:</span> {f.who}
+                                    </p>
+                                    <div className={styles.cardSolution}>
+                                        <p>{f.solution}</p>
+                                    </div>
+                                    <Link className={styles.cardLink} to={f.href}>
+                                        <Button variant="outline" size="sm" fullWidth>{f.cta} →</Button>
+                                    </Link>
+                                </div>
                             </div>
                         ))}
                     </div>

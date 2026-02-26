@@ -56,7 +56,7 @@
 
 .hero {
     position: relative;
-    padding: 8rem var(--spacing-6) var(--spacing-20);
+    padding: 0 var(--spacing-6) var(--spacing-20);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -64,22 +64,19 @@
     overflow: hidden;
 }
 
-.heroGlow {
+/* Aurora background for hero */
+.auroraBackground {
     position: absolute;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 800px;
-    height: 700px;
-    background: radial-gradient(ellipse at center, rgba(57, 206, 134, 0.15) 0%, rgba(57, 206, 134, 0.05) 40%, transparent 70%);
-    pointer-events: none;
+    inset: 0;
     z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .heroGrid {
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 6rem;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--spacing-12);
@@ -107,6 +104,35 @@
     line-height: 1.1;
     margin-bottom: var(--spacing-6);
     letter-spacing: -0.03em;
+}
+
+.underline {
+    position: relative;
+    white-space: nowrap;
+}
+
+.underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 100%;
+    height: 4px;
+    background: var(--color-primary);
+    opacity: 0.6;
+    z-index: -1;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: drawUnderline 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: 1s;
+    /* Appear after the text starts to reveal */
+}
+
+@keyframes drawUnderline {
+    to {
+        transform: scaleX(1);
+    }
 }
 
 @media (min-width: 640px) {

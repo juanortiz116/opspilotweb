@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { TrendingUp, Target, Home, Bath, Zap, ArrowDown, CircleDollarSign, Building2, ClipboardList, Rocket, Banknote, RefreshCw, ShieldCheck } from 'lucide-react';
+import { TrendingUp, Target, Home, Bath, Zap, ArrowDown, CircleDollarSign, Rocket, Banknote, RefreshCw, ShieldCheck } from 'lucide-react';
 import styles from './Product.module.css';
+import Aurora from '../components/common/Aurora';
 
 // Mockup Components for each product
 
@@ -129,7 +130,7 @@ export const Product: React.FC = () => {
     const products = [
         {
             id: 'erp',
-            emoji: <Building2 className="icon-md" />,
+
             name: 'ERP OpsPilot',
             desc: 'Gestión completa de tu empresa en un solo lugar: empleados, horarios, calendario, reservas, inventario, proveedores, facturación y analítica básica. El control que tienen las grandes empresas, al alcance de cualquier PYME.',
             price: 'Desde 29€/mes',
@@ -140,7 +141,7 @@ export const Product: React.FC = () => {
         },
         {
             id: 'crm',
-            emoji: <Target className="icon-md" />,
+
             name: 'CRM OpsPilot',
             desc: 'Gestión de clientes, seguimientos, pipeline de ventas y comunicaciones en un solo lugar. Adaptable a cómo trabaja tu equipo, no al revés. Porque cada negocio tiene su propia forma de vender.',
             price: 'Desde 19€/mes',
@@ -151,7 +152,7 @@ export const Product: React.FC = () => {
         },
         {
             id: 'presupuestador',
-            emoji: <ClipboardList className="icon-md" />,
+
             name: 'Presupuestador Pro',
             desc: 'Crea presupuestos profesionales en minutos. Añade partidas, asigna precios, crea packs reutilizables y envía propuestas que cierran ventas. Diseñado junto a reformistas, para reformistas.',
             price: 'Desde 25€/mes',
@@ -162,7 +163,7 @@ export const Product: React.FC = () => {
         },
         {
             id: 'tarifaocr',
-            emoji: <Zap className="icon-md" />,
+
             name: 'TarifaOCR',
             desc: 'Sube la factura de tu cliente y en segundos tienes la mejor propuesta de tarifa disponible, optimizada por precio final o por tu comisión. Gestiona toda tu cartera desde un solo panel. Adiós al análisis manual.',
             price: 'Consultar precio',
@@ -177,7 +178,9 @@ export const Product: React.FC = () => {
         <div className={styles.page}>
             {/* Hero */}
             <section className={styles.hero}>
-                <div className={`${styles.heroGlow} anim-pulse-glow`}></div>
+                <div className={styles.auroraBackground}>
+                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
+                </div>
                 <div className={styles.heroContent}>
                     <span className={styles.tag}>Productos</span>
                     <h1 className={styles.heroTitle}>
@@ -202,7 +205,6 @@ export const Product: React.FC = () => {
                         {products.map((p, index) => (
                             <div key={p.name} id={p.id} className={`${styles.productRow} ${index % 2 !== 0 ? styles.rowReverse : ''} reveal`}>
                                 <div className={styles.productInfo}>
-                                    <span className={styles.productIcon}>{p.emoji}</span>
                                     <span className={styles.productSector}>{p.sector}</span>
                                     <h3 className={styles.productName}>{p.name}</h3>
                                     <p className={styles.productDesc}>{p.desc}</p>

@@ -70,18 +70,18 @@ struct ColorStop {
   float position;
 };
 
-#define COLOR_RAMP(colors, factor, finalColor) {              \\
-  int index = 0;                                            \\
-  for (int i = 0; i < 2; i++) {                               \\
-     ColorStop currentColor = colors[i];                    \\
-     bool isInBetween = currentColor.position <= factor;    \\
-     index = int(mix(float(index), float(i), float(isInBetween))); \\
-  }                                                         \\
-  ColorStop currentColor = colors[index];                   \\
-  ColorStop nextColor = colors[index + 1];                  \\
-  float range = nextColor.position - currentColor.position; \\
-  float lerpFactor = (factor - currentColor.position) / range; \\
-  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \\
+#define COLOR_RAMP(colors, factor, finalColor) {              \
+  int index = 0;                                            \
+  for (int i = 0; i < 2; i++) {                               \
+     ColorStop currentColor = colors[i];                    \
+     bool isInBetween = currentColor.position <= factor;    \
+     index = int(mix(float(index), float(i), float(isInBetween))); \
+  }                                                         \
+  ColorStop currentColor = colors[index];                   \
+  ColorStop nextColor = colors[index + 1];                  \
+  float range = nextColor.position - currentColor.position; \
+  float lerpFactor = (factor - currentColor.position) / range; \
+  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
 }
 
 void main() {

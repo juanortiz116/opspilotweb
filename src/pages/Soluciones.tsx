@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import styles from './Soluciones.module.css';
+import Aurora from '../components/common/Aurora';
 
 import { ClipboardList, Zap, Building2, Target, Globe, Settings } from 'lucide-react';
 
@@ -71,7 +72,9 @@ export const Soluciones: React.FC = () => {
         <div className={styles.page}>
             {/* Hero */}
             <section className={styles.hero}>
-                <div className={`${styles.heroGlow} anim-pulse-glow`}></div>
+                <div className={styles.auroraBackground}>
+                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
+                </div>
                 <div className={styles.heroContent}>
                     <span className={styles.tag}>Soluciones</span>
                     <h1 className={styles.heroTitle}>

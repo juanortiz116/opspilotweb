@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/Button';
 import { Logo } from './Logo';
-import Aurora from './Aurora';
 import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
@@ -13,13 +12,10 @@ export const Navbar: React.FC = () => {
     return (
         <>
             <nav className={styles.navbar}>
-                <div className={styles.auroraWrapper}>
-                    <Aurora colorStops={['#111a23', '#39ce86', '#111a23']} blend={0.8} amplitude={0.5} speed={0.5} />
-                </div>
                 <div className={styles.navbarBackground}></div>
                 <div className={styles.container}>
                     <Link to="/" className={styles.logo} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <Logo size={28} />
+                        <Logo size={50} />
                         OpsPilot
                     </Link>
 

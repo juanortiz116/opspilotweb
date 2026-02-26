@@ -4,6 +4,7 @@ import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ClipboardList, Zap, Building2, Home as HomeIcon, Bath, MessageSquare } from 'lucide-react';
 import styles from './Home.module.css';
+import Aurora from '../components/common/Aurora';
 
 export const Home: React.FC = () => {
     const problemRef = useScrollReveal<HTMLDivElement>({ stagger: true });
@@ -16,12 +17,13 @@ export const Home: React.FC = () => {
         <div className={styles.page}>
             {/* ═══ SECTION 1: HERO ═══ */}
             <section className={styles.hero}>
-                <div className={`${styles.heroGlow} anim-pulse-glow`}></div>
+                <div className={styles.auroraBackground}>
+                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
+                </div>
                 <div className={styles.heroGrid}>
                     <div className={styles.heroContent}>
                         <h1 className={styles.heroTitle}>
-                            Gestiona tu negocio como las grandes empresas.<br />
-                            <span className="text-gradient">Sin su presupuesto ni su complejidad.</span>
+                            Gestiona tu negocio como las <span className={styles.underline}>grandes empresas.</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
                             Software propio para gestionar tu empresa, presupuestar en minutos,

@@ -9,6 +9,7 @@ import { Resources } from './pages/Resources';
 import { Contact } from './pages/Contact';
 import { Demo } from './pages/Demo';
 import { Soluciones } from './pages/Soluciones';
+import { NotFound } from './pages/NotFound';
 import './index.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/resources" element={<Resources />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/demo" element={<Demo />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Layout>
         </Router>

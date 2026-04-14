@@ -1,11 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import styles from './Demo.module.css';
 import Aurora from '../components/common/Aurora';
 
+// Replace with your Formspree form ID: https://formspree.io/f/{YOUR_FORM_ID}
+const FORMSPREE_DEMO_URL = 'https://formspree.io/f/YOUR_DEMO_FORM_ID';
+
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+
 export const Demo: React.FC = () => {
     const contentRef = useScrollReveal<HTMLDivElement>({ stagger: true });
+    const [status, setStatus] = useState<FormStatus>('idle');
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setStatus('submitting');
+        setErrorMsg('');
+        const form = e.currentTarget;
+        const data = new FormData(form);
+        try {
+            const res = await fetch(FORMSPREE_DEMO_URL, {
+                method: 'POST',
+                body: data,
+                headers: { Accept: 'application/json' },
+            });
+            if (res.ok) {
+                setStatus('success');
+                form.reset();
+            } else {
+                const json = await res.json().catch(() => ({}));
+                setErrorMsg(json?.errors?.[0]?.message || 'Error al enviar. Inténtalo de nuevo.');
+                setStatus('error');
+            }
+        } catch {
+            setErrorMsg('Error de red. Comprueba tu conexión e inténtalo de nuevo.');
+            setStatus('error');
+        }
+    };
 
     return (
         <div className={styles.page}>
@@ -36,42 +69,66 @@ export const Demo: React.FC = () => {
                         <div className={`${styles.formCard} reveal`}>
                             <h2 className={styles.formTitle}>Reserva tu sesión de diagnóstico</h2>
                             <p className={styles.formSub}>Rellena esto y te contactamos para confirmar día y hora.</p>
-                            <form className={styles.form}>
-                                <div className={styles.row}>
-                                    <div className={styles.field}>
-                                        <label htmlFor="demoName">Tu nombre</label>
-                                        <input id="demoName" type="text" placeholder="¿Cómo te llamas?" required />
+                            {status === 'success' ? (
+                                <div style={{
+                                    padding: 'var(--spacing-8)',
+                                    textAlign: 'center',
+                                    color: 'var(--color-primary)',
+                                }}>
+                                    <p style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, marginBottom: 'var(--spacing-3)' }}>
+                                        ¡Reserva recibida!
+                                    </p>
+                                    <p style={{ color: 'var(--color-dark-text-muted)' }}>
+                                        Te contactamos para confirmar día y hora.
+                                    </p>
+                                </div>
+                            ) : (
+                                <form className={styles.form} onSubmit={handleSubmit}>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}>
+                                            <label htmlFor="demoName">Tu nombre</label>
+                                            <input id="demoName" name="name" type="text" placeholder="¿Cómo te llamas?" required />
+                                        </div>
+                                        <div className={styles.field}>
+                                            <label htmlFor="demoEmail">Tu email</label>
+                                            <input id="demoEmail" name="email" type="email" placeholder="tu@email.com" required />
+                                        </div>
                                     </div>
                                     <div className={styles.field}>
-                                        <label htmlFor="demoEmail">Tu email</label>
-                                        <input id="demoEmail" type="email" placeholder="tu@email.com" required />
+                                        <label htmlFor="demoCompany">Tu empresa o proyecto</label>
+                                        <input id="demoCompany" name="company" type="text" placeholder="¿En qué trabajas?" />
                                     </div>
-                                </div>
-                                <div className={styles.field}>
-                                    <label htmlFor="demoCompany">Tu empresa o proyecto</label>
-                                    <input id="demoCompany" type="text" placeholder="¿En qué trabajas?" />
-                                </div>
-                                <div className={styles.field}>
-                                    <label htmlFor="demoInterest">¿Cuál es tu mayor problema ahora mismo?</label>
-                                    <select id="demoInterest" required>
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="presupuestos">Crear presupuestos me lleva demasiado tiempo</option>
-                                        <option value="energia">Analizo tarifas eléctricas manualmente</option>
-                                        <option value="erp">Gestiono mi empresa con Excel y se me escapa todo</option>
-                                        <option value="crm">Pierdo clientes por falta de seguimiento</option>
-                                        <option value="web">No tengo web o la que tengo no genera nada</option>
-                                        <option value="custom">Necesito una app o automatización a medida</option>
-                                        <option value="orientacion">No sé por dónde empezar, necesito orientación</option>
-                                    </select>
-                                </div>
-                                <div className={styles.field}>
-                                    <label htmlFor="demoNotes">Cuéntanos más (opcional)</label>
-                                    <textarea id="demoNotes" rows={4} placeholder="Cualquier detalle que nos ayude a preparar mejor la sesión..."></textarea>
-                                </div>
-                                <Button variant="primary" fullWidth size="lg" type="submit">
-                                    Reservar mi diagnóstico gratuito
-                                </Button>
-                            </form>
+                                    <div className={styles.field}>
+                                        <label htmlFor="demoInterest">¿Cuál es tu mayor problema ahora mismo?</label>
+                                        <select id="demoInterest" name="interest" required>
+                                            <option value="">Selecciona una opción</option>
+                                            <option value="presupuestos">Crear presupuestos me lleva demasiado tiempo</option>
+                                            <option value="energia">Analizo tarifas eléctricas manualmente</option>
+                                            <option value="erp">Gestiono mi empresa con Excel y se me escapa todo</option>
+                                            <option value="crm">Pierdo clientes por falta de seguimiento</option>
+                                            <option value="web">No tengo web o la que tengo no genera nada</option>
+                                            <option value="custom">Necesito una app o automatización a medida</option>
+                                            <option value="orientacion">No sé por dónde empezar, necesito orientación</option>
+                                        </select>
+                                    </div>
+                                    <div className={styles.field}>
+                                        <label htmlFor="demoNotes">Cuéntanos más (opcional)</label>
+                                        <textarea id="demoNotes" name="notes" rows={4} placeholder="Cualquier detalle que nos ayude a preparar mejor la sesión..."></textarea>
+                                    </div>
+                                    {status === 'error' && (
+                                        <p style={{
+                                            color: '#e53e3e',
+                                            fontSize: 'var(--font-size-sm)',
+                                            marginBottom: 'var(--spacing-3)',
+                                        }}>
+                                            {errorMsg}
+                                        </p>
+                                    )}
+                                    <Button variant="primary" fullWidth size="lg" type="submit" disabled={status === 'submitting'}>
+                                        {status === 'submitting' ? 'Enviando...' : 'Reservar mi diagnóstico gratuito'}
+                                    </Button>
+                                </form>
+                            )}
                         </div>
 
                         {/* Benefits */}

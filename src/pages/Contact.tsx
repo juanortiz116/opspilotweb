@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import styles from './Contact.module.css';
 import Aurora from '../components/common/Aurora';
 import { Mail, MessageSquare, MapPin } from 'lucide-react';
 
+// Replace with your Formspree form ID: https://formspree.io/f/{YOUR_FORM_ID}
+const FORMSPREE_CONTACT_URL = 'https://formspree.io/f/YOUR_CONTACT_FORM_ID';
+
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+
 export const Contact: React.FC = () => {
     const contactRef = useScrollReveal<HTMLDivElement>({ stagger: true });
+    const [status, setStatus] = useState<FormStatus>('idle');
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setStatus('submitting');
+        setErrorMsg('');
+        const form = e.currentTarget;
+        const data = new FormData(form);
+        try {
+            const res = await fetch(FORMSPREE_CONTACT_URL, {
+                method: 'POST',
+                body: data,
+                headers: { Accept: 'application/json' },
+            });
+            if (res.ok) {
+                setStatus('success');
+                form.reset();
+            } else {
+                const json = await res.json().catch(() => ({}));
+                setErrorMsg(json?.errors?.[0]?.message || 'Error al enviar. Inténtalo de nuevo.');
+                setStatus('error');
+            }
+        } catch {
+            setErrorMsg('Error de red. Comprueba tu conexión e inténtalo de nuevo.');
+            setStatus('error');
+        }
+    };
 
     return (
         <div className={styles.page}>
@@ -38,50 +71,74 @@ export const Contact: React.FC = () => {
                             <p className={styles.formSub}>
                                 Rellena esto y te respondemos en menos de 24 horas laborables.
                             </p>
-                            <form className={styles.form}>
-                                <div className={styles.row}>
-                                    <div className={styles.field}>
-                                        <label htmlFor="name">¿Cómo te llamas?</label>
-                                        <input id="name" type="text" placeholder="Tu nombre" required />
-                                    </div>
-                                    <div className={styles.field}>
-                                        <label htmlFor="email">¿Dónde te respondemos?</label>
-                                        <input id="email" type="email" placeholder="tu@email.com" required />
-                                    </div>
-                                </div>
-                                <div className={styles.field}>
-                                    <label htmlFor="company">Empresa o proyecto (opcional)</label>
-                                    <input id="company" type="text" placeholder="¿En qué trabajas?" />
-                                </div>
-                                <div className={styles.field}>
-                                    <label htmlFor="subject">¿Qué necesitas?</label>
-                                    <select id="subject" required>
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="web">Una web que funcione de verdad</option>
-                                        <option value="app">App o automatización a medida</option>
-                                        <option value="erp">ERP para gestionar mi empresa</option>
-                                        <option value="crm">CRM para gestionar mis clientes</option>
-                                        <option value="presupuesto">Presupuestador para mi empresa de reformas</option>
-                                        <option value="energia">Herramienta para comerciales de energía</option>
-                                        <option value="otro">Otra cosa, te lo explico en el mensaje</option>
-                                    </select>
-                                </div>
-                                <div className={styles.field}>
-                                    <label htmlFor="message">¿Qué problema quieres resolver?</label>
-                                    <textarea id="message" rows={5} placeholder="Cuéntanoslo como si hablaras con un amigo. Cuanto más detalle, mejor te podremos orientar." required></textarea>
-                                </div>
-                                <Button variant="primary" fullWidth type="submit">
-                                    Reservar diagnóstico gratuito
-                                </Button>
-                                <p style={{
+                            {status === 'success' ? (
+                                <div style={{
+                                    padding: 'var(--spacing-8)',
                                     textAlign: 'center',
-                                    fontSize: 'var(--font-size-xs)',
-                                    color: 'var(--color-dark-text-muted)',
-                                    marginTop: 'var(--spacing-3)'
+                                    color: 'var(--color-primary)',
                                 }}>
-                                    ✓ Respuesta en menos de 24h &nbsp;·&nbsp; ✓ Sin compromiso &nbsp;·&nbsp; ✓ Sin letra pequeña
-                                </p>
-                            </form>
+                                    <p style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, marginBottom: 'var(--spacing-3)' }}>
+                                        ¡Mensaje enviado!
+                                    </p>
+                                    <p style={{ color: 'var(--color-dark-text-muted)' }}>
+                                        Te respondemos en menos de 24 horas laborables.
+                                    </p>
+                                </div>
+                            ) : (
+                                <form className={styles.form} onSubmit={handleSubmit}>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}>
+                                            <label htmlFor="name">¿Cómo te llamas?</label>
+                                            <input id="name" name="name" type="text" placeholder="Tu nombre" required />
+                                        </div>
+                                        <div className={styles.field}>
+                                            <label htmlFor="email">¿Dónde te respondemos?</label>
+                                            <input id="email" name="email" type="email" placeholder="tu@email.com" required />
+                                        </div>
+                                    </div>
+                                    <div className={styles.field}>
+                                        <label htmlFor="company">Empresa o proyecto (opcional)</label>
+                                        <input id="company" name="company" type="text" placeholder="¿En qué trabajas?" />
+                                    </div>
+                                    <div className={styles.field}>
+                                        <label htmlFor="subject">¿Qué necesitas?</label>
+                                        <select id="subject" name="subject" required>
+                                            <option value="">Selecciona una opción</option>
+                                            <option value="web">Una web que funcione de verdad</option>
+                                            <option value="app">App o automatización a medida</option>
+                                            <option value="erp">ERP para gestionar mi empresa</option>
+                                            <option value="crm">CRM para gestionar mis clientes</option>
+                                            <option value="presupuesto">Presupuestador para mi empresa de reformas</option>
+                                            <option value="energia">Herramienta para comerciales de energía</option>
+                                            <option value="otro">Otra cosa, te lo explico en el mensaje</option>
+                                        </select>
+                                    </div>
+                                    <div className={styles.field}>
+                                        <label htmlFor="message">¿Qué problema quieres resolver?</label>
+                                        <textarea id="message" name="message" rows={5} placeholder="Cuéntanoslo como si hablaras con un amigo. Cuanto más detalle, mejor te podremos orientar." required></textarea>
+                                    </div>
+                                    {status === 'error' && (
+                                        <p style={{
+                                            color: '#e53e3e',
+                                            fontSize: 'var(--font-size-sm)',
+                                            marginBottom: 'var(--spacing-3)',
+                                        }}>
+                                            {errorMsg}
+                                        </p>
+                                    )}
+                                    <Button variant="primary" fullWidth type="submit" disabled={status === 'submitting'}>
+                                        {status === 'submitting' ? 'Enviando...' : 'Reservar diagnóstico gratuito'}
+                                    </Button>
+                                    <p style={{
+                                        textAlign: 'center',
+                                        fontSize: 'var(--font-size-xs)',
+                                        color: 'var(--color-dark-text-muted)',
+                                        marginTop: 'var(--spacing-3)'
+                                    }}>
+                                        ✓ Respuesta en menos de 24h &nbsp;·&nbsp; ✓ Sin compromiso &nbsp;·&nbsp; ✓ Sin letra pequeña
+                                    </p>
+                                </form>
+                            )}
                         </div>
 
                         {/* Info */}

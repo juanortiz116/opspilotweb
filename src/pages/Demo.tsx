@@ -4,8 +4,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import styles from './Demo.module.css';
 import Aurora from '../components/common/Aurora';
 
-// Replace with your Formspree form ID: https://formspree.io/f/{YOUR_FORM_ID}
-const FORMSPREE_DEMO_URL = 'https://formspree.io/f/YOUR_DEMO_FORM_ID';
+const FORM_DEMO_URL = 'https://formsubmit.co/ajax/opspilot.contact@gmail.com';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -20,11 +19,13 @@ export const Demo: React.FC = () => {
         setErrorMsg('');
         const form = e.currentTarget;
         const data = new FormData(form);
+        const body: Record<string, string> = {};
+        data.forEach((v, k) => { body[k] = v as string; });
         try {
-            const res = await fetch(FORMSPREE_DEMO_URL, {
+            const res = await fetch(FORM_DEMO_URL, {
                 method: 'POST',
-                body: data,
-                headers: { Accept: 'application/json' },
+                body: JSON.stringify(body),
+                headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
             });
             if (res.ok) {
                 setStatus('success');

@@ -14,6 +14,7 @@ export const Logo: React.FC<LogoProps> = ({ className, size = 60 }) => {
             height={size}
             className={className}
             style={{ objectFit: 'contain' }}
+            loading="lazy"
         />
     );
 };

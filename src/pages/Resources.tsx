@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import styles from './Resources.module.css';
 import Aurora from '../components/common/Aurora';
 
+const FORM_NEWSLETTER_URL = 'https://formsubmit.co/ajax/opspilot.contact@gmail.com';
+
+type NLStatus = 'idle' | 'submitting' | 'success' | 'error';
+
 export const Resources: React.FC = () => {
     const gridRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const nlRef = useScrollReveal<HTMLDivElement>();
+    const [nlStatus, setNlStatus] = useState<NLStatus>('idle');
+    const [nlEmail, setNlEmail] = useState('');
     const ctaRef = useScrollReveal<HTMLDivElement>();
+
+    const handleNewsletter = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setNlStatus('submitting');
+        try {
+            const res = await fetch(FORM_NEWSLETTER_URL, {
+                method: 'POST',
+                headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: nlEmail, _subject: 'Nueva suscripción newsletter OpsPilot', tipo: 'newsletter' }),
+            });
+            if (res.ok) {
+                setNlStatus('success');
+                setNlEmail('');
+            } else {
+                setNlStatus('error');
+            }
+        } catch {
+            setNlStatus('error');
+        }
+    };
 
     return (
         <div className={styles.page}>
@@ -94,10 +120,30 @@ export const Resources: React.FC = () => {
                                 Sin relleno, sin spam. Solo cosas que puedes aplicar en tu negocio.
                             </p>
                         </div>
-                        <form className={styles.nlForm}>
-                            <input type="email" placeholder="tu@email.com" className={styles.nlInput} required />
-                            <Button variant="primary" type="submit">Suscribirme gratis</Button>
-                        </form>
+                        {nlStatus === 'success' ? (
+                            <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: 'var(--font-size-lg)' }}>
+                                ¡Suscrito! Te llegará el próximo email esta semana.
+                            </p>
+                        ) : (
+                            <form className={styles.nlForm} onSubmit={handleNewsletter}>
+                                <input
+                                    type="email"
+                                    placeholder="tu@email.com"
+                                    className={styles.nlInput}
+                                    required
+                                    value={nlEmail}
+                                    onChange={(e) => setNlEmail(e.target.value)}
+                                />
+                                <Button variant="primary" type="submit" disabled={nlStatus === 'submitting'}>
+                                    {nlStatus === 'submitting' ? 'Enviando...' : 'Suscribirme gratis'}
+                                </Button>
+                                {nlStatus === 'error' && (
+                                    <p style={{ color: '#e53e3e', fontSize: 'var(--font-size-sm)', marginTop: 'var(--spacing-2)' }}>
+                                        Error al suscribirse. Inténtalo de nuevo.
+                                    </p>
+                                )}
+                            </form>
+                        )}
                     </div>
                 </div>
             </section>

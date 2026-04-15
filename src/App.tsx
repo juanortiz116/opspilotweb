@@ -1,33 +1,37 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
-import { Home } from './pages/Home';
-import { Product } from './pages/Product';
-import { Services } from './pages/Services';
-import { Cases } from './pages/Cases';
-import { Pricing } from './pages/Pricing';
-import { Resources } from './pages/Resources';
-import { Contact } from './pages/Contact';
-import { Demo } from './pages/Demo';
-import { Soluciones } from './pages/Soluciones';
-import { NotFound } from './pages/NotFound';
 import './index.css';
+
+const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
+const Product = lazy(() => import('./pages/Product').then(m => ({ default: m.Product })));
+const Services = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
+const Cases = lazy(() => import('./pages/Cases').then(m => ({ default: m.Cases })));
+const Pricing = lazy(() => import('./pages/Pricing').then(m => ({ default: m.Pricing })));
+const Resources = lazy(() => import('./pages/Resources').then(m => ({ default: m.Resources })));
+const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
+const Demo = lazy(() => import('./pages/Demo').then(m => ({ default: m.Demo })));
+const Soluciones = lazy(() => import('./pages/Soluciones').then(m => ({ default: m.Soluciones })));
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
 function App() {
     return (
         <Router>
             <Layout>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/soluciones" element={<Soluciones />} />
-                    <Route path="/product" element={<Product />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/cases" element={<Cases />} />
-                    <Route path="/pricing" element={<Pricing />} />
-                    <Route path="/resources" element={<Resources />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/demo" element={<Demo />} />
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
+                <Suspense fallback={null}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/soluciones" element={<Soluciones />} />
+                        <Route path="/product" element={<Product />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/cases" element={<Cases />} />
+                        <Route path="/pricing" element={<Pricing />} />
+                        <Route path="/resources" element={<Resources />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/demo" element={<Demo />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                </Suspense>
             </Layout>
         </Router>
     );

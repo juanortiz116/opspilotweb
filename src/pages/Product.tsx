@@ -2,217 +2,257 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { TrendingUp, Target, Home, Bath, Zap, ArrowDown, CircleDollarSign, Rocket, Banknote, RefreshCw, ShieldCheck } from 'lucide-react';
+import { usePageSEO } from '../hooks/usePageSEO';
+import {
+    FileSpreadsheet,
+    Zap,
+    Calculator,
+    Network,
+    FileText,
+    Receipt,
+    Landmark,
+    Smartphone,
+    BarChart3,
+    Users,
+    FileSignature,
+    Banknote,
+    HardHat,
+    Layers,
+    PenLine,
+    ScanLine,
+    Bot,
+    KanbanSquare,
+    Target,
+    Workflow,
+    Rocket,
+    RefreshCw,
+    ShieldCheck,
+    Building2,
+} from 'lucide-react';
+import sys from '../styles/page-system.module.css';
 import styles from './Product.module.css';
-import Aurora from '../components/common/Aurora';
 
-// Mockup Components for each product
+type ProductStatus = 'production' | 'beta' | 'soon';
 
-const ERPMockup = () => (
-    <div className={`${styles.dashboardMock} anim-float`}>
-        <div className={styles.mockHeader}>
-            <div className={styles.mockDots}>
-                <span></span><span></span><span></span>
-            </div>
+interface Feature {
+    icon: React.ReactNode;
+    label: string;
+}
+
+interface ProductCardProps {
+    icon: React.ReactNode;
+    differentiator: string;
+    features: Feature[];
+    status: ProductStatus;
+}
+
+const statusLabel: Record<ProductStatus, string> = {
+    production: 'En producción',
+    beta: 'En beta privada',
+    soon: 'Próximamente',
+};
+
+const ProductVisual: React.FC<ProductCardProps> = ({ icon, differentiator, features, status }) => (
+    <div className={styles.productVisual}>
+        <div className={styles.productVisualHeader}>
+            <div className={styles.productVisualIcon}>{icon}</div>
+            <span className={`${styles.productStatus} ${styles['status_' + status]}`}>
+                <span className={styles.productStatusDot}></span>
+                {statusLabel[status]}
+            </span>
         </div>
-        <div className={styles.mockBody}>
-            <div className={styles.mockSidebar}>
-                <div className={styles.mockNav}></div>
-                <div className={styles.mockNav}></div>
-                <div className={styles.mockNav}></div>
-                <div className={styles.mockNav}></div>
-            </div>
-            <div className={styles.mockContent}>
-                <div className={styles.mockCards}>
-                    <div className={styles.mockCard}>
-                        <div className={styles.mockLabel}>Ingresos Mes</div>
-                        <div className={styles.mockValue}>€14.250</div>
-                    </div>
-                    <div className={styles.mockCard}>
-                        <div className={styles.mockLabel}>Empleados Activos</div>
-                        <div className={styles.mockValue}>12</div>
-                    </div>
-                </div>
-                <div className={styles.mockChart}>
-                    <div className={styles.chartLine}></div>
-                </div>
-            </div>
-        </div>
-        <div className={`${styles.floatingBadge} ${styles.badgeERP}`}>
-            <TrendingUp size={16} /> Control total
-        </div>
+        <p className={styles.productVisualDifferentiator}>{differentiator}</p>
+        <ul className={styles.productVisualFeatures}>
+            {features.map((f, i) => (
+                <li key={i}>
+                    <span className={styles.productVisualFeatureIcon}>{f.icon}</span>
+                    <span>{f.label}</span>
+                </li>
+            ))}
+        </ul>
     </div>
 );
 
-const CRMMockup = () => (
-    <div className={`${styles.kanbanMock} anim-float-slow`}>
-        <div className={styles.kanbanHeader}>Pipeline de Ventas</div>
-        <div className={styles.kanbanBoard}>
-            <div className={styles.kanbanColumn}>
-                <div className={styles.colTitle}>Nuevos</div>
-                <div className={styles.kanbanCard}>Lead: Empresa S.L.</div>
-                <div className={styles.kanbanCard}>Lead: Autonómos Unidos</div>
-            </div>
-            <div className={styles.kanbanColumn}>
-                <div className={styles.colTitle}>En Negociación</div>
-                <div className={styles.kanbanCard}>Juan Pérez - Presupuesto enviado</div>
-            </div>
-            <div className={styles.kanbanColumn}>
-                <div className={styles.colTitle}>Cerrados</div>
-                <div className={`${styles.kanbanCard} ${styles.cardSuccess}`}>Proyecto Reforma Integral</div>
-            </div>
-        </div>
-        <div className={`${styles.floatingBadge} ${styles.badgeCRM}`}>
-            <Target size={16} /> +30% Conversión
-        </div>
-    </div>
-);
-
-const PresupuestadorMockup = () => (
-    <div className={`${styles.phoneMockup} anim-float`}>
-        <div className={styles.phoneScreen}>
-            <div className={styles.phoneNotch}></div>
-            <div className={styles.phoneContent}>
-                <div className={styles.quoteHeader}>PRESUPUESTO #0042</div>
-                <div className={styles.quoteCard}>
-                    <div className={styles.quoteImage}><Home size={20} /></div>
-                    <div className={styles.quoteInfo}>
-                        <div className={styles.quoteTitle}>Reforma Cocina</div>
-                        <div className={styles.quotePrice}>€4.200</div>
-                    </div>
-                </div>
-                <div className={styles.quoteCard}>
-                    <div className={styles.quoteImage}><Bath size={20} /></div>
-                    <div className={styles.quoteInfo}>
-                        <div className={styles.quoteTitle}>Reforma Baño</div>
-                        <div className={styles.quotePrice}>€2.800</div>
-                    </div>
-                </div>
-                <div className={styles.quoteTotal}>
-                    <span>Total:</span>
-                    <span className={styles.quoteTotalAmount}>€7.000</span>
-                </div>
-                <div className={`${styles.floatingBadge} ${styles.badgePresupuesto}`}>
-                    <Zap size={16} /> Enviado en 2 min
-                </div>
-            </div>
-        </div>
-    </div>
-);
-
-const TarifaOCRMockup = () => (
-    <div className={`${styles.scannerMock} anim-float-slow`}>
-        <div className={styles.scannerHeader}>Análisis de Factura</div>
-        <div className={styles.scannerBody}>
-            <div className={styles.scanLine}></div>
-            <div className={styles.facturaVieja}>
-                <div className={styles.facturaTitle}>Factura Actual (Iberdrola)</div>
-                <div className={styles.facturaPrice}>150 €/mes</div>
-            </div>
-            <div className={styles.scanArrow}><ArrowDown size={24} /></div>
-            <div className={styles.facturaNueva}>
-                <div className={styles.facturaTitle}>Propuesta Óptima (Endesa)</div>
-                <div className={styles.facturaPriceSuccess}>120 €/mes</div>
-            </div>
-        </div>
-        <div className={`${styles.floatingBadge} ${styles.badgeTarifa}`}>
-            <CircleDollarSign size={16} /> Ahorro del 20%
-        </div>
-    </div>
-);
-
+interface Product {
+    id: string;
+    name: string;
+    sector: string;
+    desc: string;
+    differentiator: string;
+    features: Feature[];
+    status: ProductStatus;
+    icon: React.ReactNode;
+    cta: string;
+    href: string;
+    external?: boolean;
+}
 
 export const Product: React.FC = () => {
+    usePageSEO({
+        title: 'Productos verticales · Software para sectores concretos — OpsPilot',
+        description:
+            'Cuatro productos verticales para PYMEs españolas: fiscalidad (AEAT, SII, VeriFactu), CRM energético, presupuestos de obra (BC3/FIEBDC) y ERP con agentes IA.',
+        canonical: 'https://opspilot.es/productos',
+    });
+
     const productsRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const advantagesRef = useScrollReveal<HTMLDivElement>({ stagger: true });
-    const ctaRef = useScrollReveal<HTMLDivElement>();
 
-    const products = [
+    const products: Product[] = [
         {
-            id: 'erp',
-
-            name: 'ERP OpsPilot',
-            desc: 'Gestión completa de tu empresa en un solo lugar: empleados, horarios, calendario, reservas, inventario, proveedores, facturación y analítica básica. El control que tienen las grandes empresas, al alcance de cualquier PYME.',
-            price: 'Desde 29€/mes',
-            sector: 'Pequeña y mediana empresa',
-            cta: 'Solicitar acceso',
-            href: '/contact',
-            mockup: <ERPMockup />
+            id: 'fiscalidad',
+            name: 'Fiscalidad',
+            sector: 'Autónomos, PYMEs y asesorías',
+            desc:
+                'Plataforma fiscal y contable española completa. Facturación, asientos automáticos según el PGC, ' +
+                'modelos AEAT, envío SII y VeriFactu nativos, conciliación bancaria con OCR de tickets, ' +
+                'asistente IA fiscal y app móvil. Pensada para uso directo y para gestorías que llevan múltiples clientes.',
+            differentiator:
+                'Cobertura completa del stack fiscal español, no solo facturación. Compite con Holded, Quipu y A3 Suite con SII, VeriFactu y consolidación de grupos incluidos.',
+            features: [
+                { icon: <Receipt size={16} />, label: 'Facturación + cobros/pagos + contabilidad PGC' },
+                { icon: <Landmark size={16} />, label: 'Modelos AEAT 303, 111, 115, 130, 190, 202, 347 y 390' },
+                { icon: <FileSignature size={16} />, label: 'Envío SII y VeriFactu (XML firmado y encadenado)' },
+                { icon: <Smartphone size={16} />, label: 'App móvil con biometría y captura de tickets' },
+                { icon: <BarChart3 size={16} />, label: 'Asistente IA fiscal y consolidación de grupos' },
+            ],
+            status: 'production',
+            icon: <FileSpreadsheet size={32} />,
+            cta: 'Ver web del producto',
+            href: 'https://fiscalidad.mcpopspilot.org',
+            external: true,
         },
         {
-            id: 'crm',
-
-            name: 'CRM OpsPilot',
-            desc: 'Gestión de clientes, seguimientos, pipeline de ventas y comunicaciones en un solo lugar. Adaptable a cómo trabaja tu equipo, no al revés. Porque cada negocio tiene su propia forma de vender.',
-            price: 'Desde 19€/mes',
-            sector: 'Cualquier sector',
-            cta: 'Solicitar acceso',
-            href: '/contact',
-            mockup: <CRMMockup />
+            id: 'energydeal',
+            name: 'EnergyDeal',
+            sector: 'Sector energético — agentes y comercializadoras',
+            desc:
+                'CRM B2B vertical para agentes comerciales y comercializadoras energéticas en España. ' +
+                'Comparador multi-proveedor, gestión por CIF con CUPS, pipeline de carga masiva de tarifas, ' +
+                'liquidación de comisiones y centro de mensajería con campañas Email + WhatsApp.',
+            differentiator:
+                'Reproducibilidad y auditoría: cada comparativa es un snapshot inmutable, las tarifas se versionan en lugar de sobrescribirse y los conflictos de interés se marcan explícitamente.',
+            features: [
+                { icon: <Banknote size={16} />, label: 'Comparador con snapshots históricos reproducibles' },
+                { icon: <Building2 size={16} />, label: 'CRM B2B por CIF con CUPS y puntos de suministro' },
+                { icon: <Workflow size={16} />, label: 'Pipeline carga masiva de tarifas (PDF → parseo → validación)' },
+                { icon: <Users size={16} />, label: 'Comisiones con estados pending / validated / paid / reverted' },
+                { icon: <FileText size={16} />, label: 'Exportes fiscales (IVA + pagos) y log de auditoría' },
+            ],
+            status: 'production',
+            icon: <Zap size={32} />,
+            cta: 'Ver web del producto',
+            href: 'https://energydeal.es',
+            external: true,
         },
         {
             id: 'presupuestador',
-
-            name: 'Presupuestador Pro',
-            desc: 'Crea presupuestos profesionales en minutos. Añade partidas, asigna precios, crea packs reutilizables y envía propuestas que cierran ventas. Diseñado junto a reformistas, para reformistas.',
-            price: 'Desde 25€/mes',
-            sector: 'Reformas, construcción y oficios',
-            cta: 'Solicitar acceso',
-            href: '/contact',
-            mockup: <PresupuestadorMockup />
+            name: 'Presupuestador',
+            sector: 'Construcción, reformas y arquitectura',
+            desc:
+                'SaaS para presupuestos y certificaciones de obra. Partidas estructuradas con descomposición ' +
+                'en recursos (materiales, mano de obra, maquinaria) y rendimientos, packs reutilizables, ' +
+                'firma digital del cliente vía enlace público y control de coste real con OCR de albaranes.',
+            differentiator:
+                'BC3/FIEBDC nativo (estándar español del sector) más descomposición real de partidas en recursos. No es un presupuestador genérico: está hecho para cómo se presupuesta obra en España.',
+            features: [
+                { icon: <Layers size={16} />, label: 'Importación y exportación BC3/FIEBDC nativa' },
+                { icon: <HardHat size={16} />, label: 'Partidas + packs reutilizables + catálogo de recursos' },
+                { icon: <PenLine size={16} />, label: 'Firma digital del cliente vía enlace público' },
+                { icon: <FileSignature size={16} />, label: 'Certificaciones de obra con asistente y versionado' },
+                { icon: <ScanLine size={16} />, label: 'Control de rentabilidad con OCR de albaranes' },
+            ],
+            status: 'beta',
+            icon: <Calculator size={32} />,
+            cta: 'Solicitar acceso anticipado',
+            href: '/contacto',
+            external: false,
         },
         {
-            id: 'tarifaocr',
-
-            name: 'TarifaOCR',
-            desc: 'Sube la factura de tu cliente y en segundos tienes la mejor propuesta de tarifa disponible, optimizada por precio final o por tu comisión. Gestiona toda tu cartera desde un solo panel. Adiós al análisis manual.',
-            price: 'Consultar precio',
-            sector: 'Comerciales de energía eléctrica',
-            cta: 'Solicitar información',
-            href: '/contact',
-            mockup: <TarifaOCRMockup />
+            id: 'erp',
+            name: 'ERP OpsPilot',
+            sector: 'Agencias, consultoras y servicios profesionales',
+            desc:
+                'ERP/PSA todo-en-uno para reemplazar la combinación Notion + Trello + HubSpot + Slack + Drive. ' +
+                'Project Hub con tareas jerárquicas, CRM con empresas y oportunidades, secuencias de prospección, ' +
+                'auditorías con plantillas reutilizables, portal cliente externo y multi-tenant.',
+            differentiator:
+                'Capa MCP nativa con 31+ herramientas: un agente IA conversacional ejecuta acciones reales del ERP. Un Odoo es excesivo para una agencia, esto es modular y pensado para servicios profesionales.',
+            features: [
+                { icon: <Bot size={16} />, label: 'Capa MCP de agentes IA con 31+ herramientas nativas' },
+                { icon: <KanbanSquare size={16} />, label: 'Project Hub con tareas jerárquicas y Kanban' },
+                { icon: <Target size={16} />, label: 'Intelligence Platform: empresas, contactos, oportunidades' },
+                { icon: <Workflow size={16} />, label: 'Outreach Engine con secuencias automatizadas' },
+                { icon: <FileText size={16} />, label: 'Auditor con plantillas reutilizables (consultoría/compliance)' },
+            ],
+            status: 'production',
+            icon: <Network size={32} />,
+            cta: 'Ver web del producto',
+            href: 'https://notionpilot.mcpopspilot.org',
+            external: true,
         },
     ];
 
     return (
-        <div className={styles.page}>
-            {/* Hero */}
-            <section className={styles.hero}>
-                <div className={styles.auroraBackground}>
-                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
-                </div>
-                <div className={styles.heroContent}>
-                    <span className={styles.tag}>Productos</span>
-                    <h1 className={styles.heroTitle}>
-                        Software propio para problemas{' '}
-                        <span className="text-gradient">que el mercado ignora.</span>
-                    </h1>
-                    <p className={styles.heroSub}>
-                        Desarrollamos nuestras propias herramientas para nichos donde el software genérico no llega.
-                        Listos para usar, con soporte incluido y sin configuraciones de meses.
-                    </p>
+        <div className={sys.page}>
+            {/* ═══ HERO ═══ */}
+            <section className={sys.pageHero}>
+                <div className={sys.container}>
+                    <div className={sys.pageHeroContent}>
+                        <span className={sys.pageHeroEyebrow}>
+                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
+                            Productos verticales
+                        </span>
+                        <h1 className={sys.pageHeroTitle}>
+                            Cuatro productos para PYMEs <em className={sys.pageHeroAccent}>españolas</em>.
+                        </h1>
+                        <p className={sys.pageHeroSubtitle}>
+                            Fiscalidad, energía, construcción y agencias. Cada producto resuelve un
+                            dominio concreto con sus estándares (PGC, AEAT, SII, VeriFactu, BC3/FIEBDC)
+                            en lugar de ofrecer un genérico que no conoce el contexto español.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Products Layout (Alternating Rows) */}
+            {/* ═══ CATÁLOGO ═══ */}
             <section className={styles.section}>
-                <div className={styles.container} ref={productsRef}>
-                    <div className={`${styles.sectionHeader} reveal`}>
-                        <h2 className={styles.sectionTitle}>Nuestros productos</h2>
-                        <p className={styles.sectionSub}>Cuatro herramientas construidas para problemas reales que encontramos en nuestros clientes.</p>
-                    </div>
+                <div className={sys.container} ref={productsRef}>
+                    <header className={`${sys.sectionHeader} reveal`}>
+                        <span className={sys.eyebrow}>
+                            <span className={sys.eyebrowDot} />
+                            Catálogo
+                        </span>
+                        <h2 className={sys.sectionTitle}>Nuestros productos.</h2>
+                    </header>
                     <div className={styles.productsList}>
                         {products.map((p, index) => (
-                            <div key={p.name} id={p.id} className={`${styles.productRow} ${index % 2 !== 0 ? styles.rowReverse : ''} reveal`}>
+                            <div
+                                key={p.id}
+                                id={p.id}
+                                className={`${styles.productRow} ${index % 2 !== 0 ? styles.rowReverse : ''} reveal`}
+                            >
                                 <div className={styles.productInfo}>
                                     <span className={styles.productSector}>{p.sector}</span>
                                     <h3 className={styles.productName}>{p.name}</h3>
                                     <p className={styles.productDesc}>{p.desc}</p>
-                                    <div className={styles.productPrice}>{p.price}</div>
-                                    <Link to={p.href}><Button variant="primary" size="lg">{p.cta} →</Button></Link>
+                                    {p.external ? (
+                                        <a href={p.href} target="_blank" rel="noopener noreferrer">
+                                            <Button variant="primary" size="lg">{p.cta}</Button>
+                                        </a>
+                                    ) : (
+                                        <Link to={p.href}>
+                                            <Button variant="primary" size="lg">{p.cta}</Button>
+                                        </Link>
+                                    )}
                                 </div>
                                 <div className={styles.productVisualContainer}>
-                                    {p.mockup}
+                                    <ProductVisual
+                                        icon={p.icon}
+                                        differentiator={p.differentiator}
+                                        features={p.features}
+                                        status={p.status}
+                                    />
                                 </div>
                             </div>
                         ))}
@@ -220,38 +260,61 @@ export const Product: React.FC = () => {
                 </div>
             </section>
 
-            {/* Advantages */}
-            <section className={styles.section}>
-                <div className={styles.container} ref={advantagesRef}>
-                    <div className={`${styles.sectionHeader} reveal`}>
-                        <h2 className={styles.sectionTitle}>Por qué nuestros productos</h2>
-                    </div>
+            {/* ═══ POR QUÉ ═══ */}
+            <section className={`${sys.sectionLoose} ${sys.sectionAlt}`}>
+                <div className={sys.container} ref={advantagesRef}>
+                    <header className={`${sys.sectionHeader} reveal`}>
+                        <span className={sys.eyebrow}>
+                            <span className={sys.eyebrowDot} />
+                            Por qué
+                        </span>
+                        <h2 className={sys.sectionTitle}>Diseñados para España.</h2>
+                    </header>
                     <div className={styles.whyGrid}>
                         {[
-                            { icon: <Rocket size={24} />, title: 'Funciona desde el primer día', desc: 'Sin meses de desarrollo ni configuraciones infinitas. En 48 horas estás gestionando con él.' },
-                            { icon: <Banknote size={24} />, title: 'Coste fijo y predecible', desc: 'Sabes exactamente lo que pagas cada mes. Sin sorpresas, sin costes ocultos, sin letra pequeña.' },
-                            { icon: <RefreshCw size={24} />, title: 'Siempre actualizado', desc: 'Mejoramos en base a lo que piden los usuarios. Las actualizaciones llegan solas, incluidas en tu suscripción.' },
-                            { icon: <ShieldCheck size={24} />, title: 'Soporte real incluido', desc: 'Personas reales que responden. No un chatbot, no un PDF de preguntas frecuentes.' },
+                            {
+                                icon: <Rocket size={24} />,
+                                title: 'Verticales, no genéricos',
+                                desc: 'Cada producto incorpora los estándares del dominio: PGC, AEAT, SII, VeriFactu, BC3/FIEBDC, CUPS. No tienes que adaptar tu negocio al software.',
+                            },
+                            {
+                                icon: <Banknote size={24} />,
+                                title: 'Suscripción mensual fija',
+                                desc: 'Precio cerrado por producto. Sin coste por documento, sin penalización por crecer. La factura de fin de mes es la que esperas.',
+                            },
+                            {
+                                icon: <RefreshCw size={24} />,
+                                title: 'Actualizaciones continuas',
+                                desc: 'Las normas fiscales y técnicas cambian (VeriFactu, nuevas versiones BC3, modelos AEAT). Nosotros nos encargamos.',
+                            },
+                            {
+                                icon: <ShieldCheck size={24} />,
+                                title: 'Soporte humano incluido',
+                                desc: 'Equipo accesible en español. Resolvemos dudas de uso y de dominio (fiscal, energético, construcción) con personas reales.',
+                            },
                         ].map((a) => (
                             <div key={a.title} className={`${styles.whyCard} reveal`}>
-                                <span className={styles.whyEmoji}>{a.icon}</span>
-                                <h4>{a.title}</h4>
-                                <p>{a.desc}</p>
+                                <span className={styles.whyIcon}>{a.icon}</span>
+                                <h3 className={styles.whyTitle}>{a.title}</h3>
+                                <p className={styles.whyText}>{a.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className={styles.section}>
-                <div className={styles.container}>
-                    <div className={`${styles.ctaBlock} reveal`} ref={ctaRef}>
-                        <h2 className={styles.ctaTitle}>¿Tu caso necesita algo diferente?</h2>
-                        <p className={styles.ctaSub}>Si ninguno de nuestros productos encaja exactamente, lo construimos a medida. Cuéntanos qué necesitas.</p>
-                        <div className={styles.ctaRow}>
-                            <Link to="/contact"><Button variant="primary" size="lg">Pedir desarrollo a medida</Button></Link>
-                            <Link to="/services"><Button variant="outline" size="lg">Ver servicios</Button></Link>
+            {/* ═══ CTA ═══ */}
+            <section className={sys.endCta}>
+                <div className={sys.container}>
+                    <div className={sys.endCtaBlock}>
+                        <h2 className={sys.endCtaTitle}>¿Tu caso necesita algo a medida?</h2>
+                        <p className={sys.endCtaSub}>
+                            Si los productos no encajan con tu flujo, lo construimos desde cero
+                            con presupuesto cerrado.
+                        </p>
+                        <div className={sys.endCtaButtons}>
+                            <Link to="/contacto"><Button variant="primary" size="lg">Pedir desarrollo a medida</Button></Link>
+                            <Link to="/servicios"><Button variant="outline" size="lg">Ver servicios</Button></Link>
                         </div>
                     </div>
                 </div>

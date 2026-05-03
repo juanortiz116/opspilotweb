@@ -2,143 +2,148 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { usePageSEO } from '../hooks/usePageSEO';
+import sys from '../styles/page-system.module.css';
 import styles from './Soluciones.module.css';
-import Aurora from '../components/common/Aurora';
 
-import { ClipboardList, Zap, Building2, Target, Globe, Settings } from 'lucide-react';
+import { FileSpreadsheet, Zap, Calculator, Network, Globe, Settings, ArrowRight } from 'lucide-react';
 
 const filtros = [
     {
-        icon: <ClipboardList size={28} />,
-        title: 'Crear presupuestos me lleva demasiado tiempo',
-        who: 'Reformistas, fontaneros, electricistas, instaladores y cualquier oficio',
-        solution: 'Presupuestador Pro — partidas, precios unitarios y packs reutilizables',
-        benefits: ['Presupuestos en 2 min', 'Márgenes sin errores', '+20% cierre de ventas'],
-        cta: 'Ver solución',
-        href: '/product#presupuestador',
+        icon: <FileSpreadsheet size={22} strokeWidth={1.5} />,
+        title: 'Llevo la fiscalidad española en cuatro herramientas distintas',
+        who: 'Autónomos, PYMEs y asesorías que llevan IVA, IRPF y modelos AEAT',
+        solution: 'Fiscalidad — facturación, contabilidad PGC, modelos AEAT, SII y VeriFactu',
+        benefits: ['Modelos 303, 130, 347, 390 automáticos', 'SII y VeriFactu nativos', 'App móvil con OCR'],
+        cta: 'Ver producto',
+        href: '/productos#fiscalidad',
     },
     {
-        icon: <Zap size={28} />,
-        title: 'Analizo tarifas eléctricas a mano cliente por cliente',
-        who: 'Comerciales de energía eléctrica y gas',
-        solution: 'TarifaOCR — sube la factura, obtén la mejor propuesta en segundos',
-        benefits: ['Análisis automático', 'Propuesta instantánea', 'Cartera centralizada'],
-        cta: 'Ver solución',
-        href: '/product#tarifaocr',
+        icon: <Zap size={22} strokeWidth={1.5} />,
+        title: 'Comparo tarifas energéticas en Excel y pierdo trazabilidad',
+        who: 'Agentes comerciales y comercializadoras energéticas en España',
+        solution: 'EnergyDeal — CRM B2B con comparador reproducible y comisiones',
+        benefits: ['Snapshots de tarifa inmutables', 'Gestión por CIF y CUPS', 'Liquidación de comisiones'],
+        cta: 'Ver producto',
+        href: '/productos#energydeal',
     },
     {
-        icon: <Building2 size={28} />,
-        title: 'Gestiono mi empresa con Excel y se me escapa todo',
-        who: 'PYMEs y autónomos de cualquier sector',
-        solution: 'ERP OpsPilot — empleados, inventario, proveedores, facturación y analítica',
-        benefits: ['Control total', 'Horas ahorradas cada mes', 'Datos en tiempo real'],
-        cta: 'Ver solución',
-        href: '/product#erp',
+        icon: <Calculator size={22} strokeWidth={1.5} />,
+        title: 'Presupuestar obra en Excel es lento y descontrolo costes',
+        who: 'Constructoras, estudios de arquitectura, contratistas y reformistas',
+        solution: 'Presupuestador — partidas, packs reutilizables, BC3/FIEBDC y certificaciones',
+        benefits: ['Importación BC3/FIEBDC', 'Firma digital del cliente', 'Control de rentabilidad real'],
+        cta: 'Ver producto',
+        href: '/productos#presupuestador',
     },
     {
-        icon: <Target size={28} />,
-        title: 'Pierdo clientes porque no les hago seguimiento',
-        who: 'Cualquier negocio que vende servicios o productos',
-        solution: 'CRM OpsPilot — pipeline, seguimientos y comunicaciones centralizadas',
-        benefits: ['Seguimiento automático', 'Pipeline visual', 'Cero leads perdidos'],
-        cta: 'Ver solución',
-        href: '/product#crm',
+        icon: <Network size={22} strokeWidth={1.5} />,
+        title: 'Mi agencia vive en cinco herramientas que no se hablan',
+        who: 'Agencias, consultoras, despachos y PYMEs de servicios profesionales',
+        solution: 'ERP OpsPilot — proyectos, CRM, prospección y agente IA',
+        benefits: ['Proyectos, CRM y auditorías unificados', 'Capa de IA con autonomía real', 'Multi-tenant'],
+        cta: 'Ver producto',
+        href: '/productos#erp',
     },
     {
-        icon: <Globe size={28} />,
+        icon: <Globe size={22} strokeWidth={1.5} />,
         title: 'No tengo web o la que tengo no me genera nada',
         who: 'Autónomos, negocios locales y PYMEs sin presencia digital',
-        solution: 'Web corporativa desde 200€, diseñada para convertir visitas en clientes',
-        benefits: ['Diseño premium', 'Optimización SEO', 'Alta conversión'],
-        cta: 'Ver solución',
-        href: '/services#web',
+        solution: 'Web corporativa diseñada para convertir visitas en clientes',
+        benefits: ['Diseño orientado a conversión', 'Optimización SEO técnica', 'Mantenimiento incluido'],
+        cta: 'Ver servicios',
+        href: '/servicios',
     },
     {
-        icon: <Settings size={28} />,
-        title: 'Lo mío es específico y no encuentro nada que encaje',
-        who: 'Cualquiera con un proceso único que el software estándar no resuelve',
-        solution: 'Desarrollo a medida — analizamos tu caso y construimos lo que necesitas',
-        benefits: ['100% Adaptado a ti', 'Escalable sin límites', 'Integración total'],
-        cta: 'Cuéntanoslo',
-        href: '/contact',
+        icon: <Settings size={22} strokeWidth={1.5} />,
+        title: 'Mi caso es específico y ningún producto encaja',
+        who: 'Empresas con procesos únicos que el software estándar no resuelve',
+        solution: 'Desarrollo a medida — análisis del caso y software construido para tu flujo',
+        benefits: ['Análisis y propuesta cerrada', 'Integraciones con tu stack', 'Mantenimiento posterior'],
+        cta: 'Cuéntanos el caso',
+        href: '/contacto',
     },
 ];
 
 export const Soluciones: React.FC = () => {
+    usePageSEO({
+        title: 'Soluciones por problema · Software a medida — OpsPilot',
+        description:
+            'Encuentra la solución por el problema, no por el producto. Productos verticales para fiscalidad, energía, construcción y agencias, o desarrollo a medida cuando nada encaja.',
+        canonical: 'https://opspilot.es/soluciones',
+    });
+
     const gridRef = useScrollReveal<HTMLDivElement>({ stagger: true });
-    const ctaRef = useScrollReveal<HTMLDivElement>();
 
     return (
-        <div className={styles.page}>
-            {/* Hero */}
-            <section className={styles.hero}>
-                <div className={styles.auroraBackground}>
-                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
-                </div>
-                <div className={styles.heroContent}>
-                    <span className={styles.tag}>Soluciones</span>
-                    <h1 className={styles.heroTitle}>
-                        ¿Cuál es el problema{' '}
-                        <span className="text-gradient">que más te frena?</span>
-                    </h1>
-                    <p className={styles.heroSub}>
-                        Elige el que mejor describe tu situación.
-                        Te llevamos directo a la solución.
-                    </p>
+        <div className={sys.page}>
+            {/* ═══ HERO ═══ */}
+            <section className={sys.pageHero}>
+                <div className={sys.container}>
+                    <div className={sys.pageHeroContent}>
+                        <span className={sys.pageHeroEyebrow}>
+                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
+                            Soluciones por problema
+                        </span>
+                        <h1 className={sys.pageHeroTitle}>
+                            Empieza por el problema,<br />
+                            no por el <em className={sys.pageHeroAccent}>producto</em>.
+                        </h1>
+                        <p className={sys.pageHeroSubtitle}>
+                            Elige la situación que mejor describe la tuya y te llevamos al
+                            producto que la resuelve, o al desarrollo a medida si nada encaja.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Filtros grid */}
-            <section className={styles.section}>
-                <div className={styles.container} ref={gridRef}>
+            {/* ═══ GRID ═══ */}
+            <section className={styles.gridSection}>
+                <div className={sys.container} ref={gridRef}>
                     <div className={styles.grid}>
                         {filtros.map((f, index) => (
-                            <div key={f.title} className={`${styles.mobileCard} reveal`} style={{ animationDelay: `${index * 0.1}s` }}>
-                                <div className={styles.mobileScreen}>
-                                    <div className={styles.screenHeader}>
-                                        <div className={styles.screenNotch}></div>
-                                    </div>
-                                    <div className={styles.screenContent}>
-                                        <div className={styles.screenIcon}>{f.icon}</div>
-                                        <div className={styles.screenTitle}>{f.solution.split('—')[0].trim()}</div>
-                                        <ul className={styles.benefitsList}>
-                                            {f.benefits.map(b => (
-                                                <li key={b}>
-                                                    <span className={styles.check}>✓</span> {b}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                            <article key={f.title} className={`${styles.filterCard} reveal`}>
+                                <div className={styles.filterCardHeader}>
+                                    <div className={styles.filterIcon}>{f.icon}</div>
+                                    <span className={styles.filterIndex}>
+                                        {String(index + 1).padStart(2, '0')} / {String(filtros.length).padStart(2, '0')}
+                                    </span>
                                 </div>
-                                <div className={styles.mobileBody}>
-                                    <h2 className={styles.cardTitle}>{f.title}</h2>
-                                    <p className={styles.cardWho}>
-                                        <span className={styles.whoLabel}>Para:</span> {f.who}
-                                    </p>
-                                    <div className={styles.cardSolution}>
-                                        <p>{f.solution}</p>
-                                    </div>
-                                    <Link className={styles.cardLink} to={f.href}>
-                                        <Button variant="outline" size="sm" fullWidth>{f.cta} →</Button>
-                                    </Link>
-                                </div>
-                            </div>
+                                <h2 className={styles.filterTitle}>{f.title}</h2>
+                                <p className={styles.filterWho}>
+                                    <span className={styles.whoLabel}>Para</span> {f.who}
+                                </p>
+                                <ul className={styles.filterBenefits}>
+                                    {f.benefits.map((b) => (
+                                        <li key={b}>{b}</li>
+                                    ))}
+                                </ul>
+                                <div className={styles.filterSolution}>{f.solution}</div>
+                                <Link className={styles.cardLink} to={f.href}>
+                                    <Button variant="outline" size="sm" fullWidth>
+                                        {f.cta} <ArrowRight size={14} strokeWidth={2} style={{ marginLeft: 6 }} />
+                                    </Button>
+                                </Link>
+                            </article>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Bloque de cierre */}
-            <section className={styles.section}>
-                <div className={styles.container}>
-                    <div className={`${styles.ctaBlock} reveal`} ref={ctaRef}>
-                        <h2 className={styles.ctaTitle}>¿No encuentras tu caso aquí?</h2>
-                        <p className={styles.ctaSub}>
-                            Cuéntanoslo y te orientamos en 30 minutos. Sin compromiso, sin presión.
+            {/* ═══ CTA ═══ */}
+            <section className={sys.endCta}>
+                <div className={sys.container}>
+                    <div className={sys.endCtaBlock}>
+                        <h2 className={sys.endCtaTitle}>¿Tu caso no aparece aquí?</h2>
+                        <p className={sys.endCtaSub}>
+                            Cuéntanoslo en una llamada de 30 minutos. Si encaja con un producto te lo
+                            decimos; si no, valoramos un desarrollo a medida con presupuesto cerrado.
                         </p>
-                        <Link to="/contact">
-                            <Button variant="primary" size="lg">Reservar diagnóstico gratuito</Button>
-                        </Link>
+                        <div className={sys.endCtaButtons}>
+                            <Link to="/contacto">
+                                <Button variant="primary" size="lg">Reservar diagnóstico</Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>

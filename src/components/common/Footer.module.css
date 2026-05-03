@@ -63,19 +63,19 @@
 }
 
 .socialLink:hover {
-    background: rgba(57, 206, 134, 0.1);
-    border-color: rgba(57, 206, 134, 0.3);
-    color: var(--color-primary);
-    transform: translateY(-2px);
+    background: rgba(57, 206, 134, 0.08);
+    border-color: var(--color-border-mint);
+    color: var(--color-mint);
 }
 
 .heading {
-    color: #FFFFFF;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-strong);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: var(--spacing-4);
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--spacing-5);
 }
 
 .links {

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { usePageSEO } from '../hooks/usePageSEO';
+import sys from '../styles/page-system.module.css';
 import styles from './Contact.module.css';
-import Aurora from '../components/common/Aurora';
 import { Mail, MessageSquare, MapPin } from 'lucide-react';
 
 const FORM_CONTACT_URL = 'https://formsubmit.co/ajax/opspilot.contact@gmail.com';
@@ -10,6 +11,13 @@ const FORM_CONTACT_URL = 'https://formsubmit.co/ajax/opspilot.contact@gmail.com'
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export const Contact: React.FC = () => {
+    usePageSEO({
+        title: 'Contacto — Diagnóstico gratuito · OpsPilot',
+        description:
+            'Cuéntanos tu caso. En 30 minutos te decimos si tenemos solución, cómo sería y un rango aproximado de coste y plazo. Sin compromiso, respuesta en menos de 24h.',
+        canonical: 'https://opspilot.es/contacto',
+    });
+
     const contactRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const [status, setStatus] = useState<FormStatus>('idle');
     const [errorMsg, setErrorMsg] = useState('');
@@ -43,45 +51,39 @@ export const Contact: React.FC = () => {
     };
 
     return (
-        <div className={styles.page}>
-            {/* Hero */}
-            <section className={styles.hero}>
-                <div className={styles.auroraBackground}>
-                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
-                </div>
-                <div className={styles.heroContent}>
-                    <span className={styles.tag}>Contacto</span>
-                    <h1 className={styles.heroTitle}>
-                        ¿Tienes un problema{' '}
-                        <span className="text-gradient">que resolver?</span>
-                    </h1>
-                    <p className={styles.heroSub}>
-                        Cuéntanoslo. En 30 minutos te decimos si podemos ayudarte, cómo lo haríamos
-                        y cuánto costaría aproximadamente. Sin compromiso, sin presión.
-                    </p>
+        <div className={sys.page}>
+            {/* ═══ HERO ═══ */}
+            <section className={sys.pageHero}>
+                <div className={sys.container}>
+                    <div className={sys.pageHeroContent}>
+                        <span className={sys.pageHeroEyebrow}>
+                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
+                            Diagnóstico · 30 min
+                        </span>
+                        <h1 className={sys.pageHeroTitle}>
+                            ¿Tienes algo que <em className={sys.pageHeroAccent}>resolver</em>?
+                        </h1>
+                        <p className={sys.pageHeroSubtitle}>
+                            Cuéntanoslo. En 30 minutos te decimos si tenemos solución,
+                            cómo sería y un rango aproximado de coste y plazo. Sin compromiso.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Contact Grid */}
-            <section className={styles.section}>
-                <div className={styles.container} ref={contactRef}>
+            {/* ═══ FORM + INFO ═══ */}
+            <section className={styles.formSection}>
+                <div className={sys.container} ref={contactRef}>
                     <div className={styles.contactGrid}>
-                        {/* Form */}
                         <div className={`${styles.formCard} reveal`}>
                             <h2 className={styles.formTitle}>Reserva tu diagnóstico gratuito</h2>
                             <p className={styles.formSub}>
                                 Rellena esto y te respondemos en menos de 24 horas laborables.
                             </p>
                             {status === 'success' ? (
-                                <div style={{
-                                    padding: 'var(--spacing-8)',
-                                    textAlign: 'center',
-                                    color: 'var(--color-primary)',
-                                }}>
-                                    <p style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, marginBottom: 'var(--spacing-3)' }}>
-                                        ¡Mensaje enviado!
-                                    </p>
-                                    <p style={{ color: 'var(--color-dark-text-muted)' }}>
+                                <div className={styles.formSuccess}>
+                                    <p className={styles.formSuccessTitle}>Mensaje enviado</p>
+                                    <p className={styles.formSuccessText}>
                                         Te respondemos en menos de 24 horas laborables.
                                     </p>
                                 </div>
@@ -102,78 +104,73 @@ export const Contact: React.FC = () => {
                                         <input id="company" name="company" type="text" placeholder="¿En qué trabajas?" />
                                     </div>
                                     <div className={styles.field}>
-                                        <label htmlFor="subject">¿Qué necesitas?</label>
-                                        <select id="subject" name="subject" required>
-                                            <option value="">Selecciona una opción</option>
-                                            <option value="web">Una web que funcione de verdad</option>
-                                            <option value="app">App o automatización a medida</option>
-                                            <option value="erp">ERP para gestionar mi empresa</option>
-                                            <option value="crm">CRM para gestionar mis clientes</option>
-                                            <option value="presupuesto">Presupuestador para mi empresa de reformas</option>
-                                            <option value="energia">Herramienta para comerciales de energía</option>
-                                            <option value="otro">Otra cosa, te lo explico en el mensaje</option>
+                                        <label htmlFor="subject">¿En qué te ayudamos?</label>
+                                        <select id="subject" name="subject" required defaultValue="">
+                                            <option value="" disabled>Selecciona una opción</option>
+                                            <option value="aplicacion">Una aplicación o sitio a medida</option>
+                                            <option value="agente">Un asistente IA que opere tareas</option>
+                                            <option value="integracion">Integraciones entre las apps que ya uso</option>
+                                            <option value="automatizacion">Automatizar procesos repetitivos</option>
+                                            <option value="erp-crm">Un ERP o CRM hecho a medida</option>
+                                            <option value="modernizacion">Modernizar mi negocio (salir de Excel)</option>
+                                            <option value="producto">Información sobre un producto vertical</option>
+                                            <option value="otro">Otro caso, lo explico abajo</option>
                                         </select>
                                     </div>
                                     <div className={styles.field}>
                                         <label htmlFor="message">¿Qué problema quieres resolver?</label>
-                                        <textarea id="message" name="message" rows={5} placeholder="Cuéntanoslo como si hablaras con un amigo. Cuanto más detalle, mejor te podremos orientar." required></textarea>
+                                        <textarea
+                                            id="message"
+                                            name="message"
+                                            rows={5}
+                                            placeholder="Describe el contexto: tipo de negocio, qué herramientas usas hoy y qué te gustaría conseguir. Cuanto más detalle, mejor podemos orientarte."
+                                            required
+                                        ></textarea>
                                     </div>
                                     {status === 'error' && (
-                                        <p style={{
-                                            color: '#e53e3e',
-                                            fontSize: 'var(--font-size-sm)',
-                                            marginBottom: 'var(--spacing-3)',
-                                        }}>
-                                            {errorMsg}
-                                        </p>
+                                        <p className={styles.formError}>{errorMsg}</p>
                                     )}
                                     <Button variant="primary" fullWidth type="submit" disabled={status === 'submitting'}>
                                         {status === 'submitting' ? 'Enviando...' : 'Reservar diagnóstico gratuito'}
                                     </Button>
-                                    <p style={{
-                                        textAlign: 'center',
-                                        fontSize: 'var(--font-size-xs)',
-                                        color: 'var(--color-dark-text-muted)',
-                                        marginTop: 'var(--spacing-3)'
-                                    }}>
-                                        ✓ Respuesta en menos de 24h &nbsp;·&nbsp; ✓ Sin compromiso &nbsp;·&nbsp; ✓ Sin letra pequeña
+                                    <p className={styles.formMeta}>
+                                        Respuesta &lt; 24h · Sin compromiso · Sin letra pequeña
                                     </p>
                                 </form>
                             )}
                         </div>
 
-                        {/* Info */}
                         <div className={styles.infoCol}>
                             <div className={`${styles.infoCard} reveal`}>
-                                <h3>Contacto directo</h3>
+                                <h3 className={styles.infoTitle}>Contacto directo</h3>
                                 <div className={styles.methods}>
                                     <div className={styles.method}>
-                                        <span><Mail className="icon-md" /></span>
+                                        <span className={styles.methodIcon}><Mail size={20} strokeWidth={1.5} /></span>
                                         <div>
                                             <strong>Email</strong>
                                             <p>opspilot.contact@gmail.com</p>
                                         </div>
                                     </div>
                                     <div className={styles.method}>
-                                        <span><MessageSquare className="icon-md" /></span>
+                                        <span className={styles.methodIcon}><MessageSquare size={20} strokeWidth={1.5} /></span>
                                         <div>
                                             <strong>WhatsApp</strong>
                                             <p>+34 640 75 61 26</p>
                                         </div>
                                     </div>
                                     <div className={styles.method}>
-                                        <span><MapPin className="icon-md" /></span>
+                                        <span className={styles.methodIcon}><MapPin size={20} strokeWidth={1.5} /></span>
                                         <div>
                                             <strong>Ubicación</strong>
-                                            <p>Teletrabajamos desde España. Atendemos todo el territorio nacional.</p>
+                                            <p>Trabajamos en remoto desde España. Atendemos todo el territorio.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className={`${styles.waCard} reveal anim-border-glow`}>
-                                <h3>¿Prefieres hablar ahora?</h3>
-                                <p>Escríbenos por WhatsApp y te respondemos en el momento. Sin formularios, sin esperas.</p>
+                            <div className={`${styles.waCard} reveal`}>
+                                <h3 className={styles.infoTitle}>¿Prefieres hablar ahora?</h3>
+                                <p>Escríbenos por WhatsApp y te respondemos al momento. Sin formularios, sin esperas.</p>
                                 <a
                                     href="https://wa.me/34640756126?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20vuestros%20servicios."
                                     target="_blank"

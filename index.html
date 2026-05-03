@@ -4,90 +4,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#111a23" />
+  <meta name="theme-color" content="#0d141c" />
+  <meta name="color-scheme" content="dark" />
 
   <!-- Primary SEO -->
-  <title>OpsPilot — Software de gestión para PYMEs en España</title>
+  <title>OpsPilot — Software a medida y productos verticales para PYMEs en España</title>
   <meta name="description"
-    content="ERP, CRM, presupuestador para reformas y herramientas para comerciales de energía. Software propio y servicios a medida para PYMEs y autónomos en España. Gestiona tu empresa como las grandes, sin su presupuesto." />
+    content="Empresa de desarrollo de software en España. Cuatro productos verticales — Fiscalidad (AEAT, SII, VeriFactu), EnergyDeal (CRM energético), Presupuestador (BC3) y ERP con agentes IA — y desarrollo a medida cuando lo estándar no encaja." />
   <meta name="keywords"
-    content="erp pequeña empresa españa, crm pyme, presupuestador reformas, software comerciales energia electrica, gestion empresa autonomo, automatizacion procesos pyme, software a medida españa" />
-  <meta name="robots" content="index, follow" />
+    content="empresa desarrollo software españa, software a medida pymes, software fiscal aeat sii verifactu, crm sector energético, presupuestos obra bc3 fiebdc, erp agencias servicios, agentes ia mcp, modelos aeat 303 130 347 390" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
   <meta name="author" content="OpsPilot" />
   <meta name="language" content="es" />
+  <meta name="geo.region" content="ES" />
+  <meta name="geo.placename" content="Madrid" />
+  <link rel="canonical" href="https://opspilot.es/" />
+  <link rel="alternate" hreflang="es-ES" href="https://opspilot.es/" />
+  <link rel="alternate" hreflang="x-default" href="https://opspilot.es/" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="OpsPilot — Gestiona tu negocio como las grandes empresas" />
-  <meta property="og:description"
-    content="Software propio y servicios a medida para PYMEs en España. ERP, CRM, presupuestador para reformas y análisis de tarifas eléctricas." />
-  <meta property="og:url" content="https://opspilot.es/" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://opspilot.es/" />
+  <meta property="og:title" content="OpsPilot — Software a medida y productos verticales para PYMEs en España" />
+  <meta property="og:description"
+    content="Empresa de desarrollo de software. Cuatro productos verticales (Fiscalidad, EnergyDeal, Presupuestador, ERP) y desarrollo a medida con agentes IA." />
   <meta property="og:image" content="https://opspilot.es/og-image.svg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="OpsPilot — Software vertical y a medida para PYMEs españolas" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:site_name" content="OpsPilot" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="OpsPilot — Software de gestión para PYMEs" />
+  <meta name="twitter:title" content="OpsPilot — Software a medida y productos verticales para PYMEs" />
   <meta name="twitter:description"
-    content="ERP, CRM, presupuestador y herramientas de nicho. Para autónomos y PYMEs en España." />
+    content="Empresa de desarrollo de software en España. Productos verticales (AEAT, SII, BC3, ERP) y a medida con agentes IA." />
   <meta name="twitter:image" content="https://opspilot.es/og-image.svg" />
 
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "OpsPilot",
-    "url": "https://opspilot.es",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "description": "Software de gestión empresarial para PYMEs y autónomos en España. ERP, CRM, presupuestador para reformas y análisis de tarifas eléctricas.",
-    "offers": [
+    "@graph": [
       {
-        "@type": "Offer",
-        "name": "ERP OpsPilot",
-        "price": "29",
-        "priceCurrency": "EUR",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "unitCode": "MON" }
+        "@type": "Organization",
+        "@id": "https://opspilot.es/#organization",
+        "name": "OpsPilot",
+        "url": "https://opspilot.es",
+        "logo": "https://opspilot.es/favicon.svg",
+        "description": "Empresa de desarrollo de software en España. Productos verticales para fiscalidad, energía, construcción y agencias, y desarrollo a medida con agentes IA.",
+        "areaServed": { "@type": "Country", "name": "España" },
+        "address": { "@type": "PostalAddress", "addressCountry": "ES", "addressLocality": "Madrid" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+34-640-756-126",
+          "contactType": "customer service",
+          "availableLanguage": ["Spanish"],
+          "email": "opspilot.contact@gmail.com"
+        }
       },
       {
-        "@type": "Offer",
-        "name": "CRM OpsPilot",
-        "price": "29",
-        "priceCurrency": "EUR",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "unitCode": "MON" }
+        "@type": "ProfessionalService",
+        "@id": "https://opspilot.es/#service",
+        "name": "OpsPilot — Desarrollo de software a medida",
+        "url": "https://opspilot.es",
+        "image": "https://opspilot.es/og-image.svg",
+        "priceRange": "€€",
+        "areaServed": "ES",
+        "serviceType": "Desarrollo de software a medida, integraciones, agentes IA, ERP y CRM",
+        "provider": { "@id": "https://opspilot.es/#organization" }
       },
       {
-        "@type": "Offer",
-        "name": "Presupuestador Pro",
-        "price": "25",
-        "priceCurrency": "EUR",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "unitCode": "MON" }
+        "@type": "WebSite",
+        "@id": "https://opspilot.es/#website",
+        "name": "OpsPilot",
+        "url": "https://opspilot.es",
+        "inLanguage": "es-ES",
+        "publisher": { "@id": "https://opspilot.es/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://opspilot.es/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://opspilot.es/#productos",
+        "name": "Productos verticales OpsPilot",
+        "itemListElement": [
+          {
+            "@type": "SoftwareApplication",
+            "position": 1,
+            "name": "Fiscalidad",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://opspilot.es/productos#fiscalidad",
+            "description": "Software fiscal y contable español: facturación, PGC, modelos AEAT (303, 130, 347, 390), SII y VeriFactu nativos, conciliación bancaria con OCR."
+          },
+          {
+            "@type": "SoftwareApplication",
+            "position": 2,
+            "name": "EnergyDeal",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://opspilot.es/productos#energydeal",
+            "description": "CRM B2B para agentes y comercializadoras energéticas. Comparador multi-proveedor, gestión por CIF/CUPS, liquidación de comisiones."
+          },
+          {
+            "@type": "SoftwareApplication",
+            "position": 3,
+            "name": "Presupuestador",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://opspilot.es/productos#presupuestador",
+            "description": "Presupuestos y certificaciones de obra con importación BC3/FIEBDC, packs reutilizables, firma digital y OCR de albaranes."
+          },
+          {
+            "@type": "SoftwareApplication",
+            "position": 4,
+            "name": "ERP OpsPilot",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://opspilot.es/productos#erp",
+            "description": "ERP/PSA para agencias y servicios profesionales con CRM, prospección, auditorías y capa MCP nativa con 31+ herramientas para agentes IA."
+          }
+        ]
       }
-    ],
-    "provider": {
-      "@type": "Organization",
-      "name": "OpsPilot",
-      "url": "https://opspilot.es",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+34-640-756-126",
-        "contactType": "customer service",
-        "availableLanguage": "Spanish",
-        "email": "opspilot.contact@gmail.com"
-      },
-      "areaServed": { "@type": "Country", "name": "España" }
-    }
+    ]
   }
   </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

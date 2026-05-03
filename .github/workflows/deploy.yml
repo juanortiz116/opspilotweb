@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    uses: Opspilots/agenciaopspilot/.github/workflows/deploy-vps.yml@main
+    uses: Opspilots/agenciaopspilot/.github/workflows/deploy-vps.yml@master
     with:
       project_name: opspilotweb
       # No test script — opspilotweb has no test suite yet

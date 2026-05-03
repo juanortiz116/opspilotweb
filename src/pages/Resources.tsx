@@ -2,19 +2,65 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { usePageSEO } from '../hooks/usePageSEO';
+import sys from '../styles/page-system.module.css';
 import styles from './Resources.module.css';
-import Aurora from '../components/common/Aurora';
 
 const FORM_NEWSLETTER_URL = 'https://formsubmit.co/ajax/opspilot.contact@gmail.com';
 
 type NLStatus = 'idle' | 'submitting' | 'success' | 'error';
 
+const RESOURCES = [
+    {
+        cat: 'Guía',
+        title: 'Cómo automatizar tu negocio sin saber de tecnología',
+        desc: 'Paso a paso para identificar qué procesos te roban tiempo y convertirlos en flujos automáticos. Sin código, sin complicaciones.',
+        time: '8 min lectura',
+    },
+    {
+        cat: 'Artículo',
+        title: '5 señales de que tu PYME necesita un sistema de gestión',
+        desc: 'Si pierdes clientes por falta de seguimiento o tus datos viven en hojas sueltas, sigue leyendo.',
+        time: '5 min lectura',
+    },
+    {
+        cat: 'Caso práctico',
+        title: 'De Excel a sistema: cómo una empresa de reformas triplicó su capacidad',
+        desc: 'El caso real de una empresa familiar que pasó de libretas a un sistema que trabaja solo.',
+        time: '6 min lectura',
+    },
+    {
+        cat: 'Checklist',
+        title: '¿Tu web trabaja para ti o contra ti? 10 puntos para saberlo',
+        desc: 'Una auditoría rápida y gratuita para saber si tu web está generando clientes o espantándolos.',
+        time: '3 min lectura',
+    },
+    {
+        cat: 'Artículo',
+        title: 'Asistentes IA productivos: lo que nadie te cuenta antes de implementar uno',
+        desc: 'Ventajas reales, limitaciones y cuándo tiene sentido invertir en agentes inteligentes.',
+        time: '7 min lectura',
+    },
+    {
+        cat: 'Guía',
+        title: 'Cómo pedir un presupuesto de software sin que te timen',
+        desc: 'Todo lo que debes preguntar antes de contratar el desarrollo de tu app, sistema o web.',
+        time: '10 min lectura',
+    },
+];
+
 export const Resources: React.FC = () => {
+    usePageSEO({
+        title: 'Recursos · Guías y artículos prácticos — OpsPilot',
+        description:
+            'Guías, artículos y herramientas gratuitas sobre automatización, software a medida y digitalización para PYMEs. Escritas para personas de negocio.',
+        canonical: 'https://opspilot.es/recursos',
+    });
+
     const gridRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const nlRef = useScrollReveal<HTMLDivElement>();
     const [nlStatus, setNlStatus] = useState<NLStatus>('idle');
     const [nlEmail, setNlEmail] = useState('');
-    const ctaRef = useScrollReveal<HTMLDivElement>();
 
     const handleNewsletter = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -37,70 +83,34 @@ export const Resources: React.FC = () => {
     };
 
     return (
-        <div className={styles.page}>
-            {/* Hero */}
-            <section className={styles.hero}>
-                <div className={styles.auroraBackground}>
-                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
-                </div>
-                <div className={styles.heroContent}>
-                    <span className={styles.tag}>Recursos</span>
-                    <h1 className={styles.heroTitle}>
-                        Aprende a hacer más{' '}
-                        <span className="text-gradient">con menos.</span>
-                    </h1>
-                    <p className={styles.heroSub}>
-                        Guías prácticas, artículos y herramientas gratuitas sobre automatización y digitalización.
-                        Escritas para personas de negocio, no para técnicos.
-                    </p>
+        <div className={sys.page}>
+            {/* ═══ HERO ═══ */}
+            <section className={sys.pageHero}>
+                <div className={sys.container}>
+                    <div className={sys.pageHeroContent}>
+                        <span className={sys.pageHeroEyebrow}>
+                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
+                            Recursos
+                        </span>
+                        <h1 className={sys.pageHeroTitle}>
+                            Aprende a hacer más con <em className={sys.pageHeroAccent}>menos</em>.
+                        </h1>
+                        <p className={sys.pageHeroSubtitle}>
+                            Guías prácticas, artículos y herramientas gratuitas sobre automatización
+                            y digitalización. Escritas para personas de negocio, no para técnicos.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Resources Grid */}
-            <section className={styles.section}>
-                <div className={styles.container} ref={gridRef}>
+            {/* ═══ GRID ═══ */}
+            <section className={styles.gridSection}>
+                <div className={sys.container} ref={gridRef}>
                     <div className={styles.grid}>
-                        {[
-                            {
-                                cat: 'Guía',
-                                title: 'Cómo automatizar tu negocio sin saber de tecnología',
-                                desc: 'Paso a paso para identificar qué procesos te roban tiempo y convertirlos en flujos automáticos. Sin código, sin complicaciones.',
-                                time: '8 min lectura'
-                            },
-                            {
-                                cat: 'Artículo',
-                                title: '5 señales de que tu PYME necesita un CRM ya',
-                                desc: 'Si pierdes clientes por falta de seguimiento o tus datos viven en hojas de Excel, sigue leyendo.',
-                                time: '5 min lectura'
-                            },
-                            {
-                                cat: 'Caso práctico',
-                                title: 'De Excel a sistema: cómo J.R. Rodríguez triplicó su capacidad',
-                                desc: 'El caso real de una empresa de reformas que pasó de libretas a un sistema que trabaja solo.',
-                                time: '6 min lectura'
-                            },
-                            {
-                                cat: 'Checklist',
-                                title: '¿Tu web trabaja para ti o contra ti? 10 puntos para saberlo',
-                                desc: 'Una auditoría rápida y gratuita para saber si tu web está generando clientes o espantándolos.',
-                                time: '3 min lectura'
-                            },
-                            {
-                                cat: 'Artículo',
-                                title: 'WhatsApp Business API: lo que nadie te cuenta antes de contratarla',
-                                desc: 'Ventajas reales, limitaciones y cuándo tiene sentido invertir en la API oficial para tu negocio.',
-                                time: '7 min lectura'
-                            },
-                            {
-                                cat: 'Guía',
-                                title: 'Cómo pedir un presupuesto de software sin que te timen',
-                                desc: 'Todo lo que debes preguntar antes de contratar a alguien para hacer tu app, CRM o web.',
-                                time: '10 min lectura'
-                            },
-                        ].map((r) => (
+                        {RESOURCES.map((r) => (
                             <article key={r.title} className={`${styles.card} reveal`}>
                                 <span className={styles.cardCat}>{r.cat}</span>
-                                <h3 className={styles.cardTitle}>{r.title}</h3>
+                                <h2 className={styles.cardTitle}>{r.title}</h2>
                                 <p className={styles.cardDesc}>{r.desc}</p>
                                 <span className={styles.cardTime}>{r.time}</span>
                             </article>
@@ -109,19 +119,23 @@ export const Resources: React.FC = () => {
                 </div>
             </section>
 
-            {/* Newsletter */}
-            <section className={styles.section}>
-                <div className={styles.container}>
+            {/* ═══ NEWSLETTER ═══ */}
+            <section className={`${sys.sectionLoose} ${sys.sectionAlt}`}>
+                <div className={sys.container}>
                     <div className={`${styles.newsletter} reveal`} ref={nlRef}>
                         <div className={styles.nlContent}>
-                            <h2 className={styles.nlTitle}>Una idea útil cada semana</h2>
+                            <span className={sys.eyebrow}>
+                                <span className={sys.eyebrowDot} />
+                                Newsletter
+                            </span>
+                            <h2 className={styles.nlTitle}>Una idea útil cada semana.</h2>
                             <p className={styles.nlText}>
-                                Un email semanal con automatizaciones prácticas, herramientas y casos reales.
-                                Sin relleno, sin spam. Solo cosas que puedes aplicar en tu negocio.
+                                Un email semanal con automatizaciones prácticas, herramientas y casos
+                                reales. Sin relleno, sin spam. Solo cosas que puedes aplicar.
                             </p>
                         </div>
                         {nlStatus === 'success' ? (
-                            <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: 'var(--font-size-lg)' }}>
+                            <p className={styles.nlSuccess}>
                                 ¡Suscrito! Te llegará el próximo email esta semana.
                             </p>
                         ) : (
@@ -138,7 +152,7 @@ export const Resources: React.FC = () => {
                                     {nlStatus === 'submitting' ? 'Enviando...' : 'Suscribirme gratis'}
                                 </Button>
                                 {nlStatus === 'error' && (
-                                    <p style={{ color: '#e53e3e', fontSize: 'var(--font-size-sm)', marginTop: 'var(--spacing-2)' }}>
+                                    <p className={styles.nlError}>
                                         Error al suscribirse. Inténtalo de nuevo.
                                     </p>
                                 )}
@@ -148,13 +162,19 @@ export const Resources: React.FC = () => {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className={styles.section}>
-                <div className={styles.container}>
-                    <div className={`${styles.ctaBlock} reveal`} ref={ctaRef}>
-                        <h2 className={styles.ctaTitle}>¿Quieres ayuda personalizada?</h2>
-                        <p className={styles.ctaSub}>Diagnóstico gratuito de 30 minutos. Sin compromiso.</p>
-                        <Link to="/contact"><Button variant="primary" size="lg">Reservar diagnóstico gratuito</Button></Link>
+            {/* ═══ CTA ═══ */}
+            <section className={sys.endCta}>
+                <div className={sys.container}>
+                    <div className={sys.endCtaBlock}>
+                        <h2 className={sys.endCtaTitle}>¿Quieres ayuda personalizada?</h2>
+                        <p className={sys.endCtaSub}>
+                            Diagnóstico gratuito de 30 minutos. Sin compromiso.
+                        </p>
+                        <div className={sys.endCtaButtons}>
+                            <Link to="/contacto">
+                                <Button variant="primary" size="lg">Reservar diagnóstico</Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>

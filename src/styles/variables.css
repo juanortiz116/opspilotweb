@@ -1,63 +1,103 @@
 :root {
-    /* Colors - Core (Opspilot Brand) */
-    --color-primary: #39ce86;
-    /* Mint Green */
-    --color-primary-dark: #2bb874;
+    /* ═══════════════════════════════════════════
+       COLOR — OpsPilot Visual System v2
+       Dark navy base + mint accent + ambar warm.
+       Two surface levels, two border levels.
+       ═══════════════════════════════════════════ */
+
+    /* Surfaces (dark) */
+    --color-bg-deep: #0d141c;        /* Página, fondo profundo */
+    --color-bg: #111a23;             /* Sección estándar / dark navy original */
+    --color-bg-elevated: #18222e;    /* Subsección o card densa */
+    --color-bg-raised: #1f2a37;      /* Card destacada / panel */
+
+    /* Borders */
+    --color-border-subtle: rgba(255, 255, 255, 0.07);
+    --color-border-strong: rgba(255, 255, 255, 0.14);
+    --color-border-mint: rgba(57, 206, 134, 0.22);
+
+    /* Text */
+    --color-text-strong: #FFFFFF;
+    --color-text: #E6EBF2;
+    --color-text-muted: #8E9BAA;
+    --color-text-subtle: #5d6878;
+
+    /* Accents */
+    --color-mint: #39ce86;
+    --color-mint-dark: #2bb874;
+    --color-mint-soft: rgba(57, 206, 134, 0.10);
+
+    --color-warm: #d99457;           /* Ámbar templado — acento secundario */
+    --color-warm-soft: rgba(217, 148, 87, 0.10);
+
+    /* Status (subtle) */
+    --color-success: #39ce86;
+    --color-warning: #e0a64a;
+    --color-error: #e15a5a;
+    --color-info: #6189c4;
+
+    /* ═══════════════════════════════════════════
+       BACKWARDS-COMPAT TOKENS
+       (mantener nombres viejos apuntando a los nuevos)
+       ═══════════════════════════════════════════ */
+    --color-primary: var(--color-mint);
+    --color-primary-dark: var(--color-mint-dark);
     --color-primary-light: #4fd99a;
     --color-secondary: #0F172A;
-    /* Slate 900 */
-    --color-accent: #39ce86;
-    /* Mint Green */
-    --color-background: #111a23;
-    /* Dark Navy */
+    --color-accent: var(--color-mint);
+    --color-background: var(--color-bg);
     --color-surface: #FFFFFF;
     --color-text-main: #1E293B;
-    /* Slate 800 */
-    --color-text-muted: #64748B;
-    /* Slate 500 */
     --color-border: #E2E8F0;
-    /* Slate 200 */
 
-    /* Status */
-    --color-success: #39ce86;
-    --color-warning: #F59E0B;
-    --color-error: #EF4444;
+    --color-dark-bg: var(--color-bg);
+    --color-dark-bg-alt: var(--color-bg-elevated);
+    --color-dark-surface: var(--color-bg-raised);
+    --color-dark-border: var(--color-border-subtle);
+    --color-dark-text-main: var(--color-text-strong);
+    --color-dark-text-muted: var(--color-text-muted);
 
-    /* Dark Theme Tokens */
-    --color-dark-bg: #111a23;
-    /* Dark Navy */
-    --color-dark-bg-alt: #162130;
-    /* Slightly lighter navy for card contrast */
-    --color-dark-surface: #1c2a38;
-    /* Card/Surface on dark */
-    --color-dark-border: rgba(255, 255, 255, 0.08);
-    --color-dark-text-main: #F8FAFC;
-    /* Slate 50 */
-    --color-dark-text-muted: #94a3b8;
-    /* Slate 400 */
-
-    /* Gradients & Glows */
-    --gradient-primary: linear-gradient(135deg, #39ce86 0%, #2bb874 50%, #20a863 100%);
-    --gradient-glow: radial-gradient(circle at center, rgba(57, 206, 134, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
-    --shadow-glow-green: 0 0 30px rgba(57, 206, 134, 0.4);
-
-    /* Typography */
+    /* ═══════════════════════════════════════════
+       TYPOGRAPHY
+       Display: Space Grotesk (geometric, deliberate)
+       Body: Inter (functional)
+       Numerals: tabular figures across the system
+       ═══════════════════════════════════════════ */
     --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-family-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-family-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    --font-family-heading: var(--font-family-display);
+    --font-family-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 1.875rem;
-    --font-size-4xl: 2.25rem;
-    --font-size-5xl: 3rem;
-    --font-size-6xl: 3.75rem;
-    --font-size-7xl: 4.5rem;
+    /* Type scale (display gets its own bigger steps) */
+    --font-size-xs: 0.75rem;     /* 12 */
+    --font-size-sm: 0.875rem;    /* 14 */
+    --font-size-base: 1rem;      /* 16 */
+    --font-size-lg: 1.125rem;    /* 18 */
+    --font-size-xl: 1.375rem;    /* 22 */
+    --font-size-2xl: 1.75rem;    /* 28 */
+    --font-size-3xl: 2.25rem;    /* 36 */
+    --font-size-4xl: 3rem;       /* 48 */
+    --font-size-5xl: 3.75rem;    /* 60 */
+    --font-size-6xl: 4.75rem;    /* 76 */
+    --font-size-7xl: 5.5rem;     /* 88 */
 
-    /* Spacing */
+    /* Font weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+
+    /* Tracking */
+    --tracking-tight: -0.025em;
+    --tracking-display: -0.035em;
+    --tracking-base: 0;
+    --tracking-wide: 0.04em;
+    --tracking-wider: 0.12em;
+
+    /* ═══════════════════════════════════════════
+       SPACING
+       ═══════════════════════════════════════════ */
     --spacing-0: 0;
     --spacing-1: 0.25rem;
     --spacing-2: 0.5rem;
@@ -65,30 +105,40 @@
     --spacing-4: 1rem;
     --spacing-5: 1.25rem;
     --spacing-6: 1.5rem;
+    --spacing-7: 1.75rem;
     --spacing-8: 2rem;
+    --spacing-9: 2.25rem;
     --spacing-10: 2.5rem;
+    --spacing-11: 2.75rem;
     --spacing-12: 3rem;
     --spacing-14: 3.5rem;
     --spacing-16: 4rem;
+    --spacing-18: 4.5rem;
     --spacing-20: 5rem;
     --spacing-24: 6rem;
+    --spacing-28: 7rem;
     --spacing-32: 8rem;
+    --spacing-40: 10rem;
 
-    /* Font Weights */
-    --font-weight-regular: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --font-weight-extrabold: 800;
+    /* Section spacing scale (jerarquia real) */
+    --space-section-tight: 4rem;       /* 64 — subseccion cohesiva */
+    --space-section-default: 6rem;     /* 96 — transicion normal */
+    --space-section-loose: 8rem;       /* 128 — separacion tematica */
+    --space-hero-top: 7rem;
+    --space-hero-bottom: 5rem;
 
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    /* ═══════════════════════════════════════════
+       SHADOWS (purposeful only)
+       ═══════════════════════════════════════════ */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
+    --shadow-md: 0 4px 16px -4px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 16px 40px -12px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 40px -16px rgba(0, 0, 0, 0.5);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.3);
 
-    /* Radius */
+    /* ═══════════════════════════════════════════
+       RADII
+       ═══════════════════════════════════════════ */
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --radius-lg: 0.75rem;
@@ -97,13 +147,64 @@
     --radius-3xl: 1.5rem;
     --radius-full: 9999px;
 
-    /* Transitions */
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* ═══════════════════════════════════════════
+       TRANSITIONS
+       ═══════════════════════════════════════════ */
+    --transition-fast: 160ms cubic-bezier(0.32, 0.72, 0, 1);
+    --transition-normal: 280ms cubic-bezier(0.32, 0.72, 0, 1);
+    --transition-slow: 480ms cubic-bezier(0.32, 0.72, 0, 1);
 
-    /* Z-index */
+    /* ═══════════════════════════════════════════
+       Z-INDEX
+       ═══════════════════════════════════════════ */
     --z-index-navbar: 1000;
     --z-index-modal: 2000;
     --z-index-toast: 3000;
+
+    /* ═══════════════════════════════════════════
+       LEGACY — kept for compat, dont use in new code
+       ═══════════════════════════════════════════ */
+    --gradient-primary: linear-gradient(135deg, #39ce86 0%, #2bb874 50%, #20a863 100%);
+    --gradient-glow: radial-gradient(circle at center, rgba(57, 206, 134, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+    --shadow-glow-green: 0 0 30px rgba(57, 206, 134, 0.4);
+}
+
+/* ═══════════════════════════════════════════
+   Card variants — shared building blocks
+   ═══════════════════════════════════════════ */
+
+/* Variant A — densa: para listados de features.
+   Sin shadow, borde inferior solamente, hover por color. */
+.card-dense {
+    padding: var(--spacing-6) var(--spacing-6);
+    background: transparent;
+    border-bottom: 1px solid var(--color-border-subtle);
+    transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.card-dense:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom-color: var(--color-border-strong);
+}
+
+/* Variant B — destacada: card hero con superficie sólida y jerarquía interna. */
+.card-featured {
+    padding: var(--spacing-10);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-2xl);
+    transition: border-color var(--transition-normal);
+}
+
+.card-featured:hover {
+    border-color: var(--color-border-strong);
+}
+
+/* Variant C — testimonial / case: offset card style con borde acentuado. */
+.card-testimonial {
+    padding: var(--spacing-10);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-subtle);
+    border-left: 3px solid var(--color-mint);
+    border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0;
 }

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
 @import './styles/variables.css';
 
 *,
@@ -11,18 +10,20 @@
 
 html {
     font-family: var(--font-family-base);
-    background-color: var(--color-background);
-    color: var(--color-dark-text-main);
+    background-color: var(--color-bg-deep);
+    color: var(--color-text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
-    letter-spacing: 0.01em;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
 }
 
 body {
     min-height: 100vh;
-    background-color: var(--color-background);
+    background-color: var(--color-bg-deep);
+    font-variant-numeric: tabular-nums;
 }
 
 h1,
@@ -31,11 +32,15 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-family-heading);
-    color: #FFFFFF;
-    line-height: 1.1;
+    font-family: var(--font-family-display);
+    color: var(--color-text-strong);
+    line-height: 1.05;
     font-weight: var(--font-weight-bold);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--tracking-tight);
+}
+
+h1 {
+    letter-spacing: var(--tracking-display);
 }
 
 a {
@@ -58,34 +63,67 @@ video {
     display: block;
 }
 
-/* Utilities */
-.text-gradient {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+/* ═══════════════════════════════════════════
+   Display utility — for very large hero numerals/headings
+   ═══════════════════════════════════════════ */
+.display {
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-display);
+    line-height: 0.95;
+    text-wrap: balance;
 }
 
-.glass-panel {
-    background: rgba(28, 42, 56, 0.6);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: var(--shadow-card);
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
 }
 
-.glass-panel-dark {
-    background: rgba(22, 33, 48, 0.8);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: var(--shadow-card);
+/* Section number marker — replaces sectionTag pill */
+.section-number {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-subtle);
+    letter-spacing: var(--tracking-wide);
+    margin-bottom: var(--spacing-6);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-3);
 }
 
-.glow-text {
-    text-shadow: 0 0 30px rgba(57, 206, 134, 0.5);
+.section-number::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--color-text-subtle);
+    display: inline-block;
 }
 
-/* Scrollbar Styling */
+/* Mint accent for single-word emphasis inside H1 */
+.accent-mint {
+    color: var(--color-mint);
+    font-weight: inherit;
+}
+
+/* Numeric stat — large display, mono, tabular */
+.stat-number {
+    font-family: var(--font-family-display);
+    font-feature-settings: "tnum", "lnum";
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-text-strong);
+}
+
+/* ═══════════════════════════════════════════
+   Scrollbar
+   ═══════════════════════════════════════════ */
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -95,30 +133,28 @@ video {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.12);
     border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.22);
 }
 
-/* Selection */
 ::selection {
     background-color: rgba(57, 206, 134, 0.3);
     color: #FFFFFF;
 }
 
 /* ═══════════════════════════════════════════
-   ANIMATIONS & EFFECTS
+   SCROLL REVEAL (kept — used widely)
    ═══════════════════════════════════════════ */
 
-/* Scroll Reveal Base */
 .reveal {
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(24px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.revealed {
@@ -126,12 +162,11 @@ video {
     transform: translateY(0);
 }
 
-/* Variant: fade from left */
 .reveal-left {
     opacity: 0;
-    transform: translateX(-40px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(-32px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-left.revealed {
@@ -139,12 +174,11 @@ video {
     transform: translateX(0);
 }
 
-/* Variant: fade from right */
 .reveal-right {
     opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(32px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-right.revealed {
@@ -152,12 +186,11 @@ video {
     transform: translateX(0);
 }
 
-/* Variant: scale in */
 .reveal-scale {
     opacity: 0;
-    transform: scale(0.92);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.96);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-scale.revealed {
@@ -165,149 +198,16 @@ video {
     transform: scale(1);
 }
 
-/* Keyframe Animations */
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-12px);
-    }
-}
-
-@keyframes floatSlow {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    33% {
-        transform: translateY(-8px) rotate(1deg);
-    }
-
-    66% {
-        transform: translateY(4px) rotate(-1deg);
-    }
-}
-
-@keyframes gradientShift {
-
-    0%,
-    100% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
-@keyframes pulseGlow {
-
-    0%,
-    100% {
-        opacity: 0.4;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200% center;
-    }
-
-    100% {
-        background-position: 200% center;
-    }
-}
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(24px);
+        transform: translateY(20px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes borderGlow {
-
-    0%,
-    100% {
-        border-color: rgba(57, 206, 134, 0.1);
-    }
-
-    50% {
-        border-color: rgba(57, 206, 134, 0.3);
-    }
-}
-
-/* Utility animation classes */
-.anim-float {
-    animation: float 5s ease-in-out infinite;
-}
-
-.anim-float-slow {
-    animation: floatSlow 8s ease-in-out infinite;
-}
-
-.anim-pulse-glow {
-    animation: pulseGlow 3s ease-in-out infinite;
-}
-
-.anim-gradient {
-    background-size: 200% 200%;
-    animation: gradientShift 6s ease infinite;
-}
-
-.anim-border-glow {
-    animation: borderGlow 3s ease-in-out infinite;
 }
 
 /* Reduced motion */
@@ -321,12 +221,39 @@ video {
         transform: none;
         transition: none;
     }
+}
 
-    .anim-float,
-    .anim-float-slow,
-    .anim-pulse-glow,
-    .anim-gradient,
-    .anim-border-glow {
-        animation: none;
-    }
+/* ═══════════════════════════════════════════
+   LEGACY UTILITIES — kept null/no-op for backwards compat
+   These were used by Home/Cases/Contact for decorative
+   pulses, glows, floats. We disable them but keep the
+   classnames so JSX doesn't break.
+   ═══════════════════════════════════════════ */
+.text-gradient {
+    color: var(--color-text-strong);
+}
+
+.glass-panel,
+.glass-panel-dark {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.glow-text {
+    text-shadow: none;
+}
+
+.anim-float,
+.anim-float-slow,
+.anim-pulse-glow,
+.anim-gradient,
+.anim-border-glow {
+    animation: none;
+}
+
+/* Icon helpers (used inline in some pages) */
+.icon-md {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.5;
 }

@@ -2,161 +2,208 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { usePageSEO } from '../hooks/usePageSEO';
+import { Check } from 'lucide-react';
+import sys from '../styles/page-system.module.css';
 import styles from './Pricing.module.css';
-import Aurora from '../components/common/Aurora';
 
 export const Pricing: React.FC = () => {
-    const pricingRef = useScrollReveal<HTMLDivElement>({ stagger: true });
+    usePageSEO({
+        title: 'Precios — Software a medida y productos · OpsPilot',
+        description:
+            'Presupuesto cerrado para desarrollo de software a medida y suscripción mensual fija para productos verticales. Sin permanencia, sin sorpresas.',
+        canonical: 'https://opspilot.es/precios',
+    });
+
     const customRef = useScrollReveal<HTMLDivElement>();
+    const pricingRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const faqRef = useScrollReveal<HTMLDivElement>({ stagger: true });
 
     return (
-        <div className={styles.page}>
-            {/* Hero */}
-            <section className={styles.hero}>
-                <div className={styles.auroraBackground}>
-                    <Aurora colorStops={['#0d1b2a', '#1b998b', '#39ce86']} blend={0.6} amplitude={1.0} speed={0.8} />
-                </div>
-                <div className={styles.heroContent}>
-                    <span className={styles.tag}>Precios</span>
-                    <h1 className={styles.heroTitle}>
-                        Precios claros.{' '}
-                        <span className="text-gradient">Sin letra pequeña.</span>
-                    </h1>
-                    <p className={styles.heroSub}>
-                        Nuestros productos SaaS tienen suscripción mensual fija.
-                        Para servicios a medida, el precio lo cerramos antes de empezar. Siempre.
-                    </p>
+        <div className={sys.page}>
+            {/* ═══ HERO ═══ */}
+            <section className={sys.pageHero}>
+                <div className={sys.container}>
+                    <div className={sys.pageHeroContent}>
+                        <span className={sys.pageHeroEyebrow}>
+                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
+                            Precios
+                        </span>
+                        <h1 className={sys.pageHeroTitle}>
+                            Presupuesto <em className={sys.pageHeroAccent}>cerrado</em>.<br />
+                            Sin sorpresas al final.
+                        </h1>
+                        <p className={sys.pageHeroSubtitle}>
+                            Para desarrollo a medida cerramos el precio antes de empezar.
+                            Para productos verticales, suscripción mensual fija y sin permanencia.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Pricing Grid */}
-            <section className={styles.section}>
-                <div className={styles.container} ref={pricingRef}>
-                    <p style={{
-                        textAlign: 'center',
-                        color: 'var(--color-dark-text-muted)',
-                        fontSize: 'var(--font-size-sm)',
-                        maxWidth: '600px',
-                        margin: '0 auto var(--spacing-10)'
-                    }}>
-                        Estos planes aplican a nuestros productos SaaS (ERP, CRM, Presupuestador Pro y TarifaOCR).
-                        Para servicios a medida (webs, apps, automatizaciones),{' '}
-                        <Link to="/contact" style={{ color: 'var(--color-primary)', textDecoration: 'none' }}>
-                            cuéntanos tu caso y cerramos precio
-                        </Link>.
-                    </p>
+            {/* ═══ SERVICIOS A MEDIDA ═══ */}
+            <section className={styles.customSection}>
+                <div className={sys.container}>
+                    <header className={`${sys.sectionHeader}`}>
+                        <span className={sys.eyebrow}>
+                            <span className={sys.eyebrowDot} />
+                            Servicios a medida
+                        </span>
+                        <h2 className={sys.sectionTitle}>
+                            Cada proyecto es único. Por eso lo presupuestamos individualmente.
+                        </h2>
+                    </header>
+                    <div className={`${styles.customBlock} reveal`} ref={customRef}>
+                        <div className={styles.customGrid}>
+                            <div className={styles.customRange}>
+                                <span className={styles.customLabel}>Página o landing</span>
+                                <span className={styles.customValue}>Desde 200&nbsp;€</span>
+                                <p className={styles.customHint}>
+                                    Sitio sencillo orientado a convertir, con SEO técnico y mantenimiento.
+                                </p>
+                            </div>
+                            <div className={styles.customRange}>
+                                <span className={styles.customLabel}>Aplicación a medida</span>
+                                <span className={styles.customValue}>Desde 500&nbsp;€</span>
+                                <p className={styles.customHint}>
+                                    Apps web o móvil, integraciones, automatizaciones, asistentes IA.
+                                </p>
+                            </div>
+                            <div className={styles.customRange}>
+                                <span className={styles.customLabel}>Sistema completo</span>
+                                <span className={styles.customValue}>Cerramos contigo</span>
+                                <p className={styles.customHint}>
+                                    ERP/CRM a medida, plataformas multi-tenant, modernización integral.
+                                </p>
+                            </div>
+                        </div>
+                        <div className={styles.customFooter}>
+                            <p className={styles.customFooterText}>
+                                Mantenimiento mensual desde <strong>10&nbsp;€/mes</strong> — opcional según el caso.
+                            </p>
+                            <Link to="/contacto">
+                                <Button variant="primary" size="lg">Pedir presupuesto cerrado</Button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ═══ PRODUCTOS — PLANES SAAS ═══ */}
+            <section className={`${sys.sectionLoose} ${sys.sectionAlt}`}>
+                <div className={sys.container} ref={pricingRef}>
+                    <header className={`${sys.sectionHeader} reveal`}>
+                        <span className={sys.eyebrow}>
+                            <span className={sys.eyebrowDot} />
+                            Productos verticales
+                        </span>
+                        <h2 className={sys.sectionTitle}>
+                            Suscripción mensual fija. Sin permanencia.
+                        </h2>
+                    </header>
                     <div className={styles.grid}>
-                        {/* Starter */}
                         <div className={`${styles.card} reveal`}>
                             <span className={styles.planName}>Starter</span>
-                            <p className={styles.planDesc}>Para autónomos y negocios que empiezan a ordenarse.</p>
+                            <p className={styles.planDesc}>
+                                Para autónomos y negocios que empiezan a ordenarse.
+                            </p>
                             <div className={styles.priceRow}>
-                                <span className={styles.price}>29€</span>
-                                <span className={styles.period}>/mes</span>
+                                <span className={styles.price}>29&nbsp;€</span>
+                                <span className={styles.period}>/ mes</span>
                             </div>
                             <ul className={styles.features}>
-                                <li><span className={styles.check}>✓</span>1 usuario</li>
-                                <li><span className={styles.check}>✓</span>Acceso a 1 producto a elegir (ERP o CRM)</li>
-                                <li><span className={styles.check}>✓</span>Soporte por email</li>
-                                <li><span className={styles.check}>✓</span>Actualizaciones incluidas</li>
-                                <li><span className={styles.check}>✓</span>Sin permanencia, cancela cuando quieras</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>1 usuario</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Acceso a 1 producto vertical</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Soporte por email</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Actualizaciones incluidas</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Sin permanencia</li>
                             </ul>
-                            <Link to="/demo"><Button variant="outline" fullWidth>Probar gratis</Button></Link>
+                            <Link to="/contacto"><Button variant="outline" fullWidth>Probar gratis</Button></Link>
                         </div>
 
-                        {/* Pro */}
                         <div className={`${styles.card} ${styles.cardPro} reveal`}>
-                            <div className={styles.badge}>Más Popular</div>
+                            <div className={styles.badge}>Más popular</div>
                             <span className={styles.planName}>Pro</span>
-                            <p className={styles.planDesc}>Para PYMEs que necesitan más usuarios y más automatización.</p>
+                            <p className={styles.planDesc}>
+                                Para PYMEs que necesitan más usuarios y más automatización.
+                            </p>
                             <div className={styles.priceRow}>
-                                <span className={styles.price}>69€</span>
-                                <span className={styles.period}>/mes</span>
+                                <span className={styles.price}>69&nbsp;€</span>
+                                <span className={styles.period}>/ mes</span>
                             </div>
                             <ul className={styles.features}>
-                                <li><span className={styles.check}>✓</span>Hasta 5 usuarios</li>
-                                <li><span className={styles.check}>✓</span>Acceso a todos los productos</li>
-                                <li><span className={styles.check}>✓</span>Automatizaciones y WhatsApp integrado</li>
-                                <li><span className={styles.check}>✓</span>Panel de analítica</li>
-                                <li><span className={styles.check}>✓</span>Soporte prioritario</li>
-                                <li><span className={styles.check}>✓</span>Onboarding incluido</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Hasta 5 usuarios</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Acceso a todos los productos</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Automatizaciones e integraciones</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Panel de analítica avanzado</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Soporte prioritario</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Onboarding incluido</li>
                             </ul>
-                            <Link to="/demo"><Button variant="primary" fullWidth>Empezar ahora</Button></Link>
+                            <Link to="/contacto"><Button variant="primary" fullWidth>Empezar ahora</Button></Link>
                         </div>
 
-                        {/* Business */}
                         <div className={`${styles.card} reveal`}>
                             <span className={styles.planName}>Business</span>
-                            <p className={styles.planDesc}>Para empresas con procesos específicos o equipos grandes.</p>
+                            <p className={styles.planDesc}>
+                                Para empresas con procesos específicos o equipos grandes.
+                            </p>
                             <div className={styles.priceRow}>
-                                <span className={styles.price}>149€</span>
-                                <span className={styles.period}>/mes</span>
+                                <span className={styles.price}>149&nbsp;€</span>
+                                <span className={styles.period}>/ mes</span>
                             </div>
                             <ul className={styles.features}>
-                                <li><span className={styles.check}>✓</span>Usuarios ilimitados</li>
-                                <li><span className={styles.check}>✓</span>Todo lo del plan Pro</li>
-                                <li><span className={styles.check}>✓</span>API e integraciones personalizadas</li>
-                                <li><span className={styles.check}>✓</span>Personalización avanzada del producto</li>
-                                <li><span className={styles.check}>✓</span>Account manager dedicado</li>
-                                <li><span className={styles.check}>✓</span>SLA garantizado</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Usuarios ilimitados</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Todo lo del plan Pro</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>API e integraciones personalizadas</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>Account manager dedicado</li>
+                                <li><span className={styles.check}><Check size={16} strokeWidth={2} /></span>SLA garantizado</li>
                             </ul>
-                            <Link to="/contact"><Button variant="outline" fullWidth>Hablar con nosotros</Button></Link>
+                            <Link to="/contacto"><Button variant="outline" fullWidth>Hablar con nosotros</Button></Link>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Custom */}
-            <section className={styles.section}>
-                <div className={styles.container}>
-                    <div className={`${styles.customBlock} reveal`} ref={customRef}>
-                        <div className={styles.customContent}>
-                            <span className={styles.tag}>Servicios a medida</span>
-                            <h2 className={styles.customTitle}>¿Necesitas algo totalmente a medida?</h2>
-                            <p className={styles.customText}>
-                                Si nuestros productos no encajan al 100% con tu negocio, lo construimos desde cero.
-                                Web, app, CRM personalizado, automatización, integraciones.
-                                Con presupuesto cerrado y sin sorpresas al final.
-                            </p>
-                            <div className={styles.customPrices}>
-                                <div className={styles.customPrice}>
-                                    <span className={styles.customPriceLabel}>Web corporativa</span>
-                                    <span className={styles.customPriceValue}>Desde 200€</span>
-                                </div>
-                                <div className={styles.customPrice}>
-                                    <span className={styles.customPriceLabel}>App o CRM a medida</span>
-                                    <span className={styles.customPriceValue}>Desde 500€</span>
-                                </div>
-                                <div className={styles.customPrice}>
-                                    <span className={styles.customPriceLabel}>Mantenimiento mensual</span>
-                                    <span className={styles.customPriceValue}>Desde 10€/mes</span>
-                                </div>
-                            </div>
-                            <Link to="/contact"><Button variant="primary">Pedir presupuesto cerrado</Button></Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* FAQ */}
-            <section className={styles.section}>
-                <div className={styles.container} ref={faqRef}>
-                    <div className={`${styles.sectionHeader} reveal`}>
-                        <h2 className={styles.sectionTitle}>Preguntas frecuentes</h2>
-                    </div>
+            {/* ═══ FAQ ═══ */}
+            <section className={styles.faqSection}>
+                <div className={sys.container} ref={faqRef}>
+                    <header className={`${sys.sectionHeader} reveal`}>
+                        <span className={sys.eyebrow}>
+                            <span className={sys.eyebrowDot} />
+                            Preguntas frecuentes
+                        </span>
+                        <h2 className={sys.sectionTitle}>Lo que la gente nos pregunta.</h2>
+                    </header>
                     <div className={styles.faqGrid}>
                         {[
-                            { q: '¿Puedo cambiar de plan cuando quiera?', a: 'Sí, sin penalizaciones. Los cambios se aplican en el siguiente ciclo mensual.' },
-                            { q: '¿Hay permanencia mínima?', a: 'No. Todos los planes son mensuales. Si no te convence, cancelas y punto. Sin trampa.' },
-                            { q: '¿Qué pasa si necesito algo que no está en los planes?', a: 'Nos lo cuentas y hacemos un presupuesto a medida. Es lo más habitual en clientes nuevos.' },
-                            { q: '¿El onboarding está incluido?', a: 'En los planes Pro y Business, sí. Te acompañamos en la configuración inicial para que empieces a sacarle partido desde el día uno.' },
+                            { q: '¿Cómo funciona el presupuesto cerrado?', a: 'Antes de empezar te enviamos un documento con alcance, plazos y precio. Si lo aprobamos, ese precio no cambia salvo que tú quieras añadir cosas.' },
+                            { q: '¿Hay permanencia mínima en los productos?', a: 'No. Las suscripciones mensuales se cancelan cuando quieras y los cambios de plan se aplican en el siguiente ciclo.' },
+                            { q: '¿Qué pasa si necesito algo que no está en los planes?', a: 'Lo construimos a medida con presupuesto cerrado. Es lo más habitual cuando hay procesos específicos del negocio.' },
+                            { q: '¿Está incluido el onboarding?', a: 'En los planes Pro y Business, sí. Te acompañamos en la configuración inicial y migración de datos.' },
+                            { q: '¿Os encargáis del mantenimiento posterior?', a: 'Sí. Tenemos planes mensuales desde 10€ que cubren bugs, pequeñas mejoras y actualizaciones.' },
+                            { q: '¿Aceptáis facturación trimestral o anual?', a: 'Sí. Trimestral con 5% de descuento, anual con 12%. Lo acordamos al firmar.' },
                         ].map((f) => (
                             <div key={f.q} className={`${styles.faqCard} reveal`}>
-                                <h4>{f.q}</h4>
-                                <p>{f.a}</p>
+                                <h3 className={styles.faqQuestion}>{f.q}</h3>
+                                <p className={styles.faqAnswer}>{f.a}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ═══ CTA ═══ */}
+            <section className={sys.endCta}>
+                <div className={sys.container}>
+                    <div className={sys.endCtaBlock}>
+                        <h2 className={sys.endCtaTitle}>¿Cuánto te costaría a ti?</h2>
+                        <p className={sys.endCtaSub}>
+                            Cuéntanos lo que necesitas. En 30 minutos te decimos un rango realista
+                            con plazo y alcance.
+                        </p>
+                        <div className={sys.endCtaButtons}>
+                            <Link to="/contacto"><Button variant="primary" size="lg">Pedir presupuesto</Button></Link>
+                        </div>
                     </div>
                 </div>
             </section>

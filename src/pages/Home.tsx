@@ -156,28 +156,6 @@ export const Home: React.FC = () => {
                 return () => heroRef.current?.removeEventListener('mousemove', onMove);
             }
 
-            // Líneas conectoras del Método (3 segmentos entre iconos, scrub)
-            if (!reduce && methodRef.current) {
-                gsap.fromTo(
-                    `.${styles.processLineFill}`,
-                    { scaleX: 0 },
-                    {
-                        scaleX: 1,
-                        ease: 'none',
-                        stagger: 0.3,
-                        scrollTrigger: {
-                            trigger: methodRef.current,
-                            start: 'top 70%',
-                            end: 'bottom 75%',
-                            scrub: 0.6,
-                        },
-                    }
-                );
-            } else {
-                document.querySelectorAll(`.${styles.processLineFill}`).forEach((el) => {
-                    (el as HTMLElement).style.transform = 'scaleX(1)';
-                });
-            }
         }, heroRef);
 
         return () => ctx.revert();
@@ -386,19 +364,11 @@ export const Home: React.FC = () => {
                         </h2>
                     </header>
                     <div className={styles.processWrapper}>
-                        <div className={styles.processLineSegments} aria-hidden="true">
-                            {[0, 1, 2].map((i) => (
-                                <div className={styles.processLineSegment} key={i}>
-                                    <div className={styles.processLineFill} />
-                                </div>
-                            ))}
-                        </div>
                         <div className={styles.processGrid}>
                             <div className={`${styles.processStep} reveal`}>
                                 <div className={styles.processStepIcon}>
                                     <MessagesSquare size={22} strokeWidth={1.6} />
                                 </div>
-                                <span className={styles.stepNumber}>01</span>
                                 <h3 className={styles.stepTitle}>Te escuchamos</h3>
                                 <p className={styles.stepText}>
                                     Una llamada de 30 minutos para entender tu negocio y qué te
@@ -409,7 +379,6 @@ export const Home: React.FC = () => {
                                 <div className={styles.processStepIcon}>
                                     <Search size={22} strokeWidth={1.6} />
                                 </div>
-                                <span className={styles.stepNumber}>02</span>
                                 <h3 className={styles.stepTitle}>Localizamos el problema</h3>
                                 <p className={styles.stepText}>
                                     Identificamos qué procesos te roban tiempo y qué pieza está
@@ -420,7 +389,6 @@ export const Home: React.FC = () => {
                                 <div className={styles.processStepIcon}>
                                     <FileCheck size={22} strokeWidth={1.6} />
                                 </div>
-                                <span className={styles.stepNumber}>03</span>
                                 <h3 className={styles.stepTitle}>Te proponemos algo concreto</h3>
                                 <p className={styles.stepText}>
                                     Plan claro con opciones reales, precio cerrado y plazos.
@@ -431,7 +399,6 @@ export const Home: React.FC = () => {
                                 <div className={styles.processStepIcon}>
                                     <Wrench size={22} strokeWidth={1.6} />
                                 </div>
-                                <span className={styles.stepNumber}>04</span>
                                 <h3 className={styles.stepTitle}>Lo hacemos y nos quedamos</h3>
                                 <p className={styles.stepText}>
                                     Construimos, implementamos y seguimos contigo mientras
@@ -511,17 +478,19 @@ export const Home: React.FC = () => {
             <section className={styles.ctaSection}>
                 <div className={styles.container}>
                     <div className={styles.ctaBlock} ref={ctaRef}>
-                        <h2 className={styles.ctaTitle}>¿Hablamos?</h2>
-                        <p className={styles.ctaSub}>
-                            30 minutos. Sin compromiso. Te decimos qué tiene sentido construir
-                            y qué no.
-                        </p>
-                        <div className={styles.ctaButtons}>
+                        <div className={styles.ctaLeft}>
+                            <h2 className={styles.ctaTitle}>¿Hablamos?</h2>
+                            <p className={styles.ctaSub}>
+                                30 minutos. Sin compromiso. Te decimos qué tiene sentido
+                                construir y qué no — sin venderte nada.
+                            </p>
+                        </div>
+                        <div className={styles.ctaRight}>
                             <Link to="/contacto">
                                 <Button variant="primary" size="lg">Reservar diagnóstico</Button>
                             </Link>
                             <Link to="/servicios">
-                                <Button variant="outline" size="lg">Cómo trabajamos</Button>
+                                <Button variant="outline" size="lg">Ver cómo trabajamos</Button>
                             </Link>
                         </div>
                     </div>

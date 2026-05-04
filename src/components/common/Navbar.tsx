@@ -1,72 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/Button';
 import { Logo } from './Logo';
-import { useMagnetic } from '../../hooks/useMagnetic';
 import styles from './Navbar.module.css';
 
-const NAV_ITEMS: { to: string; label: string }[] = [
-    { to: '/', label: 'Inicio' },
-    { to: '/soluciones', label: 'Soluciones' },
-    { to: '/servicios', label: 'Servicios' },
-    { to: '/productos', label: 'Productos' },
-    { to: '/casos', label: 'Casos' },
-    { to: '/precios', label: 'Precios' },
-];
-
 export const Navbar: React.FC = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const location = useLocation();
-    const ctaRef = useMagnetic<HTMLDivElement>({ strength: 14 });
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { pathname } = useLocation();
+
+    const isHomePage = pathname === '/';
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 12);
-        onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+        const handleScroll = () => setScrolled(window.scrollY > 12);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     useEffect(() => {
         setIsMenuOpen(false);
-    }, [location.pathname]);
+    }, [pathname]);
 
-    const toggleMenu = () => setIsMenuOpen((v) => !v);
+    const isOpaque = !isHomePage || scrolled;
+
+    const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+        `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`;
+
+    const mobileNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+        `${styles.mobileNavLink} ${isActive ? styles.mobileNavLinkActive : ''}`;
 
     return (
         <>
-            <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+            <nav className={`${styles.navbar} ${isOpaque ? styles.scrolled : ''}`}>
                 <div className={styles.container}>
-                    <Link to="/" className={styles.logo} aria-label="OpsPilot — Inicio">
-                        <Logo size={42} />
-                        <span className={styles.logoWordmark}>OpsPilot</span>
+                    <Link to="/" className={styles.logo}>
+                        <Logo size={50} />
+                        OpsPilot
                     </Link>
 
                     <div className={styles.desktopMenu}>
-                        {NAV_ITEMS.map((item) => (
-                            <NavLink
-                                key={item.to}
-                                to={item.to}
-                                end={item.to === '/'}
-                                className={({ isActive }) =>
-                                    `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-                                }
-                            >
-                                {item.label}
-                            </NavLink>
-                        ))}
-                        <div ref={ctaRef} className={styles.ctaWrap}>
-                            <Link to="/contacto">
-                                <Button variant="primary" size="sm">Diagnóstico gratuito</Button>
-                            </Link>
-                        </div>
+                        <NavLink to="/" end className={navLinkClass}>Inicio</NavLink>
+                        <NavLink to="/soluciones" className={navLinkClass}>Soluciones</NavLink>
+                        <NavLink to="/services" className={navLinkClass}>Servicios</NavLink>
+                        <NavLink to="/cases" className={navLinkClass}>Casos de Éxito</NavLink>
+                        <Link to="/demo">
+                            <Button variant="primary" size="sm">Diagnóstico gratuito</Button>
+                        </Link>
                     </div>
 
                     <button
                         className={`${styles.mobileToggle} ${isMenuOpen ? styles.active : ''}`}
-                        onClick={toggleMenu}
-                        aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-                        aria-expanded={isMenuOpen}
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label="Toggle menu"
                     >
                         <span className={styles.hamburger}></span>
                     </button>
@@ -74,22 +60,13 @@ export const Navbar: React.FC = () => {
             </nav>
 
             <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
-                {NAV_ITEMS.map((item) => (
-                    <NavLink
-                        key={item.to}
-                        to={item.to}
-                        end={item.to === '/'}
-                        className={({ isActive }) =>
-                            `${styles.mobileNavLink} ${isActive ? styles.mobileNavLinkActive : ''}`
-                        }
-                        onClick={toggleMenu}
-                    >
-                        {item.label}
-                    </NavLink>
-                ))}
-                <NavLink to="/contacto" className={styles.mobileNavLink} onClick={toggleMenu}>Contacto</NavLink>
+                <NavLink to="/" end className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Inicio</NavLink>
+                <NavLink to="/soluciones" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Soluciones</NavLink>
+                <NavLink to="/services" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Servicios</NavLink>
+                <NavLink to="/cases" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Casos de Éxito</NavLink>
+                <NavLink to="/contact" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Contacto</NavLink>
                 <div className={styles.mobileCta}>
-                    <Link to="/contacto" onClick={toggleMenu} style={{ width: '100%' }}>
+                    <Link to="/demo" onClick={() => setIsMenuOpen(false)} style={{ width: '100%' }}>
                         <Button variant="primary" fullWidth>Diagnóstico gratuito</Button>
                     </Link>
                 </div>

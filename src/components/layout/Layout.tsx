@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar } from '../common/Navbar';
 import { Footer } from '../common/Footer';
 import { ScrollProgress } from '../common/ScrollProgress';
+import { CookieBanner } from '../common/CookieBanner';
 import styles from './Layout.module.css';
 
 interface LayoutProps {
@@ -17,6 +18,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 {children}
             </main>
             <Footer />
+            <CookieBanner />
         </div>
     );
 };

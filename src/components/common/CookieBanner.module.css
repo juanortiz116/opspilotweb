@@ -1,0 +1,107 @@
+.banner {
+    position: fixed;
+    bottom: var(--spacing-4);
+    left: var(--spacing-4);
+    right: var(--spacing-4);
+    z-index: var(--z-index-toast);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-4);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-4) var(--spacing-5);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
+    animation: bannerIn 380ms var(--ease-emphasized);
+}
+
+@keyframes bannerIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .banner { animation: none; }
+}
+
+@media (min-width: 768px) {
+    .banner {
+        left: auto;
+        right: var(--spacing-6);
+        bottom: var(--spacing-6);
+        max-width: 520px;
+        align-items: center;
+    }
+}
+
+.icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--color-warm);
+    background: var(--color-warm-soft);
+    border: 1px solid rgba(217, 148, 87, 0.20);
+    border-radius: var(--radius-md);
+}
+
+.body {
+    flex: 1;
+    min-width: 0;
+}
+
+.title {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-strong);
+    line-height: 1.35;
+}
+
+.text {
+    margin-top: 4px;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.actions {
+    display: flex;
+    gap: var(--spacing-2);
+    flex-shrink: 0;
+}
+
+.close {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.close:hover {
+    color: var(--color-text-strong);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 767px) {
+    .banner {
+        flex-wrap: wrap;
+    }
+    .actions {
+        width: 100%;
+        margin-top: var(--spacing-2);
+        justify-content: flex-end;
+    }
+}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Layout } from './components/layout/Layout';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { PageTransition } from './components/common/PageTransition';
+import { CommandPaletteProvider } from './components/common/CommandPalette';
 import { ToastProvider } from './components/ui/Toast';
 import { PageSkeleton } from './components/ui/Skeleton';
 import { ROUTES, LEGACY_REDIRECTS } from './lib/routes';
@@ -23,8 +24,9 @@ function App() {
     return (
         <Router>
             <ScrollToTop />
-            <ToastProvider>
-                <Layout>
+            <CommandPaletteProvider>
+                <ToastProvider>
+                    <Layout>
                     <Suspense fallback={<PageSkeleton />}>
                         <PageTransition>
                             <Routes>
@@ -44,10 +46,11 @@ function App() {
 
                             <Route path="*" element={<NotFound />} />
                             </Routes>
-                        </PageTransition>
-                    </Suspense>
-                </Layout>
-            </ToastProvider>
+                            </PageTransition>
+                        </Suspense>
+                    </Layout>
+                </ToastProvider>
+            </CommandPaletteProvider>
         </Router>
     );
 }

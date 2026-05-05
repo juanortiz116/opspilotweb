@@ -6,6 +6,7 @@ import { usePageSEO } from '../hooks/usePageSEO';
 import { Check } from 'lucide-react';
 import { ROUTES } from '../lib/routes';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import { ROICalculator } from '../components/common/ROICalculator';
 import sys from '../styles/page-system.module.css';
 import styles from './Pricing.module.css';
 
@@ -82,6 +83,13 @@ export const Pricing: React.FC = () => {
                             </Link>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* ═══ ROI CALCULATOR ═══ */}
+            <section className={styles.roiSection}>
+                <div className={sys.container}>
+                    <ROICalculator />
                 </div>
             </section>
 

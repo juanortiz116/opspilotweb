@@ -5,6 +5,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { ROUTES } from '../lib/routes';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import { ProductComparison } from '../components/common/ProductComparison';
 import {
     FileSpreadsheet,
     Zap,
@@ -253,6 +254,13 @@ export const Product: React.FC = () => {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* ═══ COMPARATIVA ═══ */}
+            <section className={styles.comparisonSection}>
+                <div className={sys.container}>
+                    <ProductComparison />
                 </div>
             </section>
 

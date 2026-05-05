@@ -115,13 +115,87 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 720px;
+    max-width: 760px;
     text-align: left;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     flex: 1;
     justify-content: center;
+}
+
+.heroBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--spacing-7);
+    padding: 6px 14px 6px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border-subtle);
+    backdrop-filter: blur(var(--blur-glass-sm));
+    -webkit-backdrop-filter: blur(var(--blur-glass-sm));
+    border-radius: var(--radius-full);
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.heroBadgeDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-mint);
+    box-shadow: 0 0 8px var(--color-mint-glow);
+    animation: heroBadgePulse 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes heroBadgePulse {
+    0%, 100% { box-shadow: 0 0 8px var(--color-mint-glow); }
+    50%      { box-shadow: 0 0 14px var(--color-mint-glow), 0 0 4px var(--color-mint); }
+}
+
+.heroBadgeRotator {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    color: var(--color-mint);
+    font-weight: var(--font-weight-semibold);
+}
+
+.heroBadgeSpacer {
+    display: inline-block;
+    visibility: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+.heroBadgeWord {
+    position: absolute;
+    inset: 0;
+    white-space: nowrap;
+    color: var(--color-mint);
+    will-change: transform, opacity;
+}
+
+.heroAccent {
+    background: linear-gradient(135deg, #6fe2a8 0%, #39ce86 55%, #2bb874 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .heroBadgeDot { animation: none; }
 }
 
 .heroTitle {
@@ -411,6 +485,90 @@
     color: var(--color-text-muted);
     line-height: 1.65;
     max-width: 38ch;
+}
+
+/* ═══════════════════════════════════════════
+   POR QUÉ OPSPILOT — diferenciadores reales
+   ═══════════════════════════════════════════ */
+
+.whySection {
+    padding: var(--space-section-default) 0;
+    background: var(--color-bg-deep);
+    position: relative;
+}
+
+.whyGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-5);
+}
+
+@media (min-width: 768px) {
+    .whyGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.whyCard {
+    padding: var(--spacing-9) var(--spacing-8);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-2xl);
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--transition-normal),
+        background var(--transition-normal);
+}
+
+.whyCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--color-mint) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.whyCard:hover {
+    border-color: var(--color-border-mint);
+    background: var(--color-bg-raised);
+}
+
+.whyCard:hover::before {
+    opacity: 1;
+}
+
+.whyIcon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-mint);
+    background: var(--color-mint-soft);
+    border: 1px solid var(--color-border-mint);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-6);
+}
+
+.whyTitle {
+    font-family: var(--font-family-display);
+    font-size: clamp(var(--font-size-xl), 2.1vw, var(--font-size-2xl));
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-strong);
+    margin-bottom: var(--spacing-4);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+.whyText {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    line-height: 1.65;
 }
 
 /* ═══════════════════════════════════════════

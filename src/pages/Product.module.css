@@ -9,6 +9,10 @@
     overflow-x: hidden;
 }
 
+.comparisonSection {
+    padding: var(--space-section-default) 0;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;

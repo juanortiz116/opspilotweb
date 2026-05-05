@@ -6,6 +6,11 @@
     padding: var(--space-section-default) 0;
 }
 
+.roiSection {
+    padding: var(--space-section-default) 0;
+    background: var(--color-bg-deep);
+}
+
 .customBlock {
     background:
         radial-gradient(circle at 20% 0%, rgba(57, 206, 134, 0.08) 0%, transparent 60%),

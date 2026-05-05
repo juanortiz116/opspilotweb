@@ -24,6 +24,9 @@ import {
     PencilRuler,
     Check,
     ArrowRight,
+    Ban,
+    Handshake,
+    Receipt,
 } from 'lucide-react';
 import styles from './Home.module.css';
 import Aurora from '../components/common/Aurora';
@@ -110,6 +113,7 @@ export const Home: React.FC = () => {
 
     const problemRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const buildRef = useScrollReveal<HTMLDivElement>({ stagger: true });
+    const whyRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const methodScrollRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const caseRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const ctaRef = useScrollReveal<HTMLDivElement>();
@@ -135,9 +139,10 @@ export const Home: React.FC = () => {
         const ctx = gsap.context(() => {
             if (!reduce) {
                 const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-                tl.from(`.${styles.heroTitle} .${styles.heroLine}`, {
-                    opacity: 0, y: 32, duration: 0.95, stagger: 0.1,
-                })
+                tl.from(`.${styles.heroBadge}`, { opacity: 0, y: 12, duration: 0.6 })
+                    .from(`.${styles.heroTitle} .${styles.heroLine}`, {
+                        opacity: 0, y: 32, duration: 0.95, stagger: 0.1,
+                    }, '-=0.35')
                     .from(`.${styles.heroSubtitle}`, { opacity: 0, y: 18, duration: 0.7 }, '-=0.55')
                     .from(`.${styles.ctaGroup} > *`, { opacity: 0, y: 14, duration: 0.55, stagger: 0.08 }, '-=0.45')
                     .from(`.${styles.trustList} li`, { opacity: 0, y: 10, duration: 0.5, stagger: 0.06 }, '-=0.35');
@@ -200,21 +205,27 @@ export const Home: React.FC = () => {
                 <div className={styles.heroSpotlight} ref={spotlightRef} aria-hidden="true" />
 
                 <div className={styles.heroContentCentered}>
+                    <span className={styles.heroBadge}>
+                        <span className={styles.heroBadgeDot} aria-hidden="true" />
+                        Para fiscalidad · energía · obras · agencias ·{' '}
+                        <span className={styles.heroBadgeRotator}>
+                            <span className={styles.heroBadgeSpacer} aria-hidden="true">{ROTATOR_SPACER}</span>
+                            <span className={styles.heroBadgeWord} ref={rotatorRef}>{ROTATING_WORDS[0]}</span>
+                        </span>
+                    </span>
                     <h1 className={styles.heroTitle}>
-                        <span className={styles.heroLine}>Construimos software</span>
+                        <span className={styles.heroLine}>El software que tu negocio</span>
                         <span className={styles.heroLine}>
-                            a medida para{' '}
-                            <span className={styles.rotator}>
-                                <span className={styles.rotatorSpacer} aria-hidden="true">{ROTATOR_SPACER}</span>
-                                <span className={styles.rotatorWord} ref={rotatorRef}>{ROTATING_WORDS[0]}</span>
-                            </span>
-                            <span className={styles.rotatorCursor} aria-hidden="true" />
+                            necesita <span className={styles.heroAccent}>no se vende</span>
+                        </span>
+                        <span className={styles.heroLine}>
+                            en SaaS<span className={styles.rotatorCursor} aria-hidden="true" />
                         </span>
                     </h1>
                     <p className={styles.heroSubtitle}>
-                        Empresa de desarrollo de software en España. Diseñamos, construimos y
-                        mantenemos las herramientas digitales que tu negocio necesita —
-                        no las que te quieren vender.
+                        Construimos sistemas a medida para PYMEs españolas cuando lo estándar
+                        no encaja. Diseñamos, desarrollamos y mantenemos las herramientas
+                        digitales que tu negocio necesita — no las que te quieren vender.
                     </p>
                     <div className={styles.ctaGroup}>
                         <div ref={heroPrimaryCtaRef} className={styles.magneticWrap}>
@@ -298,6 +309,53 @@ export const Home: React.FC = () => {
                             <p className={styles.problemText}>
                                 Cinco herramientas distintas para hacer un mismo trabajo. El tiempo
                                 que se va en cambiar de contexto no lo recuperas.
+                            </p>
+                        </TiltCard>
+                    </div>
+                </div>
+            </section>
+
+            {/* ═══ POR QUÉ OPSPILOT ═══ */}
+            <section className={styles.whySection}>
+                <div className={styles.container} ref={whyRef}>
+                    <header className={`${styles.sectionHeader} reveal`}>
+                        <Eyebrow>Por qué OpsPilot</Eyebrow>
+                        <h2 className={styles.sectionTitle}>
+                            No somos una agencia más.
+                        </h2>
+                    </header>
+                    <div className={styles.whyGrid}>
+                        <TiltCard className={`${styles.whyCard} reveal`}>
+                            <div className={styles.whyIcon}>
+                                <Ban size={26} strokeWidth={1.5} aria-hidden="true" />
+                            </div>
+                            <h3 className={styles.whyTitle}>Te decimos que no.</h3>
+                            <p className={styles.whyText}>
+                                Si tu caso lo resuelve mejor algo estándar — Holded, Notion,
+                                HubSpot — te lo decimos. Cobrar por construir lo que no
+                                necesitas no es nuestro modelo.
+                            </p>
+                        </TiltCard>
+                        <TiltCard className={`${styles.whyCard} reveal`}>
+                            <div className={styles.whyIcon}>
+                                <Receipt size={26} strokeWidth={1.5} aria-hidden="true" />
+                            </div>
+                            <h3 className={styles.whyTitle}>Precio cerrado antes de empezar.</h3>
+                            <p className={styles.whyText}>
+                                Alcance, plazo y precio en un documento — antes de la primera
+                                línea de código. Si crece, tú decides qué entra y qué no. Sin
+                                horas extra que no pediste.
+                            </p>
+                        </TiltCard>
+                        <TiltCard className={`${styles.whyCard} reveal`}>
+                            <div className={styles.whyIcon}>
+                                <Handshake size={26} strokeWidth={1.5} aria-hidden="true" />
+                            </div>
+                            <h3 className={styles.whyTitle}>Construimos contigo, no para ti.</h3>
+                            <p className={styles.whyText}>
+                                Sesiones semanales con tu equipo. Código y datos tuyos desde el
+                                día 1. No desaparecemos cuando entregamos — nos quedamos
+                                mientras nos necesites.
                             </p>
                         </TiltCard>
                     </div>

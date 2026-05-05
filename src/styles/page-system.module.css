@@ -41,32 +41,6 @@
     max-width: 880px;
 }
 
-.pageHeroEyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-3);
-    font-family: var(--font-family-base);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-mint);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 6px 12px 6px 10px;
-    background: var(--color-mint-soft);
-    border: 1px solid var(--color-border-mint);
-    border-radius: var(--radius-full);
-    margin-bottom: var(--spacing-7);
-}
-
-.pageHeroEyebrow::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-mint);
-    box-shadow: 0 0 8px rgba(57, 206, 134, 0.6);
-}
-
 .pageHeroTitle {
     font-family: var(--font-family-display);
     font-size: clamp(2.25rem, 5vw, 4rem);
@@ -99,32 +73,6 @@
     display: flex;
     gap: var(--spacing-5);
     flex-wrap: wrap;
-}
-
-/* ─── Eyebrow chip reutilizable ─── */
-.eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-3);
-    font-family: var(--font-family-base);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-mint);
-    letter-spacing: 0.14em;
-    margin-bottom: var(--spacing-5);
-    text-transform: uppercase;
-    padding: 6px 12px 6px 10px;
-    background: var(--color-mint-soft);
-    border: 1px solid var(--color-border-mint);
-    border-radius: var(--radius-full);
-}
-
-.eyebrowDot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-mint);
-    box-shadow: 0 0 8px rgba(57, 206, 134, 0.6);
 }
 
 /* ─── Section header simple (eyebrow + título) ─── */

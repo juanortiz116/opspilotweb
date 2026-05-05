@@ -1,0 +1,78 @@
+.card {
+    position: relative;
+    border-radius: var(--radius-2xl);
+    transition: border-color var(--transition-normal),
+        background-color var(--transition-normal),
+        transform var(--transition-normal),
+        box-shadow var(--transition-normal);
+}
+
+/* Dense — listados de features. Sin shadow, borde inferior, hover por color. */
+.dense {
+    padding: var(--spacing-6);
+    background: transparent;
+    border-bottom: 1px solid var(--color-border-subtle);
+    border-radius: 0;
+}
+
+.dense:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom-color: var(--color-border-strong);
+}
+
+/* Featured — card destacada con superficie sólida */
+.featured {
+    padding: var(--spacing-10);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.featured.interactive:hover {
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Testimonial — borde mint izquierdo */
+.testimonial {
+    padding: var(--spacing-10);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-subtle);
+    border-left: 3px solid var(--color-mint);
+    border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0;
+}
+
+/* Metric — card grande para números/stats */
+.metric {
+    padding: var(--spacing-8);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-subtle);
+    text-align: left;
+}
+
+.metric.interactive:hover {
+    border-color: var(--color-border-mint);
+    background: var(--color-bg-raised);
+}
+
+/* Glass — superficie con backdrop blur, para layering sobre Aurora */
+.glass {
+    padding: var(--spacing-8);
+    background: rgba(17, 26, 35, 0.55);
+    border: 1px solid var(--color-border-subtle);
+    backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
+}
+
+.glass.interactive:hover {
+    border-color: var(--color-border-mint);
+    background: rgba(17, 26, 35, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .card.interactive:hover {
+        transform: none;
+        transition: none;
+    }
+}

@@ -224,34 +224,18 @@ video {
 }
 
 /* ═══════════════════════════════════════════
-   LEGACY UTILITIES — kept null/no-op for backwards compat
-   These were used by Home/Cases/Contact for decorative
-   pulses, glows, floats. We disable them but keep the
-   classnames so JSX doesn't break.
+   ACCENT GRADIENT — usable inline as className="text-gradient"
+   Reemplaza la utility legacy con un gradient mint real.
    ═══════════════════════════════════════════ */
 .text-gradient {
-    color: var(--color-text-strong);
+    background: linear-gradient(135deg, #6fe2a8 0%, #39ce86 55%, #2bb874 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
-.glass-panel,
-.glass-panel-dark {
-    background: var(--color-bg-elevated);
-    border: 1px solid var(--color-border-subtle);
-}
-
-.glow-text {
-    text-shadow: none;
-}
-
-.anim-float,
-.anim-float-slow,
-.anim-pulse-glow,
-.anim-gradient,
-.anim-border-glow {
-    animation: none;
-}
-
-/* Icon helpers (used inline in some pages) */
+/* Icon helpers (used inline in algunas páginas) */
 .icon-md {
     width: 24px;
     height: 24px;

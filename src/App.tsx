@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { ScrollToTop } from './components/common/ScrollToTop';
+import { ToastProvider } from './components/ui/Toast';
+import { PageSkeleton } from './components/ui/Skeleton';
 import { ROUTES, LEGACY_REDIRECTS } from './lib/routes';
 import './index.css';
 
@@ -19,27 +21,29 @@ function App() {
     return (
         <Router>
             <ScrollToTop />
-            <Layout>
-                <Suspense fallback={null}>
-                    <Routes>
-                        <Route path={ROUTES.home} element={<Home />} />
-                        <Route path={ROUTES.soluciones} element={<Soluciones />} />
-                        <Route path={ROUTES.productos} element={<Product />} />
-                        <Route path={ROUTES.servicios} element={<Services />} />
-                        <Route path={ROUTES.casos} element={<Cases />} />
-                        <Route path={ROUTES.precios} element={<Pricing />} />
-                        <Route path={ROUTES.recursos} element={<Resources />} />
-                        <Route path={ROUTES.contacto} element={<Contact />} />
-                        <Route path={ROUTES.diagnostico} element={<Navigate to={ROUTES.contacto} replace />} />
+            <ToastProvider>
+                <Layout>
+                    <Suspense fallback={<PageSkeleton />}>
+                        <Routes>
+                            <Route path={ROUTES.home} element={<Home />} />
+                            <Route path={ROUTES.soluciones} element={<Soluciones />} />
+                            <Route path={ROUTES.productos} element={<Product />} />
+                            <Route path={ROUTES.servicios} element={<Services />} />
+                            <Route path={ROUTES.casos} element={<Cases />} />
+                            <Route path={ROUTES.precios} element={<Pricing />} />
+                            <Route path={ROUTES.recursos} element={<Resources />} />
+                            <Route path={ROUTES.contacto} element={<Contact />} />
+                            <Route path={ROUTES.diagnostico} element={<Navigate to={ROUTES.contacto} replace />} />
 
-                        {LEGACY_REDIRECTS.map(([from, to]) => (
-                            <Route key={from} path={from} element={<Navigate to={to} replace />} />
-                        ))}
+                            {LEGACY_REDIRECTS.map(([from, to]) => (
+                                <Route key={from} path={from} element={<Navigate to={to} replace />} />
+                            ))}
 
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </Suspense>
-            </Layout>
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </Suspense>
+                </Layout>
+            </ToastProvider>
         </Router>
     );
 }

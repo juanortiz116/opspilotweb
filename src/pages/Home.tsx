@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '../components/ui/Button';
+import { Eyebrow } from '../components/ui/Eyebrow';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ROUTES } from '../lib/routes';
 import {
@@ -244,10 +245,7 @@ export const Home: React.FC = () => {
             <section className={styles.problemSection}>
                 <div className={styles.container} ref={problemRef}>
                     <header className={`${styles.sectionHeader} reveal`}>
-                        <span className={styles.eyebrow}>
-                            <span className={styles.eyebrowDot} />
-                            Por qué nos eligen
-                        </span>
+                        <Eyebrow>Por qué nos eligen</Eyebrow>
                         <h2 className={styles.sectionTitle}>
                             Las herramientas que usas no fueron pensadas para ti.
                         </h2>
@@ -291,10 +289,7 @@ export const Home: React.FC = () => {
             <section className={styles.buildSection}>
                 <div className={styles.container} ref={buildRef}>
                     <header className={`${styles.sectionHeader} reveal`}>
-                        <span className={styles.eyebrow}>
-                            <span className={styles.eyebrowDot} />
-                            Qué hacemos
-                        </span>
+                        <Eyebrow>Qué hacemos</Eyebrow>
                         <h2 className={styles.sectionTitle}>
                             Construimos lo que tu negocio necesita.
                         </h2>
@@ -356,10 +351,7 @@ export const Home: React.FC = () => {
             <section className={styles.methodSection} ref={methodRef}>
                 <div className={styles.container} ref={methodScrollRef}>
                     <header className={`${styles.sectionHeader} reveal`}>
-                        <span className={styles.eyebrow}>
-                            <span className={styles.eyebrowDot} />
-                            Cómo trabajamos
-                        </span>
+                        <Eyebrow>Cómo trabajamos</Eyebrow>
                         <h2 className={styles.sectionTitle}>
                             Así trabajamos contigo.
                         </h2>
@@ -415,10 +407,7 @@ export const Home: React.FC = () => {
             <section className={styles.caseSection}>
                 <div className={styles.container} ref={caseRef}>
                     <header className={`${styles.sectionHeader} reveal`}>
-                        <span className={styles.eyebrow}>
-                            <span className={styles.eyebrowDot} />
-                            Casos de éxito
-                        </span>
+                        <Eyebrow>Casos de éxito</Eyebrow>
                         <h2 className={styles.sectionTitle}>
                             Lo que construimos ya está trabajando.
                         </h2>

@@ -1,0 +1,88 @@
+.viewport {
+    position: fixed;
+    bottom: var(--spacing-6);
+    right: var(--spacing-6);
+    z-index: var(--z-index-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    pointer-events: none;
+    max-width: min(420px, calc(100vw - var(--spacing-12)));
+}
+
+.toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4) var(--spacing-5);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
+    animation: slideIn 280ms var(--ease-emphasized);
+}
+
+.icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.success .icon { color: var(--color-success); }
+.error   .icon { color: var(--color-error); }
+.info    .icon { color: var(--color-info); }
+
+.success { border-left: 3px solid var(--color-success); }
+.error   { border-left: 3px solid var(--color-error); }
+.info    { border-left: 3px solid var(--color-info); }
+
+.body {
+    flex: 1;
+    min-width: 0;
+}
+
+.title {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-strong);
+    line-height: 1.4;
+}
+
+.description {
+    margin-top: 2px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.close {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.close:hover {
+    color: var(--color-text-strong);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast { animation: none; }
+}

@@ -36,19 +36,12 @@
     --color-error: #e15a5a;
     --color-info: #6189c4;
 
-    /* ═══════════════════════════════════════════
-       BACKWARDS-COMPAT TOKENS
-       (mantener nombres viejos apuntando a los nuevos)
-       ═══════════════════════════════════════════ */
+    /* Aliases activos (usados por componentes con nombres heredados) */
     --color-primary: var(--color-mint);
     --color-primary-dark: var(--color-mint-dark);
     --color-primary-light: #4fd99a;
-    --color-secondary: #0F172A;
     --color-accent: var(--color-mint);
     --color-background: var(--color-bg);
-    --color-surface: #FFFFFF;
-    --color-text-main: #1E293B;
-    --color-border: #E2E8F0;
 
     --color-dark-bg: var(--color-bg);
     --color-dark-bg-alt: var(--color-bg-elevated);
@@ -56,6 +49,15 @@
     --color-dark-border: var(--color-border-subtle);
     --color-dark-text-main: var(--color-text-strong);
     --color-dark-text-muted: var(--color-text-muted);
+
+    /* Glow / focus rings — para CTAs destacados y accent moments */
+    --color-mint-glow: rgba(57, 206, 134, 0.45);
+    --color-warm-glow: rgba(217, 148, 87, 0.40);
+
+    /* Glass blur normalizado */
+    --blur-glass-sm: 8px;
+    --blur-glass-md: 14px;
+    --blur-glass-lg: 24px;
 
     /* ═══════════════════════════════════════════
        TYPOGRAPHY
@@ -135,6 +137,8 @@
     --shadow-lg: 0 16px 40px -12px rgba(0, 0, 0, 0.4);
     --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 40px -16px rgba(0, 0, 0, 0.5);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-mint-glow: 0 0 0 1px rgba(57, 206, 134, 0.30), 0 8px 24px rgba(57, 206, 134, 0.15);
+    --shadow-mint-glow-lg: 0 0 0 1px rgba(57, 206, 134, 0.35), 0 16px 40px rgba(57, 206, 134, 0.22);
 
     /* ═══════════════════════════════════════════
        RADII
@@ -150,9 +154,11 @@
     /* ═══════════════════════════════════════════
        TRANSITIONS
        ═══════════════════════════════════════════ */
-    --transition-fast: 160ms cubic-bezier(0.32, 0.72, 0, 1);
-    --transition-normal: 280ms cubic-bezier(0.32, 0.72, 0, 1);
-    --transition-slow: 480ms cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-emphasized: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 160ms var(--ease-emphasized);
+    --transition-normal: 280ms var(--ease-emphasized);
+    --transition-slow: 480ms var(--ease-emphasized);
 
     /* ═══════════════════════════════════════════
        Z-INDEX

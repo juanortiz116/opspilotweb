@@ -1,0 +1,29 @@
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.left { align-items: flex-start; text-align: left; }
+.center { align-items: center; text-align: center; }
+
+.value {
+    font-family: var(--font-family-display);
+    font-feature-settings: "tnum", "lnum";
+    font-variant-numeric: tabular-nums lining-nums;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-strong);
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+.label {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    line-height: 1.45;
+    max-width: 28ch;
+}
+
+.size_md .value { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+.size_lg .value { font-size: clamp(2.25rem, 4vw, 3rem); }
+.size_xl .value { font-size: clamp(3rem, 5vw, 4.25rem); }

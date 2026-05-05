@@ -5,6 +5,7 @@ import { usePageSEO } from '../hooks/usePageSEO';
 import sys from '../styles/page-system.module.css';
 import styles from './Contact.module.css';
 import { Mail, MessageSquare, MapPin } from 'lucide-react';
+import { Eyebrow } from '../components/ui/Eyebrow';
 
 const FORM_CONTACT_URL = 'https://formsubmit.co/ajax/opspilot.contact@gmail.com';
 
@@ -56,10 +57,7 @@ export const Contact: React.FC = () => {
             <section className={sys.pageHero}>
                 <div className={sys.container}>
                     <div className={sys.pageHeroContent}>
-                        <span className={sys.pageHeroEyebrow}>
-                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
-                            Diagnóstico · 30 min
-                        </span>
+                        <Eyebrow block>Diagnóstico · 30 min</Eyebrow>
                         <h1 className={sys.pageHeroTitle}>
                             ¿Tienes algo que <em className={sys.pageHeroAccent}>resolver</em>?
                         </h1>

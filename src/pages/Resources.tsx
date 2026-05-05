@@ -4,6 +4,7 @@ import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { ROUTES } from '../lib/routes';
+import { Eyebrow } from '../components/ui/Eyebrow';
 import sys from '../styles/page-system.module.css';
 import styles from './Resources.module.css';
 
@@ -89,10 +90,7 @@ export const Resources: React.FC = () => {
             <section className={sys.pageHero}>
                 <div className={sys.container}>
                     <div className={sys.pageHeroContent}>
-                        <span className={sys.pageHeroEyebrow}>
-                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
-                            Recursos
-                        </span>
+                        <Eyebrow block>Recursos</Eyebrow>
                         <h1 className={sys.pageHeroTitle}>
                             Aprende a hacer más con <em className={sys.pageHeroAccent}>menos</em>.
                         </h1>
@@ -125,10 +123,7 @@ export const Resources: React.FC = () => {
                 <div className={sys.container}>
                     <div className={`${styles.newsletter} reveal`} ref={nlRef}>
                         <div className={styles.nlContent}>
-                            <span className={sys.eyebrow}>
-                                <span className={sys.eyebrowDot} />
-                                Newsletter
-                            </span>
+                            <Eyebrow>Newsletter</Eyebrow>
                             <h2 className={styles.nlTitle}>Una idea útil cada semana.</h2>
                             <p className={styles.nlText}>
                                 Un email semanal con automatizaciones prácticas, herramientas y casos

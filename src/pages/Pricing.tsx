@@ -5,6 +5,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { Check } from 'lucide-react';
 import { ROUTES } from '../lib/routes';
+import { Eyebrow } from '../components/ui/Eyebrow';
 import sys from '../styles/page-system.module.css';
 import styles from './Pricing.module.css';
 
@@ -26,10 +27,7 @@ export const Pricing: React.FC = () => {
             <section className={sys.pageHero}>
                 <div className={sys.container}>
                     <div className={sys.pageHeroContent}>
-                        <span className={sys.pageHeroEyebrow}>
-                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
-                            Precios
-                        </span>
+                        <Eyebrow block>Precios</Eyebrow>
                         <h1 className={sys.pageHeroTitle}>
                             Presupuesto <em className={sys.pageHeroAccent}>cerrado</em>.<br />
                             Sin sorpresas al final.
@@ -46,10 +44,7 @@ export const Pricing: React.FC = () => {
             <section className={styles.customSection}>
                 <div className={sys.container}>
                     <header className={`${sys.sectionHeader}`}>
-                        <span className={sys.eyebrow}>
-                            <span className={sys.eyebrowDot} />
-                            Servicios a medida
-                        </span>
+                        <Eyebrow>Servicios a medida</Eyebrow>
                         <h2 className={sys.sectionTitle}>
                             Cada proyecto es único. Por eso lo presupuestamos individualmente.
                         </h2>
@@ -94,10 +89,7 @@ export const Pricing: React.FC = () => {
             <section className={`${sys.sectionLoose} ${sys.sectionAlt}`}>
                 <div className={sys.container} ref={pricingRef}>
                     <header className={`${sys.sectionHeader} reveal`}>
-                        <span className={sys.eyebrow}>
-                            <span className={sys.eyebrowDot} />
-                            Productos verticales
-                        </span>
+                        <Eyebrow>Productos verticales</Eyebrow>
                         <h2 className={sys.sectionTitle}>
                             Suscripción mensual fija. Sin permanencia.
                         </h2>
@@ -169,10 +161,7 @@ export const Pricing: React.FC = () => {
             <section className={styles.faqSection}>
                 <div className={sys.container} ref={faqRef}>
                     <header className={`${sys.sectionHeader} reveal`}>
-                        <span className={sys.eyebrow}>
-                            <span className={sys.eyebrowDot} />
-                            Preguntas frecuentes
-                        </span>
+                        <Eyebrow>Preguntas frecuentes</Eyebrow>
                         <h2 className={sys.sectionTitle}>Lo que la gente nos pregunta.</h2>
                     </header>
                     <div className={styles.faqGrid}>

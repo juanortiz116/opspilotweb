@@ -4,6 +4,7 @@ import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { ROUTES } from '../lib/routes';
+import { Eyebrow } from '../components/ui/Eyebrow';
 import {
     FileSpreadsheet,
     Zap,
@@ -200,10 +201,7 @@ export const Product: React.FC = () => {
             <section className={sys.pageHero}>
                 <div className={sys.container}>
                     <div className={sys.pageHeroContent}>
-                        <span className={sys.pageHeroEyebrow}>
-                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-mint)', boxShadow: '0 0 8px rgba(57, 206, 134, 0.6)' }} />
-                            Productos verticales
-                        </span>
+                        <Eyebrow block>Productos verticales</Eyebrow>
                         <h1 className={sys.pageHeroTitle}>
                             Cuatro productos para PYMEs <em className={sys.pageHeroAccent}>españolas</em>.
                         </h1>
@@ -220,10 +218,7 @@ export const Product: React.FC = () => {
             <section className={styles.section}>
                 <div className={sys.container} ref={productsRef}>
                     <header className={`${sys.sectionHeader} reveal`}>
-                        <span className={sys.eyebrow}>
-                            <span className={sys.eyebrowDot} />
-                            Catálogo
-                        </span>
+                        <Eyebrow>Catálogo</Eyebrow>
                         <h2 className={sys.sectionTitle}>Nuestros productos.</h2>
                     </header>
                     <div className={styles.productsList}>
@@ -265,10 +260,7 @@ export const Product: React.FC = () => {
             <section className={`${sys.sectionLoose} ${sys.sectionAlt}`}>
                 <div className={sys.container} ref={advantagesRef}>
                     <header className={`${sys.sectionHeader} reveal`}>
-                        <span className={sys.eyebrow}>
-                            <span className={sys.eyebrowDot} />
-                            Por qué
-                        </span>
+                        <Eyebrow>Por qué</Eyebrow>
                         <h2 className={sys.sectionTitle}>Diseñados para España.</h2>
                     </header>
                     <div className={styles.whyGrid}>

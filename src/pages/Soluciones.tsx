@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { usePageSEO } from '../hooks/usePageSEO';
 import styles from './Soluciones.module.css';
 import Aurora from '../components/common/Aurora';
 
@@ -15,7 +16,7 @@ const sectores = [
         solution: 'Automatización documental — flujos de firma, comunicación y archivo digital sin fricciones',
         benefits: ['Documentos sin papel', 'Seguimiento en tiempo real', 'Clientes siempre informados'],
         cta: 'Cuéntanos tu caso',
-        href: '/contact',
+        href: '/contacto',
     },
     {
         icon: <Zap size={28} />,
@@ -24,7 +25,7 @@ const sectores = [
         solution: 'Análisis de tarifas y onboarding digital — propuesta instantánea, cartera centralizada y gestión automatizada',
         benefits: ['Análisis en segundos', 'Propuestas sin errores', 'Pipeline de clientes claro'],
         cta: 'Cuéntanos tu caso',
-        href: '/contact',
+        href: '/contacto',
     },
     {
         icon: <Building2 size={28} />,
@@ -33,7 +34,7 @@ const sectores = [
         solution: 'Presupuestación y seguimiento de obra — de la visita al cobro sin llamadas innecesarias',
         benefits: ['Presupuestos en 2 minutos', 'Clientes sin llamadas extras', 'Cobros sin perseguir'],
         cta: 'Cuéntanos tu caso',
-        href: '/contact',
+        href: '/contacto',
     },
     {
         icon: <Target size={28} />,
@@ -42,7 +43,7 @@ const sectores = [
         solution: 'CRM y gestión de proyectos — pipeline visual, seguimientos automáticos y cero leads perdidos',
         benefits: ['Nada se pierde', 'Pipeline siempre actualizado', 'Menos tiempo administrativo'],
         cta: 'Cuéntanos tu caso',
-        href: '/contact',
+        href: '/contacto',
     },
     {
         icon: <Globe size={28} />,
@@ -51,7 +52,7 @@ const sectores = [
         solution: 'Centralización operativa — una sola herramienta para empleados, tareas, proveedores y analítica',
         benefits: ['Control total en un sitio', 'Decisiones con datos reales', 'Menos caos operativo'],
         cta: 'Cuéntanos tu caso',
-        href: '/contact',
+        href: '/contacto',
     },
     {
         icon: <Settings size={28} />,
@@ -60,11 +61,17 @@ const sectores = [
         solution: 'Desarrollo a medida — analizamos tu caso, lo construimos para ti y lo mantenemos vivo',
         benefits: ['100% adaptado a ti', 'Integrado con lo que ya tienes', 'Escalable sin límites'],
         cta: 'Cuéntanos tu caso',
-        href: '/contact',
+        href: '/contacto',
     },
 ];
 
 export const Soluciones: React.FC = () => {
+    usePageSEO({
+        title: 'Soluciones por sector — Asesorías, energía, obra y agencias · OpsPilot',
+        description: 'Soluciones digitales adaptadas a tu sector: asesorías y despachos, comercializadoras de energía, reformas e instalaciones, agencias y PYMEs. Tecnología que encaja con cómo trabajas.',
+        canonical: 'https://opspilot.es/soluciones',
+    });
+
     const gridRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const ctaRef = useScrollReveal<HTMLDivElement>();
 
@@ -136,7 +143,7 @@ export const Soluciones: React.FC = () => {
                         <p className={styles.ctaSub}>
                             Cuéntanoslo y te orientamos en 30 minutos. Sin compromiso, sin presión.
                         </p>
-                        <Link to="/contact">
+                        <Link to="/contacto">
                             <Button variant="primary" size="lg">Reservar diagnóstico gratuito</Button>
                         </Link>
                     </div>

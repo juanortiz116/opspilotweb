@@ -7,16 +7,37 @@ import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
     const [scrolled, setScrolled] = useState(false);
+    const [hidden, setHidden] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { pathname } = useLocation();
 
     const isHomePage = pathname === ROUTES.home;
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 12);
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const update = () => {
+            const y = window.scrollY;
+            setScrolled(y > 12);
+            const goingDown = y > lastY;
+            // Hide only after passing 120px and on downward scroll. Always show on upward.
+            if (goingDown && y > 120) setHidden(true);
+            else if (!goingDown) setHidden(false);
+            lastY = y;
+            ticking = false;
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(update);
+                ticking = true;
+            }
+        };
+
+        update();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
     useEffect(() => {
@@ -33,7 +54,7 @@ export const Navbar: React.FC = () => {
 
     return (
         <>
-            <nav className={`${styles.navbar} ${isOpaque ? styles.scrolled : ''}`}>
+            <nav className={`${styles.navbar} ${isOpaque ? styles.scrolled : ''} ${hidden && !isMenuOpen ? styles.hidden : ''}`}>
                 <div className={styles.container}>
                     <Link to={ROUTES.home} className={styles.logo}>
                         <Logo size={50} />

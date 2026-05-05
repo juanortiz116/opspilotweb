@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { ScrollToTop } from './components/common/ScrollToTop';
+import { PageTransition } from './components/common/PageTransition';
 import { ToastProvider } from './components/ui/Toast';
 import { PageSkeleton } from './components/ui/Skeleton';
 import { ROUTES, LEGACY_REDIRECTS } from './lib/routes';
@@ -24,7 +25,8 @@ function App() {
             <ToastProvider>
                 <Layout>
                     <Suspense fallback={<PageSkeleton />}>
-                        <Routes>
+                        <PageTransition>
+                            <Routes>
                             <Route path={ROUTES.home} element={<Home />} />
                             <Route path={ROUTES.soluciones} element={<Soluciones />} />
                             <Route path={ROUTES.productos} element={<Product />} />
@@ -40,7 +42,8 @@ function App() {
                             ))}
 
                             <Route path="*" element={<NotFound />} />
-                        </Routes>
+                            </Routes>
+                        </PageTransition>
                     </Suspense>
                 </Layout>
             </ToastProvider>

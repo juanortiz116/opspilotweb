@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '../components/ui/Button';
 import { Eyebrow } from '../components/ui/Eyebrow';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useMagnetic } from '../hooks/useMagnetic';
+import { useTilt } from '../hooks/useTilt';
 import { ROUTES } from '../lib/routes';
 import {
     LayoutGrid,
@@ -27,6 +29,17 @@ import styles from './Home.module.css';
 import Aurora from '../components/common/Aurora';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Card con tilt 3D suave al hover. Wrapper local; respeta reduced-motion.
+const TiltCard: React.FC<{
+    className: string;
+    children: React.ReactNode;
+    as?: 'div' | 'article';
+}> = ({ className, children, as = 'div' }) => {
+    const ref = useTilt<HTMLDivElement>({ max: 4 });
+    const Tag = as as React.ElementType;
+    return <Tag ref={ref} className={className}>{children}</Tag>;
+};
 
 const ROTATING_WORDS = [
     'PYMEs españolas',
@@ -103,6 +116,9 @@ export const Home: React.FC = () => {
 
     const [activeCase, setActiveCase] = useState(0);
     const [carouselPaused, setCarouselPaused] = useState(false);
+
+    const heroPrimaryCtaRef = useMagnetic<HTMLDivElement>({ strength: 12 });
+    const finalPrimaryCtaRef = useMagnetic<HTMLDivElement>({ strength: 12 });
 
     useEffect(() => {
         const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -192,6 +208,7 @@ export const Home: React.FC = () => {
                                 <span className={styles.rotatorSpacer} aria-hidden="true">{ROTATOR_SPACER}</span>
                                 <span className={styles.rotatorWord} ref={rotatorRef}>{ROTATING_WORDS[0]}</span>
                             </span>
+                            <span className={styles.rotatorCursor} aria-hidden="true" />
                         </span>
                     </h1>
                     <p className={styles.heroSubtitle}>
@@ -200,9 +217,11 @@ export const Home: React.FC = () => {
                         no las que te quieren vender.
                     </p>
                     <div className={styles.ctaGroup}>
-                        <Link to={ROUTES.contacto}>
-                            <Button variant="primary" size="lg">Reservar diagnóstico</Button>
-                        </Link>
+                        <div ref={heroPrimaryCtaRef} className={styles.magneticWrap}>
+                            <Link to={ROUTES.contacto}>
+                                <Button variant="primary" size="lg">Reservar diagnóstico</Button>
+                            </Link>
+                        </div>
                         <Link to={ROUTES.servicios} className={styles.ctaSecondary}>
                             Cómo trabajamos <ArrowRight size={16} strokeWidth={2} />
                         </Link>
@@ -251,7 +270,7 @@ export const Home: React.FC = () => {
                         </h2>
                     </header>
                     <div className={styles.problemGrid}>
-                        <div className={`${styles.problemCard} reveal`}>
+                        <TiltCard className={`${styles.problemCard} reveal`}>
                             <div className={styles.problemIcon}>
                                 <Layers size={26} strokeWidth={1.5} aria-hidden="true" />
                             </div>
@@ -260,8 +279,8 @@ export const Home: React.FC = () => {
                                 Una app para esto, otra para aquello, el correo, la hoja de cálculo.
                                 Los datos no cuadran y nadie sabe cuál es la versión buena.
                             </p>
-                        </div>
-                        <div className={`${styles.problemCard} reveal`}>
+                        </TiltCard>
+                        <TiltCard className={`${styles.problemCard} reveal`}>
                             <div className={styles.problemIcon}>
                                 <PencilRuler size={26} strokeWidth={1.5} aria-hidden="true" />
                             </div>
@@ -270,8 +289,8 @@ export const Home: React.FC = () => {
                                 Cosas que mueven dinero — presupuestos, comisiones, plazos —
                                 viviendo en un Excel que se rompe al primer cambio.
                             </p>
-                        </div>
-                        <div className={`${styles.problemCard} reveal`}>
+                        </TiltCard>
+                        <TiltCard className={`${styles.problemCard} reveal`}>
                             <div className={styles.problemIcon}>
                                 <Workflow size={26} strokeWidth={1.5} aria-hidden="true" />
                             </div>
@@ -280,7 +299,7 @@ export const Home: React.FC = () => {
                                 Cinco herramientas distintas para hacer un mismo trabajo. El tiempo
                                 que se va en cambiar de contexto no lo recuperas.
                             </p>
-                        </div>
+                        </TiltCard>
                     </div>
                 </div>
             </section>
@@ -295,54 +314,54 @@ export const Home: React.FC = () => {
                         </h2>
                     </header>
                     <div className={styles.buildGrid}>
-                        <article className={`${styles.buildCard} reveal`}>
+                        <TiltCard as="article" className={`${styles.buildCard} reveal`}>
                             <div className={styles.buildIcon}><LayoutGrid size={22} strokeWidth={1.5} /></div>
                             <h3 className={styles.buildCardTitle}>Apps y sitios para tu equipo</h3>
                             <p className={styles.buildCardText}>
                                 La herramienta donde tu equipo trabaja todos los días — fácil de usar,
                                 rápida y pensada para cómo trabajáis vosotros.
                             </p>
-                        </article>
-                        <article className={`${styles.buildCard} reveal`}>
+                        </TiltCard>
+                        <TiltCard as="article" className={`${styles.buildCard} reveal`}>
                             <div className={styles.buildIcon}><Sparkles size={22} strokeWidth={1.5} /></div>
                             <h3 className={styles.buildCardTitle}>Asistentes que trabajan por ti</h3>
                             <p className={styles.buildCardText}>
                                 IA que opera tu negocio, no que solo te responde preguntas.
                                 Cierra agendas, prepara informes y avisa cuando hace falta.
                             </p>
-                        </article>
-                        <article className={`${styles.buildCard} reveal`}>
+                        </TiltCard>
+                        <TiltCard as="article" className={`${styles.buildCard} reveal`}>
                             <div className={styles.buildIcon}><Plug size={22} strokeWidth={1.5} /></div>
                             <h3 className={styles.buildCardTitle}>Conectamos tus herramientas</h3>
                             <p className={styles.buildCardText}>
                                 Que el banco, el correo y las apps que ya usas hablen entre sí
                                 para que los datos no se pierdan ni se dupliquen.
                             </p>
-                        </article>
-                        <article className={`${styles.buildCard} reveal`}>
+                        </TiltCard>
+                        <TiltCard as="article" className={`${styles.buildCard} reveal`}>
                             <div className={styles.buildIcon}><Workflow size={22} strokeWidth={1.5} /></div>
                             <h3 className={styles.buildCardTitle}>Automatizamos lo aburrido</h3>
                             <p className={styles.buildCardText}>
                                 Las tareas repetitivas que nadie quiere hacer — gestionadas solas,
                                 sin errores ni horas perdidas.
                             </p>
-                        </article>
-                        <article className={`${styles.buildCard} reveal`}>
+                        </TiltCard>
+                        <TiltCard as="article" className={`${styles.buildCard} reveal`}>
                             <div className={styles.buildIcon}><Database size={22} strokeWidth={1.5} /></div>
                             <h3 className={styles.buildCardTitle}>Tu sistema de gestión a medida</h3>
                             <p className={styles.buildCardText}>
                                 Cuando lo estándar es excesivo o demasiado genérico, construimos
                                 el sistema que encaja con cómo funciona tu empresa.
                             </p>
-                        </article>
-                        <article className={`${styles.buildCard} reveal`}>
+                        </TiltCard>
+                        <TiltCard as="article" className={`${styles.buildCard} reveal`}>
                             <div className={styles.buildIcon}><Rocket size={22} strokeWidth={1.5} /></div>
                             <h3 className={styles.buildCardTitle}>Migrar al siguiente nivel</h3>
                             <p className={styles.buildCardText}>
                                 Sacar tu negocio de hojas de cálculo y suscripciones sueltas
                                 sin perder un dato y sin parar la operativa.
                             </p>
-                        </article>
+                        </TiltCard>
                     </div>
                 </div>
             </section>
@@ -476,9 +495,11 @@ export const Home: React.FC = () => {
                             </p>
                         </div>
                         <div className={styles.ctaRight}>
-                            <Link to={ROUTES.contacto}>
-                                <Button variant="primary" size="lg">Reservar diagnóstico</Button>
-                            </Link>
+                            <div ref={finalPrimaryCtaRef} className={styles.magneticWrap}>
+                                <Link to={ROUTES.contacto}>
+                                    <Button variant="primary" size="lg">Reservar diagnóstico</Button>
+                                </Link>
+                            </div>
                             <Link to={ROUTES.servicios}>
                                 <Button variant="outline" size="lg">Ver cómo trabajamos</Button>
                             </Link>

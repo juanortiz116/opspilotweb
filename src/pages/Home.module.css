@@ -151,6 +151,27 @@
     line-height: inherit;
 }
 
+/* Cursor blink — pequeño detalle "typing" tras la palabra */
+.rotatorCursor {
+    display: inline-block;
+    width: 0.06em;
+    height: 0.85em;
+    margin-left: 0.08em;
+    vertical-align: -0.05em;
+    background: var(--color-mint);
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--color-mint-glow);
+    animation: caretBlink 1.05s steps(2, end) infinite;
+}
+
+@keyframes caretBlink {
+    50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rotatorCursor { animation: none; opacity: 1; }
+}
+
 .rotatorSpacer {
     display: inline-block;
     visibility: hidden;
@@ -190,6 +211,11 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
+}
+
+.magneticWrap {
+    display: inline-block;
+    will-change: transform;
 }
 
 .ctaSecondary {

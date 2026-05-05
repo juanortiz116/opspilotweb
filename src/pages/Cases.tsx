@@ -5,18 +5,35 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { usePageSEO } from '../hooks/usePageSEO';
 import { ROUTES } from '../lib/routes';
 import { Eyebrow } from '../components/ui/Eyebrow';
+import { Stat } from '../components/ui/Stat';
 import sys from '../styles/page-system.module.css';
 import styles from './Cases.module.css';
 
-const CASES = [
+interface CaseStat {
+    value: number | string;
+    prefix?: string;
+    suffix?: string;
+    label: string;
+}
+
+interface Case {
+    sector: string;
+    title: string;
+    text: string;
+    stats: CaseStat[];
+    quote: string;
+    author: string;
+}
+
+const CASES: Case[] = [
     {
         sector: 'Reformas',
         title: 'De la libreta al sistema que trabaja solo',
         text: 'Empresa familiar de reformas que lo llevaba todo con Excel y llamadas. Diseñamos su marca, construimos un sistema a medida con presupuestos asistidos por IA y automatizamos las citas por WhatsApp. En tres meses triplicaron su capacidad sin incorporar a nadie más.',
         stats: [
-            { v: '3×', l: 'Capacidad de atención' },
-            { v: '−70%', l: 'Tiempo en gestión' },
-            { v: '0 €', l: 'Personal extra' },
+            { value: 3, suffix: '×', label: 'Capacidad de atención' },
+            { value: 70, prefix: '−', suffix: '%', label: 'Tiempo en gestión' },
+            { value: '0 €', label: 'Personal extra' },
         ],
         quote: 'Pasamos de perder presupuestos por falta de seguimiento a tener un sistema que trabaja solo.',
         author: 'J.R. Rodríguez · CEO',
@@ -26,9 +43,9 @@ const CASES = [
         title: 'Una asesoría que cierra cuentas mientras duerme',
         text: 'Despacho con cientos de clientes ahogado en tareas repetitivas. Implementamos lectura inteligente de documentos, conciliación bancaria automática y un asistente IA que prepara los modelos antes de la revisión humana. Cierre mensual al 80% en automático.',
         stats: [
-            { v: '80%', l: 'Cierre automático' },
-            { v: '−5h/día', l: 'En tareas repetitivas' },
-            { v: '+45%', l: 'Más capacidad sin contratar' },
+            { value: 80, suffix: '%', label: 'Cierre automático' },
+            { value: '−5h/día', label: 'En tareas repetitivas' },
+            { value: 45, prefix: '+', suffix: '%', label: 'Más capacidad sin contratar' },
         ],
         quote: 'Antes era imposible escalar sin contratar; ahora podemos crecer sin que el equipo reviente.',
         author: 'Socio director',
@@ -38,9 +55,9 @@ const CASES = [
         title: 'Una agencia que recupera 20 horas a la semana',
         text: 'Agencia de marketing con cinco herramientas distintas que no se hablaban entre sí. Construimos un sistema único que sustituyó CRM, gestión, facturación y comunicación interna, con reporting en tiempo real para dirección y un asistente IA para dudas internas.',
         stats: [
-            { v: '20h', l: 'Ahorradas a la semana' },
-            { v: '5 → 1', l: 'Apps en un solo sistema' },
-            { v: '100%', l: 'Información centralizada' },
+            { value: 20, suffix: 'h', label: 'Ahorradas a la semana' },
+            { value: '5 → 1', label: 'Apps en un solo sistema' },
+            { value: 100, suffix: '%', label: 'Información centralizada' },
         ],
         quote: 'Dejamos de pagar cinco herramientas y ganamos visibilidad real de cada cliente.',
         author: 'Directora de operaciones',
@@ -91,10 +108,14 @@ export const Cases: React.FC = () => {
                                 <p className={styles.caseText}>{c.text}</p>
                                 <div className={styles.statsRow}>
                                     {c.stats.map((s, j) => (
-                                        <div key={j} className={styles.stat}>
-                                            <span className={styles.statNum}>{s.v}</span>
-                                            <span className={styles.statLabel}>{s.l}</span>
-                                        </div>
+                                        <Stat
+                                            key={j}
+                                            value={s.value}
+                                            prefix={s.prefix}
+                                            suffix={s.suffix}
+                                            label={s.label}
+                                            size="md"
+                                        />
                                     ))}
                                 </div>
                                 <blockquote className={styles.quote}>

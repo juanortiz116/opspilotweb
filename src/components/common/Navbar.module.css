@@ -6,14 +6,27 @@
     height: 4rem;
     z-index: var(--z-index-navbar);
     background: transparent;
-    transition: background var(--transition-normal), border-color var(--transition-normal);
+    transition: background var(--transition-normal),
+        border-color var(--transition-normal),
+        transform 320ms var(--ease-emphasized);
     border-bottom: 1px solid transparent;
+    will-change: transform;
 }
 
 .navbar.scrolled {
     background: rgba(11, 17, 24, 0.88);
-    backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-glass-md)) saturate(140%);
     border-bottom-color: var(--color-border-subtle);
+}
+
+.navbar.hidden {
+    transform: translateY(-110%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar { transition: background var(--transition-normal), border-color var(--transition-normal); }
+    .navbar.hidden { transform: none; }
 }
 
 .container {
@@ -40,7 +53,11 @@
 .desktopMenu {
     display: none;
     align-items: center;
-    gap: var(--spacing-8);
+    gap: var(--spacing-6);
+}
+
+@media (min-width: 1100px) {
+    .desktopMenu { gap: var(--spacing-7); }
 }
 
 .navLink {
@@ -143,19 +160,57 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--color-bg);
+    background: rgba(11, 17, 24, 0.92);
+    backdrop-filter: blur(var(--blur-glass-lg)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-glass-lg)) saturate(140%);
     padding: var(--spacing-8) var(--spacing-6);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-2);
+    gap: var(--spacing-1);
     transform: translateX(100%);
-    transition: transform var(--transition-normal);
+    transition: transform var(--transition-normal), opacity var(--transition-normal);
+    opacity: 0;
     z-index: 100;
     overflow-y: auto;
+    pointer-events: none;
 }
 
 .mobileMenu.open {
     transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Stagger entry: cada link entra con un pequeño delay incremental */
+.mobileMenu.open > * {
+    animation: mobileLinkIn 380ms var(--ease-spring) backwards;
+}
+
+.mobileMenu.open > *:nth-child(1) { animation-delay: 70ms; }
+.mobileMenu.open > *:nth-child(2) { animation-delay: 110ms; }
+.mobileMenu.open > *:nth-child(3) { animation-delay: 150ms; }
+.mobileMenu.open > *:nth-child(4) { animation-delay: 190ms; }
+.mobileMenu.open > *:nth-child(5) { animation-delay: 230ms; }
+.mobileMenu.open > *:nth-child(6) { animation-delay: 270ms; }
+.mobileMenu.open > *:nth-child(7) { animation-delay: 310ms; }
+.mobileMenu.open > *:nth-child(8) { animation-delay: 350ms; }
+.mobileMenu.open > *:nth-child(9) { animation-delay: 390ms; }
+
+@keyframes mobileLinkIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mobileMenu.open > * {
+        animation: none;
+    }
 }
 
 .mobileNavLink {

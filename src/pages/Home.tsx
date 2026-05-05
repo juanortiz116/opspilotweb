@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { ROUTES } from '../lib/routes';
 import {
     LayoutGrid,
     Sparkles,
@@ -198,10 +199,10 @@ export const Home: React.FC = () => {
                         no las que te quieren vender.
                     </p>
                     <div className={styles.ctaGroup}>
-                        <Link to="/contacto">
+                        <Link to={ROUTES.contacto}>
                             <Button variant="primary" size="lg">Reservar diagnóstico</Button>
                         </Link>
-                        <Link to="/servicios" className={styles.ctaSecondary}>
+                        <Link to={ROUTES.servicios} className={styles.ctaSecondary}>
                             Cómo trabajamos <ArrowRight size={16} strokeWidth={2} />
                         </Link>
                     </div>
@@ -486,10 +487,10 @@ export const Home: React.FC = () => {
                             </p>
                         </div>
                         <div className={styles.ctaRight}>
-                            <Link to="/contacto">
+                            <Link to={ROUTES.contacto}>
                                 <Button variant="primary" size="lg">Reservar diagnóstico</Button>
                             </Link>
-                            <Link to="/servicios">
+                            <Link to={ROUTES.servicios}>
                                 <Button variant="outline" size="lg">Ver cómo trabajamos</Button>
                             </Link>
                         </div>

@@ -42,9 +42,9 @@ export const Navbar: React.FC = () => {
                     <div className={styles.desktopMenu}>
                         <NavLink to="/" end className={navLinkClass}>Inicio</NavLink>
                         <NavLink to="/soluciones" className={navLinkClass}>Soluciones</NavLink>
-                        <NavLink to="/services" className={navLinkClass}>Servicios</NavLink>
-                        <NavLink to="/cases" className={navLinkClass}>Casos de Éxito</NavLink>
-                        <Link to="/demo">
+                        <NavLink to="/servicios" className={navLinkClass}>Servicios</NavLink>
+                        <NavLink to="/casos" className={navLinkClass}>Casos de Éxito</NavLink>
+                        <Link to="/contacto">
                             <Button variant="primary" size="sm">Diagnóstico gratuito</Button>
                         </Link>
                     </div>
@@ -62,11 +62,11 @@ export const Navbar: React.FC = () => {
             <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
                 <NavLink to="/" end className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Inicio</NavLink>
                 <NavLink to="/soluciones" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Soluciones</NavLink>
-                <NavLink to="/services" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Servicios</NavLink>
-                <NavLink to="/cases" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Casos de Éxito</NavLink>
-                <NavLink to="/contact" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Contacto</NavLink>
+                <NavLink to="/servicios" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Servicios</NavLink>
+                <NavLink to="/casos" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Casos de Éxito</NavLink>
+                <NavLink to="/contacto" className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Contacto</NavLink>
                 <div className={styles.mobileCta}>
-                    <Link to="/demo" onClick={() => setIsMenuOpen(false)} style={{ width: '100%' }}>
+                    <Link to="/contacto" onClick={() => setIsMenuOpen(false)} style={{ width: '100%' }}>
                         <Button variant="primary" fullWidth>Diagnóstico gratuito</Button>
                     </Link>
                 </div>

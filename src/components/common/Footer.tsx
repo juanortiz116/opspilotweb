@@ -52,14 +52,14 @@ export const Footer: React.FC = () => {
                         <h4 className={styles.heading}>Navegación</h4>
                         <Link to="/" className={styles.link}>Inicio</Link>
                         <Link to="/soluciones" className={styles.link}>Soluciones</Link>
-                        <Link to="/services" className={styles.link}>Servicios</Link>
+                        <Link to="/servicios" className={styles.link}>Servicios</Link>
                     </div>
 
                     <div className={styles.links}>
                         <h4 className={styles.heading}>Más</h4>
-                        <Link to="/cases" className={styles.link}>Casos de Éxito</Link>
-                        <Link to="/contact" className={styles.link}>Contacto</Link>
-                        <Link to="/demo" className={styles.link}>Diagnóstico gratuito</Link>
+                        <Link to="/casos" className={styles.link}>Casos de Éxito</Link>
+                        <Link to="/contacto" className={styles.link}>Contacto</Link>
+                        <Link to="/contacto" className={styles.link}>Diagnóstico gratuito</Link>
                     </div>
                 </div>
 

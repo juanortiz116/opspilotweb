@@ -2,11 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { usePageSEO } from '../hooks/usePageSEO';
 import styles from './Services.module.css';
 import Aurora from '../components/common/Aurora';
 import { Zap, Handshake, TrendingUp, MessageSquare, Settings, BarChart3 } from 'lucide-react';
 
 export const Services: React.FC = () => {
+    usePageSEO({
+        title: 'Servicios — Desarrollo de software a medida y automatización · OpsPilot',
+        description: 'Automatizaciones, integraciones, asistentes IA y software a medida para PYMEs. Te escuchamos primero, proponemos algo concreto y nos quedamos contigo cuando lo necesitas.',
+        canonical: 'https://opspilot.es/servicios',
+    });
+
     const servicesRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const valueRef = useScrollReveal<HTMLDivElement>({ stagger: true });
     const ctaRef = useScrollReveal<HTMLDivElement>();
@@ -143,7 +150,7 @@ export const Services: React.FC = () => {
                             Cuéntanos tu caso. En 30 minutos te decimos si tenemos solución, cómo sería y cuánto tiempo llevaría.
                         </p>
                         <div className={styles.ctaButtons}>
-                            <Link to="/contact">
+                            <Link to="/contacto">
                                 <Button variant="primary" size="lg">Reservar diagnóstico gratuito</Button>
                             </Link>
                             <a href="https://wa.me/34640756126" target="_blank" rel="noopener noreferrer">

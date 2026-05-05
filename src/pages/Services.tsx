@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { ROUTES } from '../lib/routes';
 import styles from './Services.module.css';
 import Aurora from '../components/common/Aurora';
 import { Zap, Handshake, TrendingUp, MessageSquare, Settings, BarChart3 } from 'lucide-react';
@@ -143,7 +144,7 @@ export const Services: React.FC = () => {
                             Cuéntanos tu caso. En 30 minutos te decimos si tenemos solución, cómo sería y cuánto tiempo llevaría.
                         </p>
                         <div className={styles.ctaButtons}>
-                            <Link to="/contact">
+                            <Link to={ROUTES.contacto}>
                                 <Button variant="primary" size="lg">Reservar diagnóstico gratuito</Button>
                             </Link>
                             <a href="https://wa.me/34640756126" target="_blank" rel="noopener noreferrer">

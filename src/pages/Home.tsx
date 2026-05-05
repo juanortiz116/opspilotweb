@@ -229,7 +229,7 @@ export const Home: React.FC = () => {
                     </p>
                     <div className={styles.ctaGroup}>
                         <div ref={heroPrimaryCtaRef} className={styles.magneticWrap}>
-                            <Link to={ROUTES.contacto}>
+                            <Link to={ROUTES.diagnostico}>
                                 <Button variant="primary" size="lg">Reservar diagnóstico</Button>
                             </Link>
                         </div>
@@ -554,8 +554,8 @@ export const Home: React.FC = () => {
                         </div>
                         <div className={styles.ctaRight}>
                             <div ref={finalPrimaryCtaRef} className={styles.magneticWrap}>
-                                <Link to={ROUTES.contacto}>
-                                    <Button variant="primary" size="lg">Reservar diagnóstico</Button>
+                                <Link to={ROUTES.diagnostico}>
+                                    <Button variant="primary" size="lg">Empezar diagnóstico</Button>
                                 </Link>
                             </div>
                             <Link to={ROUTES.servicios}>

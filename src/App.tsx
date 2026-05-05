@@ -16,6 +16,7 @@ const Resources = lazy(() => import('./pages/Resources').then(m => ({ default: m
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 const Soluciones = lazy(() => import('./pages/Soluciones').then(m => ({ default: m.Soluciones })));
 const Product = lazy(() => import('./pages/Product').then(m => ({ default: m.Product })));
+const Diagnostico = lazy(() => import('./pages/Diagnostico').then(m => ({ default: m.Diagnostico })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
                             <Route path={ROUTES.precios} element={<Pricing />} />
                             <Route path={ROUTES.recursos} element={<Resources />} />
                             <Route path={ROUTES.contacto} element={<Contact />} />
-                            <Route path={ROUTES.diagnostico} element={<Navigate to={ROUTES.contacto} replace />} />
+                            <Route path={ROUTES.diagnostico} element={<Diagnostico />} />
 
                             {LEGACY_REDIRECTS.map(([from, to]) => (
                                 <Route key={from} path={from} element={<Navigate to={to} replace />} />

@@ -94,7 +94,7 @@ export const Footer: React.FC = () => {
                         <Link to={ROUTES.casos} className={styles.link}>Casos de éxito</Link>
                         <Link to={ROUTES.recursos} className={styles.link}>Recursos</Link>
                         <Link to={ROUTES.contacto} className={styles.link}>Contacto</Link>
-                        <Link to={ROUTES.contacto} className={styles.link}>Diagnóstico gratuito</Link>
+                        <Link to={ROUTES.diagnostico} className={styles.link}>Diagnóstico gratuito</Link>
                     </div>
 
                     {/* Newsletter */}

@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
                         <NavLink to={ROUTES.servicios} className={navLinkClass}>Servicios</NavLink>
                         <NavLink to={ROUTES.casos} className={navLinkClass}>Casos</NavLink>
                         <NavLink to={ROUTES.precios} className={navLinkClass}>Precios</NavLink>
-                        <Link to={ROUTES.contacto}>
+                        <Link to={ROUTES.diagnostico}>
                             <Button variant="primary" size="sm">Diagnóstico gratuito</Button>
                         </Link>
                     </div>
@@ -93,7 +93,7 @@ export const Navbar: React.FC = () => {
                 <NavLink to={ROUTES.recursos} className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Recursos</NavLink>
                 <NavLink to={ROUTES.contacto} className={mobileNavLinkClass} onClick={() => setIsMenuOpen(false)}>Contacto</NavLink>
                 <div className={styles.mobileCta}>
-                    <Link to={ROUTES.contacto} onClick={() => setIsMenuOpen(false)} style={{ width: '100%' }}>
+                    <Link to={ROUTES.diagnostico} onClick={() => setIsMenuOpen(false)} style={{ width: '100%' }}>
                         <Button variant="primary" fullWidth>Diagnóstico gratuito</Button>
                     </Link>
                 </div>
